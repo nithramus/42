@@ -1,22 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 15:47:36 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/23 01:00:09 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/05 23:03:41 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/08 19:45:07 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE  3
-#include <stdlib.h>
-#include <unistd.h>
 #include "libft.h"
 
-int		get_next_line(const int fd1, char **line);
+char	*ft_strsub(char const *str, unsigned int start, size_t len)
+{
+	unsigned long	end;
+	char			*retour;
+	int				j;
 
-#endif
+	if (str)
+	{
+		j = 0;
+		end = start + len;
+		retour = (char*)malloc(len + 1);
+		if (retour == NULL)
+			return (NULL);
+		while (start < end)
+		{
+			retour[j] = str[start];
+			j++;
+			start++;
+		}
+		retour[j] = '\0';
+		return (retour);
+	}
+	else
+		return (NULL);
+}

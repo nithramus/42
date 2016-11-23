@@ -1,22 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 15:47:36 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/23 01:00:09 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/07 15:05:25 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/10 18:22:51 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE  3
-#include <stdlib.h>
-#include <unistd.h>
 #include "libft.h"
 
-int		get_next_line(const int fd1, char **line);
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	char	*debut;
+	char	*fin;
 
-#endif
+	if (n == 0)
+		return (dest);
+	else if (dest < src || dest > src + n + 1)
+	{
+		ft_memcpy(dest, src, n);
+	}
+	else
+	{
+		debut = ((char*)src);
+		fin = ((char*)dest);
+		while (n > 0)
+		{
+			fin[n - 1] = debut[n - 1];
+			n--;
+		}
+	}
+	return (dest);
+}

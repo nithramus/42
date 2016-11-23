@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 15:47:36 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/23 01:00:09 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/06 17:10:41 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/08 18:01:20 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE  3
-#include <stdlib.h>
-#include <unistd.h>
 #include "libft.h"
 
-int		get_next_line(const int fd1, char **line);
+char	*ft_strnew(size_t size)
+{
+	char	*chainretour;
+	size_t	i;
 
-#endif
+	i = 0;
+	chainretour = (char*)malloc(size + 1);
+	if (chainretour == NULL)
+		return (NULL);
+	while (i < (size + 1))
+	{
+		chainretour[i] = '\0';
+		i++;
+	}
+	return (chainretour);
+}

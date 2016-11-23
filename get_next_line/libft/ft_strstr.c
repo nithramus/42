@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 15:47:36 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/23 01:00:09 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/08 16:07:20 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/08 16:17:35 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE  3
-#include <stdlib.h>
-#include <unistd.h>
 #include "libft.h"
 
-int		get_next_line(const int fd1, char **line);
+char	*ft_strstr(const char *haystack, const char *needle)
+{
+	size_t i;
+	size_t j;
 
-#endif
+	i = 0;
+	j = 0;
+	if (needle[0] == '\0')
+		return ((char*)haystack);
+	while (haystack[i])
+	{
+		while (haystack[i + j] == needle[j])
+		{
+			j++;
+			if (needle[j] == '\0')
+				return ((char*)&haystack[i]);
+		}
+		j = 0;
+		i++;
+	}
+	return (NULL);
+}

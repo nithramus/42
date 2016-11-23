@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putlst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 15:47:36 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/23 01:00:09 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/11 17:25:34 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/11 17:46:07 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE  3
-#include <stdlib.h>
-#include <unistd.h>
 #include "libft.h"
 
-int		get_next_line(const int fd1, char **line);
+void	ft_putlst(t_list *firstelem)
+{
+	size_t	i;
+	char	*c;
 
-#endif
+	i = 0;
+	while (firstelem)
+	{
+		i = 0;
+		c = (char*)firstelem;
+		while (i < firstelem->content_size)
+		{
+			ft_putchar(c[i]);
+			i++;
+		}
+		firstelem = firstelem->next;
+	}
+}
