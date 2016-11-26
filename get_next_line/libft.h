@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 20:40:27 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/17 16:55:45 by bandre           ###   ########.fr       */
+/*   Updated: 2016/11/24 15:05:42 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct		s_list
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
-	int				is_n;
 }					t_list;
 
 void				*ft_memset(void *str, int c, size_t n);

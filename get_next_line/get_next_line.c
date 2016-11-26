@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 15:36:36 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/23 01:19:03 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/24 15:04:14 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/26 01:06:13 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,126 +16,142 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-char	*put_line(t_list **firstelem, int *ret)
+char	*put_line(t_list **elem, int *pos, char **line)
 {
-	int len;
-	char *line;
-	t_list *elem;
-	char *n;
+	char	*n;
+	t_list	*elem_avant;
 
-	elem = *firstelem;
-	len = 0;
-	while (elem)
+	while ((*elem)->next && (elem_avant = *elem))
 	{
-		len += elem->content_size;
-		elem = elem->next;
+		ft_strcat(*line, &((const char*)(*elem)->content)[*pos]);
+		*elem = (*elem)->next;
+		free(elem_avant->content);
+		free(elem_avant);
+		*pos = 0;
 	}
-	elem = *firstelem;
-	line = (char*)malloc(len * sizeof(char) + 1);
-	while (elem->next)
+	if ((n = ft_strchr(&((char*)(*elem)->content)[*pos], '\n')) && n)
 	{
-		ft_strcat(line, &((const char*)elem->content)[elem->is_n]);
-		elem = elem->next;
-	}
-	n = ft_strchr(&((char*)elem->content)[elem->is_n], '\n');
-	if (n)
-	{
-		ft_strncat(line, &((const char*)elem->content)[elem->is_n],
-				(n - &((char*)elem->content)[elem->is_n]));
-		elem->is_n += (n - &((char*)elem->content)[elem->is_n]) + 1;
+		ft_strncat(*line, &((const char*)(*elem)->content)[*pos],
+				(n - &((char*)(*elem)->content)[*pos]));
+		*pos = (n - &((char*)(*elem)->content)[0]) + 1;
 	}
 	else
 	{
-		ft_strcat(line, &((const char*)elem->content)[elem->is_n]);
-		elem = NULL;
+		ft_strcat(*line, &((const char*)(*elem)->content)[*pos]);
+		free((*elem)->content);
+		free(*elem);
+		*elem = NULL;
 	}
-	*firstelem = elem;
-	*ret = 1;
-	return (line);
+	return (*line);
 }
 
-t_list	*add_read(int fd, int *ret)
+t_list	*add_read(int fd, int *ret, int cont, t_list *firstelem)
 {
-	char buff[BUFF_SIZE + 1];
-	t_list *firstelem;
-	t_list *elemnext;
+	char	buff[BUFF_SIZE + 1];
+	t_list	*elemnext;
 
-	firstelem = NULL;
 	*ret = read(fd, buff, BUFF_SIZE);
-	if (ret <= 0)
-		return (NULL);
-	buff[*ret] = '\0';
-	firstelem = ft_lstnew(buff, *ret + 1);
-	elemnext = firstelem;
-	firstelem->is_n = 0;
-	if (ft_strchr(buff, '\n') == NULL)
+	while (*ret > 0 && cont == 1)
 	{
-		*ret = read(fd, buff, BUFF_SIZE);
-		if (ret < 0)
-			return (NULL);
-		if (ret == 0)
-			return (firstelem);
-		while (ft_strchr(buff, '\n') == NULL && *ret > 0)
+		buff[*ret] = '\0';
+		if (ft_strchr(buff, '\n') != NULL)
+			cont = 0;
+		if (!firstelem)
 		{
-			buff[*ret] = '\0';
+			firstelem = ft_lstnew(buff, *ret + 1);
+			elemnext = firstelem;
+		}
+		else
+		{
 			elemnext->next = ft_lstnew(buff, *ret + 1);
 			elemnext = elemnext->next;
-			elemnext->is_n = 0;
-			*ret = read(fd, buff, BUFF_SIZE);
 		}
-		elemnext->next = ft_lstnew(buff, *ret);
-		elemnext = elemnext->next;
+		if (cont)
+			*ret = read(fd, buff, BUFF_SIZE);
 	}
+	if (*ret < 0)
+		return (NULL);
 	return (firstelem);
 }
 
-
-int		need_new_read(int fd, t_list **firstelem)
+int		need_new_read(int fd, t_list **firstelem, int n)
 {
-	t_list *elem;
-	int ret;
+	t_list	*elem;
+	int		ret;
+	int		cont;
+	t_list	*anelem;
 
+	anelem = NULL;
+	cont = 1;
 	elem = *firstelem;
 	if (elem)
 	{
-		if (ft_strchr(&elem->content[elem->is_n + 1], '\n') != NULL)
+		if (ft_strchr(&elem->content[n], '\n') != NULL)
 			return (1);
 	}
 	if (elem == NULL)
-		*firstelem = add_read(fd, &ret);
+	{
+		elem = add_read(fd, &ret, cont, anelem);
+		if (elem)
+			*firstelem = elem;
+	}
 	else
-		elem->next = add_read(fd, &ret);
+		elem->next = add_read(fd, &ret, cont, anelem);
 	return (ret);
+}
+
+int		get_next(const int fd, char **line, t_list **firstelem, int *n)
+{
+	char			line2;
+	int				len;
+	t_list			*elem;
+
+	if (need_new_read(fd, firstelem, *n) == -1)
+		return (-1);
+	line2 = '\0';
+	*line = &line2;
+	if (!*firstelem)
+		return (0);
+	if ((*firstelem)->next || ((char*)(*firstelem)->content)[*n] != '\0')
+	{
+		elem = *firstelem;
+		len = elem->content_size;
+		while ((elem = elem->next) && elem)
+			len += elem->content_size;
+		if (!(*line = ft_strnew(len + 1)))
+			return (-1);
+		put_line(firstelem, n, line);
+	}
+	else
+		return (0);
+	return (1);
 }
 
 int		get_next_line(const int fd, char **line)
 {
-	static t_list *firstelem = NULL;
-	int ret;
-	int ret2;
+	static t_listchain	*first = NULL;
+	int					ret;
 
-	ret = 1;
-	ret = need_new_read(fd, &firstelem);
-	if (ret == -1)
-		return (-1);
-	*line = put_line(&firstelem, &ret2);
-	if (ret == 0 && firstelem == NULL)
-		return (0);
-	return (ret2);
-}/*
-int		main()
-{
-	int fd;
-	char *ptr;
-
-	fd = open("test", O_RDONLY);
-	get_next_line(fd, &ptr);
-	ft_putstr(ptr);
-	get_next_line(fd, &ptr);
-	ft_putstr(ptr);
-	get_next_line(fd, &ptr);
-	ft_putstr(ptr);
-	get_next_line(fd, &ptr);
-	ft_putstr(ptr);
-	return (0);
-}*/
+	if (first)
+		if (first->fd != fd)
+		{
+			free(first->firstelem);
+			free(first);
+			first = NULL;
+		}
+	if (!first)
+	{
+		first = (t_listchain*)malloc(sizeof(t_listchain));
+		if (!first)
+			return (-1);
+		first->n = 0;
+		first->fd = fd;
+		first->firstelem = NULL;
+	}
+	if ((ret = get_next(fd, line, &first->firstelem, &first->n)) && ret == 0)
+	{
+		free(first);
+		first = NULL;
+	}
+	return (ret);
+}
