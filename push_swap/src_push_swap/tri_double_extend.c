@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_new_chercker.c                                  :+:      :+:    :+:   */
+/*   tri_double_extend.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/08 00:27:17 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/12 20:13:52 by bandre           ###   ########.fr       */
+/*   Created: 2016/12/14 01:34:06 by bandre            #+#    #+#             */
+/*   Updated: 2016/12/14 01:50:34 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_checker	*ft_new_checker(int nb, t_checker *previous)
+void	tridouble_extend(t_checker **dest, char a)
 {
-	t_checker *new;
-
-	if (!(new = (t_checker*)malloc(sizeof(t_checker))))
-		return (NULL);
-	new->nb = nb;
-	new->next = NULL;
-	new->previous = previous;
-	return (new);
+	if ((*dest)->nb > (*dest)->next->nb)
+	{
+		ft_printf("s%c\n", a);
+		op_swap(*dest);
+	}
+	op_rotate(dest);
+	op_rotate(dest);
+	ft_printf("r%c\n", a);
+	ft_printf("r%c\n", a);
 }

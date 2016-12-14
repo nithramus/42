@@ -6,11 +6,11 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 01:24:24 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/12 18:40:10 by bandre           ###   ########.fr       */
+/*   Updated: 2016/12/12 20:13:14 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 static int	ft_extend(t_checker **dest)
 {

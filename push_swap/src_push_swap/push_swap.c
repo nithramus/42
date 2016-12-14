@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 16:29:30 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/11 02:42:19 by bandre           ###   ########.fr       */
+/*   Updated: 2016/12/14 21:18:37 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		main(int argv, char **argc)
 {
-	int		len;
+	int			len;
 	t_checker	*a_list;
 	t_checker	*b_list;
 
@@ -34,9 +34,8 @@ int		main(int argv, char **argc)
 	}
 	a_list = b_list;
 	b_list = NULL;
-	ft_printf("\nvaleur de retour:%d",tri_fusion_ameliore(&a_list, &b_list, len));
-	//ft_printf("valeur de retour:%d",tri_fusion(&a_list, &b_list, 'a', len));
-
-	
+	tri_fusion_ameliore(&a_list, &b_list, len);
+	ft_free_checker(a_list);
+	ft_free_checker(b_list);
 	return (1);
 }

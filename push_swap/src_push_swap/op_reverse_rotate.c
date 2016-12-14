@@ -6,11 +6,11 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 20:55:51 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/12 18:41:06 by bandre           ###   ########.fr       */
+/*   Updated: 2016/12/12 20:14:21 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 int		op_reverse_rotate(t_checker **list)
 {

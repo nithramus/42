@@ -6,11 +6,11 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 00:34:31 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/12 19:55:34 by bandre           ###   ########.fr       */
+/*   Updated: 2016/12/12 20:13:36 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 static t_checker	*complete_list(int argc, char **argv, t_checker *prev)
 {

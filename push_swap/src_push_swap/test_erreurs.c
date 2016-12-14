@@ -6,11 +6,11 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 21:34:59 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/12 19:54:21 by bandre           ###   ########.fr       */
+/*   Updated: 2016/12/12 20:15:27 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 static int	is_valide(char *value)
 {
