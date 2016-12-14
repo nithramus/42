@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cassupp.c                                       :+:      :+:    :+:   */
+/*   op_rotate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 20:25:52 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/13 20:25:54 by bandre           ###   ########.fr       */
+/*   Created: 2016/12/08 20:13:52 by bandre            #+#    #+#             */
+/*   Updated: 2016/12/12 18:41:25 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "checker.h"
 
-char	*ft_casp(t_param list, char *s)
+int		op_rotate(t_checker **list)
 {
-	if (list.specifier == 'i' || list.specifier == 'd' || list.specifier == 'o'
-			|| list.specifier == 'O' || list.specifier == 'x' ||
-			list.specifier == 'X' || list.specifier == 'u' ||
-			list.specifier == 'U' || list.specifier == 'D')
-		if (list.precision == 0 && ft_strlen(s) == 1 && s[0] == '0')
-			s[0] = '\0';
-	return (s);
+	t_checker	*tmp;
+	t_checker	*parcour;
+	int			i;
+
+	i = 0;
+	if (!*list)
+		return (1);
+	else if (!((*list)->next))
+		return (1);
+	tmp = *list;
+	*list = (*list)->next;
+	parcour = *list;
+	while (parcour)
+	{
+		if (parcour->next == NULL)
+		{
+			parcour->next = tmp;
+			tmp->next = NULL;
+			return (1);
+		}
+		parcour = parcour->next;
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 20:40:27 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/07 22:03:14 by bandre           ###   ########.fr       */
+/*   Updated: 2016/12/07 22:09:51 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char				*ft_itoa_base(size_t value, int base, int m);
 char				*ft_strnstr(const char *str, const char *subs, size_t len);
 int					ft_strcmp(const char *str1, const char *str2);
 int					ft_strncmp(const char *str1, const char *str2, size_t n);
-size_t				ft_atoi(char *str);
+ssize_t				ft_atoi(char *str);
 size_t				ft_strlcat(char *dst, const char*src, size_t size);
 
 void				ft_putchar(char c);

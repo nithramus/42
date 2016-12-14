@@ -6,7 +6,7 @@
 #    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 20:53:12 by bandre            #+#    #+#              #
-#    Updated: 2016/12/04 19:44:46 by bandre           ###   ########.fr        #
+#    Updated: 2016/12/13 23:26:04 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 
 SRC_PATH = libft
 
-SRC_PATH_PRINTF = ft_printf/
+SRC_PATH_PRINTF = ft_printf
 
 SRC_NAME = ft_atoi.c\
 		   ft_isdigit.c\
@@ -78,6 +78,7 @@ SRC_NAME = ft_atoi.c\
 		   ft_putlst.c\
 		   ft_itoa_base_signed.c\
 		   ft_itoa_base.c\
+		   get_next_line.c
 
 SRC_PRINTF = ft_affichage.c\
 			 ft_gestion_flag.c\
@@ -92,11 +93,10 @@ SRC_PRINTF = ft_affichage.c\
 OBJ_PATH = obj
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-OBJPRINTF = $(SRC_PRINTF:.c=.o)
+OBJ_PRINTF = $(SRC_PRINTF:.c=.o)
 
-SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
-OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
-SRCPRINTF = $(addprefix $(SRC_PATH_PRINTF)/,$(SRC_PRINTF))
+OBJ = $(addprefix $(SRC_PATH)/,$(OBJ_NAME))
+OBJPRINTF = $(addprefix $(SRC_PATH_PRINTF)/,$(OBJ_PRINTF))
 
 CPPFLAGS = -I.
 
@@ -105,12 +105,14 @@ CFLAGS = -Werror -Wall -Wextra
 
 all: $(NAME)
 
-$(NAME):
-	$(CC) -c $(CFLAGS) $(CPPFLAGS) $(SRC) $(SRCPRINTF)
-	ar rc $(NAME) $(OBJ_NAME) $(OBJPRINTF)
+$(NAME): $(OBJ) $(OBJPRINTF)
+	ar rc $(NAME) $(OBJ) $(OBJPRINTF)
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ_NAME) $(OBJPRINTF)
+	rm -rf $(OBJ) $(OBJPRINTF)
 
 fclean: clean
 	rm -rf $(NAME)

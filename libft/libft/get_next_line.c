@@ -6,17 +6,13 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 15:04:14 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/07 18:16:56 by bandre           ###   ########.fr       */
+/*   Updated: 2016/11/28 14:59:05 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdio.h>
 
-char	*put_line(t_list **elem, int *pos, char **line)
+static char		*put_line(t_list **elem, int *pos, char **line)
 {
 	char	*n;
 	t_list	*elem_avant;
@@ -45,7 +41,7 @@ char	*put_line(t_list **elem, int *pos, char **line)
 	return (*line);
 }
 
-t_list	*add_read(int fd, int *ret, int cont, t_list *firstelem)
+static t_list	*add_read(int fd, int *ret, int cont, t_list *firstelem)
 {
 	char	buff[BUFF_SIZE + 1];
 	t_list	*elemnext;
@@ -74,7 +70,7 @@ t_list	*add_read(int fd, int *ret, int cont, t_list *firstelem)
 	return (firstelem);
 }
 
-int		need_new_read(int fd, t_list **firstelem, int n)
+static int		need_new_read(int fd, t_list **firstelem, int n)
 {
 	t_list	*elem;
 	int		ret;
@@ -100,7 +96,7 @@ int		need_new_read(int fd, t_list **firstelem, int n)
 	return (ret);
 }
 
-int		get_next(const int fd, char **line, t_list **firstelem, int *n)
+static int		get_next(const int fd, char **line, t_list **firstelem, int *n)
 {
 	char			line2;
 	int				len;
@@ -127,40 +123,31 @@ int		get_next(const int fd, char **line, t_list **firstelem, int *n)
 	return (1);
 }
 
-int		get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
 	static t_listchain	*first = NULL;
-	t_listchain			*list_fd;
-	t_listchain			*listmal;
-	int ret;
+	int					ret;
 
-	list_fd = first;
-	while (list_fd)
-	{
-		if (list_fd->fd == fd)
+	if (first)
+		if (first->fd != fd)
 		{
-			ret = get_next(fd, line, &(list_fd->firstelem), &(list_fd->n));
-			if (ret == 0)
-			{
-				listmal = list_fd->next;
-				free(list_fd);
-				list_fd = listmal;
-				return (ret);
-			}
-		list_fd = list_fd->next;
+			free(first->firstelem);
+			free(first);
+			first = NULL;
 		}
+	if (!first)
+	{
+		first = (t_listchain*)malloc(sizeof(t_listchain));
+		if (!first)
+			return (-1);
+		first->n = 0;
+		first->fd = fd;
+		first->firstelem = NULL;
 	}
-	if (!(listmal = (t_listchain*)malloc(sizeof(t_listchain))))
-		return (0);
-	if ((list_fd = first) && first)
-		while (list_fd->next)
-			list_fd = list_fd->next;
-	if (first && (listmal->fd = fd))
-		list_fd->next = listmal;
-	else
-		first = listmal;
-	listmal->n = 0;
-	listmal->next = NULL;
-	listmal->firstelem = NULL;
-	return (get_next(fd, line, &(listmal->firstelem), &(listmal->n)));
+	if ((ret = get_next(fd, line, &first->firstelem, &first->n)) && ret == 0)
+	{
+		free(first);
+		first = NULL;
+	}
+	return (ret);
 }
