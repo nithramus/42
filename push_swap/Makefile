@@ -42,6 +42,9 @@ SRC_PUSH_SWAP = push_swap.o\
 		   tri_am.o\
 		   fusion_recursiv.o\
 		   tri_double_extend.o\
+		   tri_recursif.o\
+		   op_recursif.o\
+		   op_recursif_s.o\
 
 CC = gcc
 
@@ -56,16 +59,16 @@ CHECKER = $(addprefix $(SRC_PATH_CHECKER)/,$(SRC_CHECKER))
 all: EXEC $(NAME) $(PUSH)
 
 $(NAME): $(CHECKER)
-	$(CC) -o $(NAME) $(FLAG) $(CHECKER) $(LIB)
+	$(CC) -o $(NAME) $(CHECKER) $(LIB)
 
 $(PUSH): $(PUSH_SWAP)
-	$(CC) -o $(PUSH) $(FLAG) $(PUSH_SWAP) $(LIB) 
+	$(CC) -o $(PUSH) $(PUSH_SWAP) $(LIB) 
 
 EXEC: 
 	make -C libft
 
 %.o: %.c
-	$(CC) $(FLAG) -c $< -o $@
+	$(CC) -c $< -o $@
 
 clean:
 	rm -f $(addprefix $(SRC_PATH_CHECKER)/,$(SRC_CHECKER))

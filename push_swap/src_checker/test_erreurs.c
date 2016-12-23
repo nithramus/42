@@ -38,7 +38,7 @@ int			*verif_entier(char *argv, int *ptr)
 {
 	ssize_t value;
 
-	if (is_valide(argv) == -1)
+	if (is_valide(argv) == -1 || ft_strlen(argv) > 12)
 		return (NULL);
 	value = ft_atoi(argv);
 	if (value >= (ssize_t)INT_MIN && value <= (ssize_t)INT_MAX)

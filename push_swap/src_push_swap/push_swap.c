@@ -12,9 +12,24 @@
 
 #include "push_swap.h"
 
+int		is_trie(t_checker *a_list, t_checker *b_list)
+{
+	if (b_list)
+		return (0);
+	while (a_list)
+	{
+		if (a_list->next)
+			if (a_list->nb > a_list->next->nb)
+				return (0);
+		a_list = a_list->next;
+	}
+	return (1);
+}
+
 int		main(int argv, char **argc)
 {
 	int			len;
+	char *ret;
 	t_checker	*a_list;
 	t_checker	*b_list;
 
@@ -34,7 +49,16 @@ int		main(int argv, char **argc)
 	}
 	a_list = b_list;
 	b_list = NULL;
-	tri_fusion_ameliore(&a_list, &b_list, len);
+	if (is_trie(a_list, b_list))
+	{
+		ft_printf("\n");
+		return (1);
+	}
+	if (len > 10)
+		tri_fusion_ameliore(&a_list, &b_list, len);
+	else
+		recursif(&a_list, &b_list);
+	afficher(a_list, b_list);
 	ft_free_checker(a_list);
 	ft_free_checker(b_list);
 	return (1);

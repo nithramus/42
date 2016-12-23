@@ -42,5 +42,18 @@ int						tri_am_a(t_checker **src, t_checker **dest
 int						fusion_recursiv(t_checker **src, t_checker **dest,
 		int len, int s_d);
 void					tridouble_extend(t_checker **dest, char a);
+char						*tri_recursif(t_checker **a_list, t_checker **b_list, int len, int len_max);
+int						is_trie(t_checker *a_list, t_checker *b_list);
+int						recursif(t_checker **a_list, t_checker **b_list);
 
+
+char	*push_recursif_a(t_checker **a_list, t_checker **b_list, int len, int len_max);
+char	*push_recursif_b(t_checker **a_list, t_checker **b_list, int len, int len_max);
+
+char	*swap_recursif_a(t_checker **a_list, t_checker **b_list, int len, int len_max);
+char	*swap_recursif_b(t_checker **a_list, t_checker **b_list, int len, int len_max);
+
+char	*rotate_recursif_a(t_checker **a_list, t_checker **b_list, int len, int len_max);
+
+char	*reverse_recursif_a(t_checker **a_list, t_checker **b_list, int len, int len_max);
 #endif
