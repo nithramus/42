@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   is_in_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/04 18:36:02 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/05 13:44:42 by bandre           ###   ########.fr       */
+/*   Created: 2017/01/05 13:46:50 by bandre            #+#    #+#             */
+/*   Updated: 2017/01/05 13:49:19 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		main()
+int		is_in_list(g_struct **list, g_struct *add)
 {
-	g_struct **graphe;
-	g_struct ***path;
+	int i;
 
-	graphe = create_graph();
-	path = find_path(*graphe);
+	i = 0;
+	while (list[i])
+	{
+		if (list[i] == add)
+			return (1);
+		i++;
+	}
+	return (0);
 }

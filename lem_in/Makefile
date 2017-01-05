@@ -6,7 +6,7 @@
 #    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2017/01/04 23:30:39 by bandre           ###   ########.fr        #
+#    Updated: 2017/01/05 13:50:03 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SRC = create_graph.o\
 	  new_g_struct.o\
 	  graphchr.o\
 	  ptr_join.o\
+	  is_in_list.o\
+	  find_path.o\
 
 CC = gcc
 
