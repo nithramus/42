@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_putlst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/11 17:25:34 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/11 17:46:07 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+void	ft_putlst(t_list *firstelem)
 {
-	char	*debut;
-	char	*fin;
 	size_t	i;
+	char	*c;
 
 	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
-	while (i < n)
+	while (firstelem)
 	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
-		i++;
+		i = 0;
+		c = (char*)firstelem;
+		while (i < firstelem->content_size)
+		{
+			ft_putchar(c[i]);
+			i++;
+		}
+		firstelem = firstelem->next;
 	}
-	return (NULL);
 }

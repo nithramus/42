@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/08 15:31:03 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/08 18:26:38 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+char	*ft_strchr(const char *str, int c)
 {
-	char	*debut;
-	char	*fin;
 	size_t	i;
+	char	carac;
 
+	carac = (char)c;
 	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
-	while (i < n)
+	while (str[i])
 	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
+		if (str[i] == carac)
+			return ((char*)&str[i]);
 		i++;
 	}
+	if (str[i] == carac)
+		return ((char*)&str[i]);
 	return (NULL);
 }

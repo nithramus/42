@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/07 19:16:18 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/08 18:04:41 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+char	*ft_strdup(const char *str)
 {
-	char	*debut;
-	char	*fin;
 	size_t	i;
+	char	*chaineretour;
 
+	chaineretour = (char*)malloc(sizeof(char) * (ft_strlen(str) + 1));
+	if (!chaineretour)
+		return (NULL);
 	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
-	while (i < n)
+	while (str[i])
 	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
+		chaineretour[i] = str[i];
 		i++;
 	}
-	return (NULL);
+	chaineretour[i] = '\0';
+	return (chaineretour);
 }

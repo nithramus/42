@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/08 20:24:22 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/08 20:24:25 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+char	*ft_strmapi(char const *str, char (*f)(unsigned int, char))
 {
-	char	*debut;
-	char	*fin;
-	size_t	i;
+	char			*chainretour;
+	unsigned int	len;
 
-	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
-	while (i < n)
+	if (str && f)
 	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
-		i++;
+		len = 0;
+		while (str[len])
+			len++;
+		chainretour = (char*)malloc(sizeof(char) * len + 1);
+		if (chainretour == NULL)
+			return (NULL);
+		len = 0;
+		while (str[len])
+		{
+			chainretour[len] = (*f)(len, str[len]);
+			len++;
+		}
+		chainretour[len] = '\0';
+		return (chainretour);
 	}
-	return (NULL);
+	else
+		return (NULL);
 }

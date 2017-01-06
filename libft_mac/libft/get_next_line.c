@@ -82,7 +82,7 @@ static int		need_new_read(int fd, t_list **firstelem, int n)
 	elem = *firstelem;
 	if (elem)
 	{
-		if (ft_strchr((char*)(&elem->content + n), '\n') != NULL)
+		if (ft_strchr(&elem->content[n], '\n') != NULL)
 			return (1);
 	}
 	if (elem == NULL)

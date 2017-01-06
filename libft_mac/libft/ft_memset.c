@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/07 14:37:40 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/08 18:35:04 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+void	*ft_memset(void *str, int c, size_t n)
 {
-	char	*debut;
-	char	*fin;
+	char	value;
 	size_t	i;
+	char	*pointeur;
 
 	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
+	value = (unsigned char)c;
+	pointeur = str;
 	while (i < n)
 	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
+		pointeur[i] = value;
 		i++;
 	}
-	return (NULL);
+	return (str);
 }

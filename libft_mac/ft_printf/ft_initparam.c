@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_initparam.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/12/04 17:49:02 by bandre            #+#    #+#             */
+/*   Updated: 2016/12/04 17:52:49 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+t_param		initparam(void)
 {
-	char	*debut;
-	char	*fin;
-	size_t	i;
+	t_param param;
 
-	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
-	while (i < n)
-	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
-		i++;
-	}
-	return (NULL);
+	param.minus = 0;
+	param.plus = 0;
+	param.space = 0;
+	param.diese = 0;
+	param.use_zero = 0;
+	param.width = 0;
+	param.precision = -1;
+	param.specifier = 0;
+	param.longueur = 0;
+	return (param);
 }

@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/06 17:10:41 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/08 18:01:20 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+char	*ft_strnew(size_t size)
 {
-	char	*debut;
-	char	*fin;
+	char	*chainretour;
 	size_t	i;
 
 	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
-	while (i < n)
+	chainretour = (char*)malloc(size + 1);
+	if (chainretour == NULL)
+		return (NULL);
+	while (i < (size + 1))
 	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
+		chainretour[i] = '\0';
 		i++;
 	}
-	return (NULL);
+	return (chainretour);
 }

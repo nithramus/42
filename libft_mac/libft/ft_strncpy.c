@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/07 19:27:32 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/07 19:35:19 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
-	char	*debut;
-	char	*fin;
-	size_t	i;
+	size_t i;
 
 	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
-	while (i < n)
+	while (src[i] && i < n)
 	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
+		dest[i] = src[i];
 		i++;
 	}
-	return (NULL);
+	if (i == n)
+		return (dest);
+	else
+	{
+		while (i < n)
+		{
+			dest[i] = '\0';
+			i++;
+		}
+		return (dest);
+	}
 }

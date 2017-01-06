@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   strnequ.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/06 14:49:22 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/11 16:10:58 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+int		ft_strnequ(char const *str1, char const *str2, size_t n)
 {
-	char	*debut;
-	char	*fin;
-	size_t	i;
+	size_t i;
 
-	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
-	while (i < n)
+	if (str1 && str2)
 	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
-		i++;
+		i = 0;
+		while (i < n && str1[i] && str2[i])
+		{
+			if (str1[i] != str2[i])
+				return (0);
+			else
+				i++;
+		}
+		return (1);
 	}
-	return (NULL);
+	else
+		return (0);
 }

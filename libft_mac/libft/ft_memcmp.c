@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/07 18:57:55 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/08 18:29:51 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char	*debut;
-	char	*fin;
-	size_t	i;
+	unsigned char	*chaine1;
+	unsigned char	*chaine2;
+	size_t			i;
 
 	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
+	chaine1 = (unsigned char*)s1;
+	chaine2 = (unsigned char*)s2;
 	while (i < n)
 	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
-		i++;
+		if (chaine1[i] != chaine2[i])
+			return (chaine1[i] - chaine2[i]);
+		else
+			i++;
 	}
-	return (NULL);
+	return (0);
 }

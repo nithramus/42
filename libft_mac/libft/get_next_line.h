@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/15 15:47:36 by bandre            #+#    #+#             */
+/*   Updated: 2016/12/09 01:57:00 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 10
+# include <stdlib.h>
+# include <unistd.h>
+# include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+typedef struct			s_listchain
 {
-	char	*debut;
-	char	*fin;
-	size_t	i;
+	int					fd;
+	t_list				*firstelem;
+	struct s_listchain	*next;
+	int					n;
+}						t_listchain;
 
-	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
-	while (i < n)
-	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
-		i++;
-	}
-	return (NULL);
-}
+int						get_next_line(const int fd, char **line);
+
+#endif

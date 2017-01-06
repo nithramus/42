@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/07 15:05:25 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/10 18:22:51 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	char	*debut;
 	char	*fin;
-	size_t	i;
 
-	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
-	while (i < n)
+	if (n == 0)
+		return (dest);
+	else if (dest < src || dest > src + n + 1)
 	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
-		i++;
+		ft_memcpy(dest, src, n);
 	}
-	return (NULL);
+	else
+	{
+		debut = ((char*)src);
+		fin = ((char*)dest);
+		while (n > 0)
+		{
+			fin[n - 1] = debut[n - 1];
+			n--;
+		}
+	}
+	return (dest);
 }

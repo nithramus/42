@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_cassupp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/12/13 20:25:52 by bandre            #+#    #+#             */
+/*   Updated: 2016/12/13 20:25:54 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+char	*ft_casp(t_param list, char *s)
 {
-	char	*debut;
-	char	*fin;
-	size_t	i;
-
-	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
-	while (i < n)
-	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
-		i++;
-	}
-	return (NULL);
+	if (list.specifier == 'i' || list.specifier == 'd' || list.specifier == 'o'
+			|| list.specifier == 'O' || list.specifier == 'x' ||
+			list.specifier == 'X' || list.specifier == 'u' ||
+			list.specifier == 'U' || list.specifier == 'D')
+		if (list.precision == 0 && ft_strlen(s) == 1 && s[0] == '0')
+			s[0] = '\0';
+	return (s);
 }

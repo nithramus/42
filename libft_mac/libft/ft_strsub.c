@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/05 23:03:41 by bandre            #+#    #+#             */
+/*   Updated: 2016/11/08 19:45:07 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+char	*ft_strsub(char const *str, unsigned int start, size_t len)
 {
-	char	*debut;
-	char	*fin;
-	size_t	i;
+	unsigned long	end;
+	char			*retour;
+	int				j;
 
-	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
-	while (i < n)
+	if (str)
 	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
-		i++;
+		j = 0;
+		end = start + len;
+		retour = (char*)malloc(len + 1);
+		if (retour == NULL)
+			return (NULL);
+		while (start < end)
+		{
+			retour[j] = str[start];
+			j++;
+			start++;
+		}
+		retour[j] = '\0';
+		return (retour);
 	}
-	return (NULL);
+	else
+		return (NULL);
 }

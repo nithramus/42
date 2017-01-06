@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:59:11 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 18:31:33 by bandre           ###   ########.fr       */
+/*   Created: 2016/11/29 22:14:32 by bandre            #+#    #+#             */
+/*   Updated: 2016/12/06 01:33:51 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+int		ft_printf(char *line, ...)
 {
-	char	*debut;
-	char	*fin;
-	size_t	i;
+	va_list		ap;
+	int			i;
+	int			len;
+	int			ret;
 
 	i = 0;
-	debut = (char*)src;
-	fin = (char*)dest;
-	while (i < n)
+	len = 0;
+	va_start(ap, line);
+	while (line[i])
 	{
-		fin[i] = debut[i];
-		if (debut[i] == c)
-			return ((void*)&fin[i + 1]);
-		i++;
+		ret = 0;
+		if (line[i] != '%')
+		{
+			ft_putchar(line[i]);
+			i++;
+			len++;
+		}
+		else
+			ret = ft_gestionspe(line, &i, ap);
+		if (ret < 0)
+			return (-1);
+		len += ret;
 	}
-	return (NULL);
+	va_end(ap);
+	return (len);
 }
