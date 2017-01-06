@@ -27,9 +27,11 @@ int		parse_tubes(g_struct **list_salles, char *line)
 	{
 	ft_putendl("yolo3");
 		split = ft_strsplit(line, '-');
+		ft_putendl(split[0]);
 		salle1 = graphchr(list_salles, split[0]);
 		salle2 = graphchr(list_salles, split[1]);
-	ft_putendl("yolo4");
+		ft_printf("%p%s\n", salle1, split[0]);
+		ft_printf("%p\n", salle2);
 		if (!salle1 || !salle2)
 			return (0);
 		salle1->liaisons = ptr_join(salle1->liaisons, salle2);
@@ -49,7 +51,6 @@ int		parse_tubes(g_struct **list_salles, char *line)
 		}
 		i++;
 	}
-
 	return (1);
 }
 
@@ -57,7 +58,9 @@ g_struct	**parse_salles(g_struct **list_salles, char *start, char *end)
 {
 	char *line;
 	char **split;
+	int i;
 
+	i = 0;
 	while (get_next_line(0, &line))
 	{
 		if (ft_strchr(line, '-'))
@@ -65,8 +68,14 @@ g_struct	**parse_salles(g_struct **list_salles, char *start, char *end)
 		if (!(split = ft_strsplit(line, ' ')))
 			return (NULL);
 		list_salles = graphe_join(list_salles, new_g_struct(split[0]));
+		free(line);
 	}
 
+	while (list_salles[i])
+	{
+		ft_putendl(list_salles[i]->name);
+		i++;
+	}
 	ft_putendl("yolo1");
 	parse_tubes(list_salles, line);
 	ft_putendl("yolo2");

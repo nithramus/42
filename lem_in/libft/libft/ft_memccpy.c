@@ -17,9 +17,7 @@ void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 	char	*debut;
 	char	*fin;
 	size_t	i;
-	char	carac;
 
-	carac = (char)c;
 	i = 0;
 	debut = (char*)src;
 	fin = (char*)dest;
@@ -27,7 +25,7 @@ void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 	{
 		fin[i] = debut[i];
 		if (debut[i] == c)
-			return (&dest[i + 1]);
+			return ((void*)&fin[i + 1]);
 		i++;
 	}
 	return (NULL);

@@ -12,13 +12,13 @@
 
 #include "lem_in.h"
 
-g_struct	*graphchr(g_struct **list_salles, char *salle)
+g_struct	*graphchr(g_struct **list_salles, char *name)
 {
 	int i;
 	 i = 0;
 	 while (list_salles[i])
 	 {
-		 if (ft_strcmp((list_salles[i])->name, salle) == 0)
+		 if (ft_strcmp((list_salles[i])->name, name) == 0)
 			 return (list_salles[i]);
 		 i++;
 	 }

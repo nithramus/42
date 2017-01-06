@@ -16,6 +16,9 @@
 # include <stdarg.h>
 # include "../libft/libft.h"
 # include <wchar.h>
+# include <limits.h>
+# include <string.h>
+# include <inttypes.h>
 
 typedef struct	s_listparam
 {

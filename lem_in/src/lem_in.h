@@ -27,5 +27,5 @@ g_struct	*graphchr(g_struct **list_salles, char *salles);
 g_struct	**ptr_join(g_struct **list, g_struct *add);
 g_struct	***find_path(g_struct *start, g_struct *end);
 g_struct	***path_join(g_struct ***list, g_struct **add);
-
+int			is_in_list(g_struct **list_salles, g_struct *salle);
 #endif
