@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_path.c                                        :+:      :+:    :+:   */
+/*   path_join.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/05 13:36:53 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/06 00:02:32 by bandre           ###   ########.fr       */
+/*   Created: 2017/01/05 23:25:24 by bandre            #+#    #+#             */
+/*   Updated: 2017/01/05 23:32:10 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		find_all_way(g_struct ***list_path, g_struct *start, g_struct *end)
+g_struct	***path_join(g_struct ***list, g_struct **add)
 {
-}
+	int i;
+	g_struct ***new;
 
-g_struct	***find_path(g_struct *start, g_struct *end)
-{
-	g_struct ***list_path;
-
-	list_path = (g_struct***)malloc(sizeof(g_struct**));
-	*list_path = NULL;
-
-	find_all_way(list_path, start, end);
-	return (NULL);
+	i = 0;
+	while (list[i])
+		i++;
+	if (!(new = (g_struct***)malloc((i + 2) * sizeof(g_struct**))))
+		return (NULL);
+	i = 0;
+	while (list[i])
+	{
+		new[i] = list[i];
+		i++;
+	}
+	new[i] = add;
+	new[i + 1] = NULL;
+	return (new);
 }

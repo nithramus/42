@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:36:02 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/05 13:44:42 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/06 00:02:27 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ int		main()
 	g_struct ***path;
 
 	graphe = create_graph();
-	path = find_path(*graphe);
+	path = find_path(graphe[0], graphe[1]);
 }
