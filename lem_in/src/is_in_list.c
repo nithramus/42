@@ -19,7 +19,7 @@ int		is_in_list(g_struct **list, g_struct *add)
 	i = 0;
 	while (list[i])
 	{
-		if (list[i] == add)
+		if (!(ft_strcmp(list[i]->name, add->name)))
 			return (1);
 		i++;
 	}

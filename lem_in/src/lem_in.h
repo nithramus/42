@@ -20,7 +20,11 @@ typedef struct		s_graphe
 	struct s_graphe	**liaisons;
 }					g_struct;
 
-g_struct	**create_graph(void);
+
+int		afficher(g_struct **list_salles);
+
+
+g_struct	**create_graph(g_struct **start, g_struct **end);
 g_struct	*new_g_struct(char *name);
 g_struct	**graphe_join(g_struct **src, g_struct *add);
 g_struct	*graphchr(g_struct **list_salles, char *salles);

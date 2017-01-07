@@ -10,13 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include"lem_in.h"
+
+int		afficher(g_struct **list_salles)
+{
+	int i = 0;
+	int j = 0;
+
+
+	ft_putendl("###############");
+	while (list_salles[i])
+	{
+		ft_putendl((list_salles[i])->name);
+		i++;
+	}
+	ft_putendl("###############");
+}
 
 int		main()
 {
 	g_struct **graphe;
 	g_struct ***path;
+	g_struct *start;
+	g_struct *end;
 
-	graphe = create_graph();
-	path = find_path(graphe[0], graphe[1]);
+	graphe = create_graph(&start, &end);
+	afficher(graphe);
+	path = find_path(start, end);
 }

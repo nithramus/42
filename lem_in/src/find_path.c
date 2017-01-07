@@ -20,6 +20,8 @@ int		find_all_way(g_struct ***list_path, g_struct *start, g_struct *end, g_struc
 	i = 0;
 	if (start == end)
 	{
+		path_join(list_path, list_salles);
+		afficher(list_salles);
 		ft_putendl("fin du prog");
 		return (1);
 	}
@@ -43,8 +45,9 @@ g_struct	***find_path(g_struct *start, g_struct *end)
 
 	list_path = (g_struct***)malloc(sizeof(g_struct**));
 	*list_path = NULL;
-	list_salles = (g_struct**)malloc(sizeof(g_struct*));
-	*list_salles = NULL;
+	list_salles = (g_struct**)malloc(sizeof(g_struct*) * 2);
+	*list_salles = start;
+	list_salles[1] = NULL;
 
 	find_all_way(list_path, start, end, list_salles);
 	return (NULL);

@@ -22,6 +22,7 @@ SRC = create_graph.o\
 	  ptr_join.o\
 	  is_in_list.o\
 	  find_path.o\
+	  path_join.o\
 
 CC = gcc
 

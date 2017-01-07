@@ -18,6 +18,8 @@ g_struct	**graphe_join(g_struct **src, g_struct *add)
 	g_struct	**new;
 
 	i = 0;
+	if (is_in_list(src, add))
+		return (src);
 	while (src[i])
 		i++;
 	new = (g_struct**)malloc((i + 2) * sizeof(g_struct*));

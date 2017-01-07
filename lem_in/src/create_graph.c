@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-int		parse_tubes(g_struct **list_salles, char *line)
+static int		parse_tubes(g_struct **list_salles, char *line)
 {
 	g_struct *salle1;
 	g_struct *salle2;
@@ -27,11 +27,8 @@ int		parse_tubes(g_struct **list_salles, char *line)
 	{
 	ft_putendl("yolo3");
 		split = ft_strsplit(line, '-');
-		ft_putendl(split[0]);
 		salle1 = graphchr(list_salles, split[0]);
 		salle2 = graphchr(list_salles, split[1]);
-		ft_printf("%p%s\n", salle1, split[0]);
-		ft_printf("%p\n", salle2);
 		if (!salle1 || !salle2)
 			return (0);
 		salle1->liaisons = ptr_join(salle1->liaisons, salle2);
@@ -40,21 +37,24 @@ int		parse_tubes(g_struct **list_salles, char *line)
 		cont = get_next_line(0, &line);
 	}
 	i = 0;
-	while (list_salles[i])
-	{
-		j = 0;
-		while (list_salles[i]->liaisons[j])
-		{
-			ft_putstr(list_salles[i]->name);
-			ft_putendl((list_salles[i])->liaisons[j]->name);
-			j++;
-		}
-		i++;
-	}
+
 	return (1);
 }
 
-g_struct	**parse_salles(g_struct **list_salles, char *start, char *end)
+
+int		static split_not_valid_salle(char **split)
+{
+	int i;
+
+	i = 0;
+	while (split[i])
+		i++;
+	if (i != 1)
+		return (1);
+	return (0);
+}
+
+static g_struct	**parse_salles(g_struct **list_salles, int *start, int *end)
 {
 	char *line;
 	char **split;
@@ -67,29 +67,39 @@ g_struct	**parse_salles(g_struct **list_salles, char *start, char *end)
 			break;
 		if (!(split = ft_strsplit(line, ' ')))
 			return (NULL);
-		list_salles = graphe_join(list_salles, new_g_struct(split[0]));
+		if (split_not_valid_salle(split))
+			return (list_salles);
+		if (!(ft_strcmp("##start", split[0])))
+			*start = i;
+		else if (!(ft_strcmp("##end", split[0])))
+			*end = i;
+		else
+		{
+			list_salles = graphe_join(list_salles, new_g_struct(split[0]));
+			i++;
+		}
 		free(line);
 	}
-
+	i = 0;
 	while (list_salles[i])
 	{
 		ft_putendl(list_salles[i]->name);
 		i++;
 	}
-	ft_putendl("yolo1");
 	parse_tubes(list_salles, line);
-	ft_putendl("yolo2");
 	return (list_salles);
 }
 
-g_struct	**create_graph()
+g_struct	**create_graph(g_struct **start, g_struct **end)
 {
-	g_struct **list_salles;
-	char	*start;
-	char	*end;
+	g_struct	**list_salles;
+	int			debut;
+	int			fin;
 
 	list_salles = (g_struct**)malloc(sizeof(g_struct));
 	list_salles[0] = NULL;
-	list_salles = parse_salles(list_salles, start, end);
+	list_salles = parse_salles(list_salles, &debut, &fin);
+	*start = list_salles[debut];
+	*end = list_salles[fin];
 	return (list_salles);
 }
