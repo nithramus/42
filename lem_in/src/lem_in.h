@@ -1,4 +1,5 @@
 /* ************************************************************************** */
+	char			**name;
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
@@ -20,6 +21,11 @@ typedef struct		s_graphe
 	struct s_graphe	**liaisons;
 }					g_struct;
 
+typedef struct		s_path
+{
+	g_struct		*dependance;
+	g_struct		**path;
+}					f_path;
 
 int		afficher(g_struct **list_salles);
 
@@ -29,7 +35,10 @@ g_struct	*new_g_struct(char *name);
 g_struct	**graphe_join(g_struct **src, g_struct *add);
 g_struct	*graphchr(g_struct **list_salles, char *salles);
 g_struct	**ptr_join(g_struct **list, g_struct *add);
-g_struct	***find_path(g_struct *start, g_struct *end);
-g_struct	***path_join(g_struct ***list, g_struct **add);
+f_path		**find_path(g_struct *start, g_struct *end);
+f_path		**path_join(f_path ***list, g_struct **add);
+f_path		*new_f_path(g_struct **add);
+int			make_dependance(f_path **path);
 int			is_in_list(g_struct **list_salles, g_struct *salle);
+
 #endif

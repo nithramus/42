@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-int		find_all_way(g_struct ***list_path, g_struct *start, g_struct *end, g_struct **list_salles)
+static int		find_all_way(f_path ***list_path, g_struct *start, g_struct *end, g_struct **list_salles)
 {
 	int i;
 	g_struct **list;
@@ -20,6 +20,7 @@ int		find_all_way(g_struct ***list_path, g_struct *start, g_struct *end, g_struc
 	i = 0;
 	if (start == end)
 	{
+		ft_putendl("bugici");
 		path_join(list_path, list_salles);
 		afficher(list_salles);
 		ft_putendl("fin du prog");
@@ -38,17 +39,17 @@ int		find_all_way(g_struct ***list_path, g_struct *start, g_struct *end, g_struc
 	return (1);
 }
 
-g_struct	***find_path(g_struct *start, g_struct *end)
+f_path	**find_path(g_struct *start, g_struct *end)
 {
-	g_struct ***list_path;
+	f_path	**list_path;
 	g_struct **list_salles;
 
-	list_path = (g_struct***)malloc(sizeof(g_struct**));
+	list_path = (f_path**)malloc(sizeof(f_path*));
 	*list_path = NULL;
 	list_salles = (g_struct**)malloc(sizeof(g_struct*) * 2);
 	*list_salles = start;
 	list_salles[1] = NULL;
 
-	find_all_way(list_path, start, end, list_salles);
-	return (NULL);
+	find_all_way(&list_path, start, end, list_salles);
+	return (list_path);
 }

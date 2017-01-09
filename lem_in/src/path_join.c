@@ -12,23 +12,26 @@
 
 #include "lem_in.h"
 
-g_struct	***path_join(g_struct ***list, g_struct **add)
+f_path	**path_join(f_path ***list, g_struct **add)
 {
 	int i;
-	g_struct ***new;
+	f_path **new;
 
 	i = 0;
-	while (list[i])
+
+	while ((*list)[i])
 		i++;
-	if (!(new = (g_struct***)malloc((i + 2) * sizeof(g_struct**))))
+	if (!(new = (f_path**)malloc((i + 2) * sizeof(f_path*))))
 		return (NULL);
 	i = 0;
-	while (list[i])
+	while ((*list)[i])
 	{
-		new[i] = list[i];
+		new[i] = (*list)[i];
 		i++;
 	}
-	new[i] = add;
+	*list = new;
+	if (!(new[i] = new_f_path(add)))
+		return (NULL);
 	new[i + 1] = NULL;
 	return (new);
 }

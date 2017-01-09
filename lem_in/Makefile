@@ -23,6 +23,8 @@ SRC = create_graph.o\
 	  is_in_list.o\
 	  find_path.o\
 	  path_join.o\
+	  new_f_path.o\
+	  make_dependance.o\
 
 CC = gcc
 

@@ -30,11 +30,14 @@ int		afficher(g_struct **list_salles)
 int		main()
 {
 	g_struct **graphe;
-	g_struct ***path;
+	f_path		**path;
 	g_struct *start;
 	g_struct *end;
 
 	graphe = create_graph(&start, &end);
 	afficher(graphe);
 	path = find_path(start, end);
+	if (make_dependance(path) == 0)
+		return (0);
+	return (1);
 }
