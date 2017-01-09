@@ -6,7 +6,9 @@ f_path	*new_f_path(g_struct **add)
 
 	if (!(new = (f_path*)malloc(sizeof(f_path))))
 		return (NULL);
-	new->dependance = NULL;
+	if (!(new->dependance = (f_path**)malloc(sizeof(f_path*))))
+		return (NULL);
+	new->dependance[0] = NULL;
 	new->path=add;
 	return (new);
 }

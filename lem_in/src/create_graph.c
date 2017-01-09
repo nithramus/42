@@ -96,7 +96,7 @@ g_struct	**create_graph(g_struct **start, g_struct **end)
 	int			debut;
 	int			fin;
 
-	list_salles = (g_struct**)malloc(sizeof(g_struct));
+	list_salles = (g_struct**)malloc(sizeof(g_struct*));
 	list_salles[0] = NULL;
 	list_salles = parse_salles(list_salles, &debut, &fin);
 	*start = list_salles[debut];

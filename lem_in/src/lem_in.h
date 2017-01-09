@@ -23,7 +23,7 @@ typedef struct		s_graphe
 
 typedef struct		s_path
 {
-	g_struct		*dependance;
+	struct s_path	**dependance;
 	g_struct		**path;
 }					f_path;
 
@@ -38,6 +38,8 @@ g_struct	**ptr_join(g_struct **list, g_struct *add);
 f_path		**find_path(g_struct *start, g_struct *end);
 f_path		**path_join(f_path ***list, g_struct **add);
 f_path		*new_f_path(g_struct **add);
+f_path		**path_combinaison(f_path **a_path, f_path **dependance, int nb_path, int nb_max);
+
 int			make_dependance(f_path **path);
 int			is_in_list(g_struct **list_salles, g_struct *salle);
 
