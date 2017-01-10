@@ -7,6 +7,7 @@ static int calc_len_road(f_path *path)
 	i = 0;
 	while (path->path[i])
 		i++;
+	i--;
 	return (i);
 }
 
@@ -20,19 +21,20 @@ int		test_nbtour(f_path **list_road, int nb_fourmis)
 	fourmis_arrive = 0;
 	nb_road = 0;
 	len_road = 0;
-	nb_tour = 1;
+	nb_tour = 0;
 	while (fourmis_arrive < nb_fourmis)
 	{
-		len_road = calc_len_road(list_road[nb_road]);
+		nb_road = 0;
 		while (list_road[nb_road])
 		{
-			if (nb_tour > len_road)
+			len_road = calc_len_road(list_road[nb_road]);
+			ft_printf("lenroad:%d\n", len_road);
+			if (nb_tour >= len_road)
 				fourmis_arrive++;
 			nb_road++;
 		}
+		ft_putendl("sortie");
 		nb_tour++;
 	}
 	return (nb_tour);
 }
-
-

@@ -50,7 +50,7 @@ f_path	**path_combinaison(f_path **all_path, f_path ***best_path_comb, f_path **
 	//ft_putendl("test2");
 	while (all_path[nb_path])
 	{
-		ft_printf("%d\n", nb_road);
+		//ft_printf("%d\n", nb_road);
 		if (dep_test(act_path, all_path[nb_path]))
 		{
 			new_dep = f_path_join(act_path, all_path[nb_path]);
@@ -60,7 +60,7 @@ f_path	**path_combinaison(f_path **all_path, f_path ***best_path_comb, f_path **
 			else if (nb_road == 0)
 			{
 				ft_putendl("yolo");
-				//testrapidite
+				ft_printf("nb-tours: %d", test_nbtour(new_dep, 10));
 				//return (NULL);
 			}
 		}

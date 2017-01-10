@@ -26,6 +26,7 @@ SRC = create_graph.o\
 	  new_f_path.o\
 	  make_dependance.o\
 	  path_combinaison.o\
+	  test_nbtour.o\
 
 CC = gcc
 

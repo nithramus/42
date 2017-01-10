@@ -40,6 +40,7 @@ f_path		**path_join(f_path ***list, g_struct **add);
 f_path		*new_f_path(g_struct **add);
 f_path		**path_combinaison(f_path **a_path, f_path ***dependance, f_path **ac_path, int nb_path, int nb_max);
 
+int			test_nbtour(f_path **act_path, int nb_fourmis);
 int			make_dependance(f_path **path);
 int			is_in_list(g_struct **list_salles, g_struct *salle);
 
