@@ -33,13 +33,19 @@ int		main()
 	f_path		**path;
 	g_struct *start;
 	g_struct *end;
-	f_path		***best_path;
+	f_path		**best_path;
+	f_path		*ac_path[1];
 
+	ac_path[0] = NULL;
 	graphe = create_graph(&start, &end);
 	afficher(graphe);
 	path = find_path(start, end);
 	if (make_dependance(path) == 0)
 		return (0);
-	path_combinaison(path, best_path, 0, 3);
+	int i = 0;
+	while (path[i])
+		i++;
+	ft_printf("%d\n", i);
+	path_combinaison(path, &best_path, ac_path, 0, 2);
 	return (1);
 }
