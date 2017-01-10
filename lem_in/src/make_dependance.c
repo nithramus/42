@@ -17,7 +17,8 @@ static int dep_find(f_path *path, f_path *path2)
 		i++;
 	}
 	new[i] = path2;
-	new[i] = NULL;
+	new[i + 1] = NULL;
+	path->dependance = new;
 	ft_putendl("dep trouvé");
 	return (1);
 }

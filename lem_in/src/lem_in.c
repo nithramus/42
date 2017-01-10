@@ -35,6 +35,7 @@ int		main()
 	g_struct *end;
 	f_path		**best_path;
 	f_path		*ac_path[1];
+	int i;
 
 	ac_path[0] = NULL;
 	graphe = create_graph(&start, &end);
@@ -42,7 +43,22 @@ int		main()
 	path = find_path(start, end);
 	if (make_dependance(path) == 0)
 		return (0);
-	int i = 0;
+
+	i = 0;
+	int j = 0;
+	while (path[i])
+	{
+		j = 0;
+		while (path[i]->dependance[j])
+		{
+			afficher(path[i]->dependance[j]->path);
+			j++;
+		}
+		i++;
+	}
+
+
+	i = 0;
 	while (path[i])
 		i++;
 	ft_printf("%d\n", i);
