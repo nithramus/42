@@ -27,6 +27,19 @@ int		afficher(g_struct **list_salles)
 	ft_putendl("###############");
 }
 
+int		afficher_road(f_path **path)
+{
+	int i = 0;
+	int j = 0;
+	ft_putendl("##############################");
+	while (path[i])
+	{
+		afficher(path[i]->path);
+		i++;
+	}
+	ft_putendl("###############################");
+}
+
 int		main()
 {
 	g_struct **graphe;
@@ -44,24 +57,17 @@ int		main()
 	if (make_dependance(path) == 0)
 		return (0);
 
-	i = 0;
-	int j = 0;
-	while (path[i])
-	{
-		j = 0;
-		while (path[i]->dependance[j])
-		{
-			afficher(path[i]->dependance[j]->path);
-			j++;
-		}
-		i++;
-	}
+
 
 
 	i = 0;
 	while (path[i])
 		i++;
 	ft_printf("%d\n", i);
-	path_combinaison(path, &best_path, ac_path, 0, 2);
+	best_path = NULL;
+	path_combinaison(path, &best_path, ac_path, 0, 3, 10);
+	ft_putendl("final!");
+	afficher_road(best_path);
 	return (1);
+
 }
