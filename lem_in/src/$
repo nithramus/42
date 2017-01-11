@@ -37,7 +37,6 @@ int		afficher_road(f_path **path)
 		afficher(path[i]->path);
 		i++;
 	}
-	exit(1);
 	ft_putendl("###############################");
 }
 
@@ -53,11 +52,6 @@ int		main()
 
 	ac_path[0] = NULL;
 	graphe = create_graph(&start, &end);
-	if (!(graphe))
-	{
-		ft_putendl("ERROR");
-		return (1);
-	}
 	afficher(graphe);
 	path = find_path(start, end);
 	if (make_dependance(path) == 0)
@@ -73,6 +67,7 @@ int		main()
 	best_path = NULL;
 	path_combinaison(path, &best_path, ac_path, 0, 3, 10);
 	ft_putendl("final!");
+	exit(EXIT_SUCCESS);
 	afficher_road(best_path);
 	return (1);
 
