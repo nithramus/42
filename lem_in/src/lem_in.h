@@ -45,4 +45,5 @@ int			test_nbtour(f_path **act_path, int nb_fourmis);
 int			make_dependance(f_path **path);
 int			is_in_list(g_struct **list_salles, g_struct *salle);
 
+void		afficher_error(void);
 #endif

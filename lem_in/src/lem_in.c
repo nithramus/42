@@ -12,33 +12,39 @@
 
 #include"lem_in.h"
 
-int		afficher(g_struct **list_salles)
+
+static f_path **best_path_comb(f_path **a_path, int nbfoumis)
 {
-	int i = 0;
-	int j = 0;
+	f_path	**best_path;
+	f_path	*ac_path[1];
+	f_path	**new_best;
+	int i;
+	
+	i = 1;
+	ac_path[0] = NULL;
+	new_best = NULL;
+	
+	ft_putendl("test2");
+	path_combinaison(a_path, &new_best, ac_path, 0, i, 10);
+	ft_putendl("test1");
+	if (!(new_best))
+		afficher_error();
 
-
-	ft_putendl("###############");
-	while (list_salles[i])
+	best_path = new_best;
+	i = 2;
+	while (new_best)
 	{
-		ft_putendl((list_salles[i])->name);
+		new_best = NULL;
+		path_combinaison(a_path, &new_best, ac_path, 0, i, 10);
+		if (new_best)
+			best_path = new_best;
 		i++;
 	}
-	ft_putendl("###############");
-}
 
-int		afficher_road(f_path **path)
-{
-	int i = 0;
-	int j = 0;
-	ft_putendl("##############################");
-	while (path[i])
-	{
-		afficher(path[i]->path);
-		i++;
-	}
-	exit(1);
-	ft_putendl("###############################");
+
+	ft_putendl("final!");
+	afficher_road(best_path);
+	return (best_path);
 }
 
 int		main()
@@ -47,43 +53,22 @@ int		main()
 	f_path		**path;
 	g_struct *start;
 	g_struct *end;
-	f_path		**best_path;
-	f_path		*ac_path[1];
-	int i;
+	f_path **best_path;
 
-	ac_path[0] = NULL;
+
+
 	graphe = create_graph(&start, &end);
 	if (!(graphe))
-	{
-		ft_putendl("ERROR");
-		return (1);
-	}
+		afficher_error();
 	afficher(graphe);
 	if (!(path = find_path(start, end)))
-	{
-		ft_putendl("ERROR");
-		return (0);
-	}
+		afficher_error();
 	if (path[0] == NULL)
-	{
-		ft_putendl("ERROR");
-		return (0);
-	}
+		afficher_error();
 
 	if (make_dependance(path) == 0)
 		return (0);
-
-
-
-
-	i = 0;
-	while (path[i])
-		i++;
-	ft_printf("%d\n", i);
-	best_path = NULL;
-	path_combinaison(path, &best_path, ac_path, 0, 3, 10);
-	ft_putendl("final!");
-	afficher_road(best_path);
+	best_path = best_path_comb(path, 10);
 	return (1);
 
 }
