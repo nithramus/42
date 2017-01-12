@@ -21,7 +21,11 @@ static int		find_all_way(f_path ***list_path, g_struct *start, g_struct *end, g_
 	if (start == end)
 	{
 		ft_putendl("bugici");
-		path_join(list_path, list_salles);
+		if (!(path_join(list_path, list_salles)))
+		{
+			ft_putendl("ERROR");
+			exit(0);
+		}
 		afficher(list_salles);
 		ft_putendl("fin du prog");
 		return (1);
@@ -30,7 +34,11 @@ static int		find_all_way(f_path ***list_path, g_struct *start, g_struct *end, g_
 	{
 		if (!(is_in_list(list_salles, start->liaisons[i])))
 		{
-			list = ptr_join(list_salles, start->liaisons[i]);
+			if (!(list = ptr_join(list_salles, start->liaisons[i])))
+			{
+				ft_putendl("ERROR");
+				exit(0);
+			}
 			find_all_way(list_path, start->liaisons[i], end, list);
 		}
 		i++;
@@ -44,9 +52,11 @@ f_path	**find_path(g_struct *start, g_struct *end)
 	f_path	**list_path;
 	g_struct **list_salles;
 
-	list_path = (f_path**)malloc(sizeof(f_path*));
+	if (!(list_path = (f_path**)malloc(sizeof(f_path*))))
+		return (NULL);
 	*list_path = NULL;
-	list_salles = (g_struct**)malloc(sizeof(g_struct*) * 2);
+	if (!(list_salles = (g_struct**)malloc(sizeof(g_struct*) * 2)))
+		return (NULL);
 	*list_salles = start;
 	list_salles[1] = NULL;
 

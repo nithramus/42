@@ -59,7 +59,17 @@ int		main()
 		return (1);
 	}
 	afficher(graphe);
-	path = find_path(start, end);
+	if (!(path = find_path(start, end)))
+	{
+		ft_putendl("ERROR");
+		return (0);
+	}
+	if (path[0] == NULL)
+	{
+		ft_putendl("ERROR");
+		return (0);
+	}
+
 	if (make_dependance(path) == 0)
 		return (0);
 
