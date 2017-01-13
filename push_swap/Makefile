@@ -6,7 +6,7 @@
 #    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2016/12/14 01:40:48 by bandre           ###   ########.fr        #
+#    Updated: 2017/01/13 17:03:56 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,10 +59,10 @@ CHECKER = $(addprefix $(SRC_PATH_CHECKER)/,$(SRC_CHECKER))
 all: EXEC $(NAME) $(PUSH)
 
 $(NAME): $(CHECKER)
-	$(CC) -o $(NAME) $(CHECKER) $(LIB)
+	$(CC) $(FLAG) -o $(NAME) $(CHECKER) $(LIB)
 
 $(PUSH): $(PUSH_SWAP)
-	$(CC) -o $(PUSH) $(PUSH_SWAP) $(LIB) 
+	$(CC) $(FLAG) -o $(PUSH) $(PUSH_SWAP) $(LIB) 
 
 EXEC: 
 	make -C libft

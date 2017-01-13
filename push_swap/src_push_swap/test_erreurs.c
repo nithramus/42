@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 21:34:59 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/12 20:15:27 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/13 17:35:44 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int			*verif_entier(char *argv, int *ptr)
 {
 	ssize_t value;
 
+	if (ft_strlen(argv) > 13)
+		return (NULL);
 	if (is_valide(argv) == -1)
 		return (NULL);
 	value = ft_atoi(argv);

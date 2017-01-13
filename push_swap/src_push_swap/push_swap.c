@@ -6,13 +6,13 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 16:29:30 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/14 21:18:37 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/13 19:27:54 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		is_trie(t_checker *a_list, t_checker *b_list)
+int			is_trie(t_checker *a_list, t_checker *b_list)
 {
 	if (b_list)
 		return (0);
@@ -26,7 +26,24 @@ int		is_trie(t_checker *a_list, t_checker *b_list)
 	return (1);
 }
 
-int		main(int argv, char **argc)
+static int	expend(t_checker *a_list, t_checker *b_list, int len)
+{
+	if (is_trie(a_list, b_list))
+	{
+		ft_printf("\n");
+		return (1);
+	}
+	if (len > 7)
+		tri_fusion_ameliore(&a_list, &b_list, len);
+	else
+		recursif(&a_list, &b_list);
+	ft_free_checker(a_list);
+	ft_free_checker(b_list);
+	return (1);
+}
+
+
+int			main(int argv, char **argc)
 {
 	int			len;
 	char *ret;
@@ -49,17 +66,6 @@ int		main(int argv, char **argc)
 	}
 	a_list = b_list;
 	b_list = NULL;
-	if (is_trie(a_list, b_list))
-	{
-		ft_printf("\n");
-		return (1);
-	}
-	if (len > 10)
-		tri_fusion_ameliore(&a_list, &b_list, len);
-	else
-		recursif(&a_list, &b_list);
-	afficher(a_list, b_list);
-	ft_free_checker(a_list);
-	ft_free_checker(b_list);
+	expend(a_list, b_list, len);
 	return (1);
 }
