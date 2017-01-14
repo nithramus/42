@@ -1,5 +1,4 @@
 /* ************************************************************************** */
-	char			**name;
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
@@ -7,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:47:43 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/06 00:02:00 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/14 18:19:49 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +24,17 @@ typedef struct		s_path
 {
 	struct s_path	**dependance;
 	g_struct		**path;
+	int				nb_fourmis;
 }					f_path;
+
+typedef struct		fourmis_path
+{
+	int				pos;
+	f_path			*road;
+	int				num_fourmis;
+	int				move;
+}					s_fourmis;
+
 
 int		afficher(g_struct **list_salles);
 int		afficher_road(f_path **road);
@@ -44,6 +53,7 @@ f_path		**path_combinaison(f_path **a_path, f_path ***dependance, f_path **ac_pa
 int			test_nbtour(f_path **act_path, int nb_fourmis);
 int			make_dependance(f_path **path);
 int			is_in_list(g_struct **list_salles, g_struct *salle);
+int			fourmis_chemins(f_path **best_path, int nb_fourmis);
 
 void		afficher_error(void);
 #endif

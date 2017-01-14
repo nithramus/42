@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:36:02 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/06 00:02:27 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/14 13:44:59 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static f_path **best_path_comb(f_path **a_path, int nbfoumis)
 
 	ft_putendl("final!");
 	afficher_road(best_path);
+	fourmis_chemins(best_path, nbfoumis);
 	return (best_path);
 }
 
@@ -68,7 +69,8 @@ int		main()
 
 	if (make_dependance(path) == 0)
 		return (0);
-	best_path = best_path_comb(path, 10);
+	best_path = best_path_comb(path, 15);
+	ft_putendl("fin");
 	return (1);
 
 }

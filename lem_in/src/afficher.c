@@ -13,6 +13,7 @@ int		afficher(g_struct **list_salles)
 		i++;
 	}
 	ft_putendl("###############");
+	return (1);
 }
 
 int		afficher_road(f_path **path)
@@ -26,6 +27,7 @@ int		afficher_road(f_path **path)
 		i++;
 	}
 	ft_putendl("###############################");
+	return (1);
 }
 
 void	afficher_error(void)

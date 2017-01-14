@@ -10,5 +10,6 @@ f_path	*new_f_path(g_struct **add)
 		return (NULL);
 	new->dependance[0] = NULL;
 	new->path=add;
+	new->nb_fourmis = 0;
 	return (new);
 }
