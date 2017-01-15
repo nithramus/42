@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_nbtour.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/15 21:04:15 by bandre            #+#    #+#             */
+/*   Updated: 2017/01/15 21:04:47 by bandre           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-static int calc_len_road(f_path *path)
+static int	calc_len_road(f_path *path)
 {
 	int i;
 
@@ -11,7 +23,7 @@ static int calc_len_road(f_path *path)
 	return (i);
 }
 
-int		test_nbtour(f_path **list_road, int nb_fourmis)
+int			test_nbtour(f_path **list_road, int nb_fourmis)
 {
 	int nb_road;
 	int len_road;
@@ -28,14 +40,11 @@ int		test_nbtour(f_path **list_road, int nb_fourmis)
 		while (list_road[nb_road])
 		{
 			len_road = calc_len_road(list_road[nb_road]);
-			//ft_printf("lenroad:%d\n", len_road);
 			if (nb_tour >= len_road)
 				fourmis_arrive++;
-			//ft_printf("foumi:%d\n", fourmis_arrive);
 			nb_road++;
 		}
 		nb_tour++;
-		//ft_printf("nb_tours1: %d\n", nb_tour);
 	}
 	nb_tour--;
 	return (nb_tour);

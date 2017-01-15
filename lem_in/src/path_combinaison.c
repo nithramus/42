@@ -3,14 +3,14 @@
 static f_path	**f_path_join(f_path **act_path, f_path *path_to_add)
 {
 	f_path	**new;
-	int i;
+	int		i;
 
 	i = 0;
 	while (act_path[i])
 		i++;
 	if (!(new = (f_path**)malloc((i + 2) * sizeof(f_path*))))
 		afficher_error();
-	i  = 0;
+	i = 0;
 	while (act_path[i])
 	{
 		new[i] = act_path[i];

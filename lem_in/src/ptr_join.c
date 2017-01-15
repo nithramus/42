@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 22:37:32 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 15:41:29 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/15 21:04:11 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 g_struct	**ptr_join_not_free(g_struct **list, g_struct *add)
 {
-	int i;
-	g_struct **new;
+	int			i;
+	g_struct	**new;
 
 	i = 0;
 	while (list[i])
 		i++;
-	if (!(new = (g_struct**)malloc((i + 2)  * sizeof(g_struct*))))
+	if (!(new = (g_struct**)malloc((i + 2) * sizeof(g_struct*))))
 		return (NULL);
 	i = 0;
 	while (list[i])
@@ -35,13 +35,13 @@ g_struct	**ptr_join_not_free(g_struct **list, g_struct *add)
 
 g_struct	**ptr_join(g_struct **list, g_struct *add)
 {
-	int i;
-	g_struct **new;
+	int			i;
+	g_struct	**new;
 
 	i = 0;
 	while (list[i])
 		i++;
-	if (!(new = (g_struct**)malloc((i + 2)  * sizeof(g_struct*))))
+	if (!(new = (g_struct**)malloc((i + 2) * sizeof(g_struct*))))
 		return (NULL);
 	i = 0;
 	while (list[i])

@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:47:43 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 18:14:56 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/15 20:48:29 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ typedef struct		fourmis_path
 	int				move;
 }					s_fourmis;
 
-
 int		afficher(g_struct **list_salles);
 int		afficher_road(f_path **road);
-
 
 g_struct	**create_graph(g_struct **start, g_struct **end);
 g_struct	*new_g_struct(char *name);

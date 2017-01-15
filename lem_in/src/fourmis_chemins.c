@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 23:47:46 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 18:19:17 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/15 20:58:26 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ static s_fourmis	**s_fourmis_join(s_fourmis **list, s_fourmis *new)
 
 static s_fourmis	**add_fourmis(s_fourmis **list, f_path **best_path)
 {
-	int i;
-	s_fourmis **new;
+	int			i;
+	s_fourmis	**new;
 
-	 i = 0;
+	i = 0;
 	while (best_path[i])
 	{
 		if (best_path[i]->nb_fourmis > 0)
@@ -120,9 +120,11 @@ static int		affichage_final(s_fourmis **list_fourmis)
 		{
 			if (list_fourmis[i]->road->path[list_fourmis[i]->pos + 1])
 			{
-				ft_printf("L%s-%s ",list_fourmis[i]->road->path[list_fourmis[i]->pos]->name, list_fourmis[i]->road->path[list_fourmis[i]->pos + 1]->name);
-			list_fourmis[i]->pos++;
-			cont = 1;
+				ft_printf("L%s-%s ",
+						list_fourmis[i]->road->path[list_fourmis[i]->pos]->name,
+						list_fourmis[i]->road->path[list_fourmis[i]->pos + 1]->name);
+				list_fourmis[i]->pos++;
+				cont = 1;
 			}
 			else
 				list_fourmis[i]->move = 0;
@@ -135,9 +137,9 @@ static int		affichage_final(s_fourmis **list_fourmis)
 
 int		fourmis_chemins(f_path **best_path, int nb_fourmis)
 {
-	s_fourmis **list_fourmis;
-	int i;
-	int nb_road;
+	s_fourmis	**list_fourmis;
+	int			i;
+	int			nb_road;
 
 	nb_road = 0;
 	while (best_path[nb_road])
@@ -157,7 +159,6 @@ int		fourmis_chemins(f_path **best_path, int nb_fourmis)
 	}
 	while (affichage_final(list_fourmis))
 		list_fourmis = add_fourmis(list_fourmis, best_path);
-	
 	ft_free_s_fourmis(list_fourmis);
 	return (0);
 }

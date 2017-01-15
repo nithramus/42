@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   make_dependance.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/15 20:53:39 by bandre            #+#    #+#             */
+/*   Updated: 2017/01/15 21:06:58 by bandre           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-static int dep_find(f_path *path, f_path *path2)
+static int	dep_find(f_path *path, f_path *path2)
 {
-	int i;
-	f_path **new;
-	f_path **stock;
+	int		i;
+	f_path	**new;
+	f_path	**stock;
 
 	stock = path->dependance;
 	i = 1;
@@ -26,7 +38,7 @@ static int dep_find(f_path *path, f_path *path2)
 	return (1);
 }
 
-static int add_dependance(f_path **list_path, int i)
+static int	add_dependance(f_path **list_path, int i)
 {
 	int u;
 	int k;
@@ -45,9 +57,9 @@ static int add_dependance(f_path **list_path, int i)
 			while (list_path[u]->path[m])
 			{
 				if (!(list_path[u]->path[m + 1]))
-					break;
+					break ;
 				if (list_path[i]->path[k] == list_path[u]->path[m])
-					return (dep_find(list_path[i], list_path[u])+
+					return (dep_find(list_path[i], list_path[u]) +
 							dep_find(list_path[u], list_path[i]));
 				m++;
 			}
@@ -57,7 +69,7 @@ static int add_dependance(f_path **list_path, int i)
 	return (1);
 }
 
-int		make_dependance(f_path **list_path)
+int			make_dependance(f_path **list_path)
 {
 	int i;
 
