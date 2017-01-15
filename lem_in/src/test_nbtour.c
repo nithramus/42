@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 21:04:15 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 21:04:47 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/16 00:05:08 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,5 @@ int			test_nbtour(f_path **list_road, int nb_fourmis)
 		}
 		nb_tour++;
 	}
-	nb_tour--;
-	return (nb_tour);
+	return (nb_tour--);
 }

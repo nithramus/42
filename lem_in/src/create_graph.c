@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:52:00 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 15:37:43 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/15 23:25:20 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static g_struct	**parse_salles(g_struct **list_salles, int *start, int *end)
 	}
 	ft_free_split(split);
 	i = 0;
-	afficher(list_salles);
 	if (parse_tubes(list_salles, line) == 0)
 		return (NULL);
 	return (list_salles);

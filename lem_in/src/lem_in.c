@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:36:02 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 22:06:00 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/16 00:33:41 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,32 @@ static	f_path **best_path_comb(f_path **a_path, int nbfoumis)
 	f_path	**new_best;
 	int		i;
 
-	i = 0;
+	i = 1;
+	ft_putendl("entree");
 	ac_path = (f_path**)malloc(sizeof(f_path*));
 	*ac_path = NULL;
 	new_best = NULL;
-	ft_putendl("test2");
 	path_combinaison(a_path, &new_best, ac_path, 0, i, 10);
-	ft_putendl("test1");
 	if (!(new_best))
 		afficher_error();
 	best_path = new_best;
-	i = 1;
+	i = 2;
 	while (new_best)
 	{
+		afficher_road(best_path);
 		ac_path = (f_path**)malloc(sizeof(f_path*));
 		*ac_path = NULL;
 		new_best = NULL;
-		ft_putendl("tour");
 		path_combinaison(a_path, &new_best, ac_path, 0, i, nbfoumis);
 		if (new_best)
 		{
+			ft_putendl("test");
 			free(best_path);
 			best_path = new_best;
 		}
 		i++;
 	}
-	ft_putendl("final!");
+	ft_putendl("final");
 	afficher_road(best_path);
 	fourmis_chemins(best_path, nbfoumis);
 	free(best_path);
@@ -68,12 +68,9 @@ int		main(void)
 		afficher_error();
 	if (make_dependance(path) == 0)
 		return (0);
+	afficher_road(path);
 	best_path_comb(path, 3);
 	ft_free_list_g_struct(graphe);
-	ft_putendl("sortie");
 	ft_free_list_f_path(path);
-	ft_putendl("fin");
-	while (1);
-
 	return (1);
 }
