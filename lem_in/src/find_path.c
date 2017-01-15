@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 13:36:53 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/06 00:02:32 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/15 16:03:39 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int		find_all_way(f_path ***list_path, g_struct *start, g_struct *end, g_
 	{
 		if (!(is_in_list(list_salles, start->liaisons[i])))
 		{
-			if (!(list = ptr_join(list_salles, start->liaisons[i])))
+			if (!(list = ptr_join_not_free(list_salles, start->liaisons[i])))
 			{
 				ft_putendl("ERROR");
 				exit(0);

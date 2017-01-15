@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:47:43 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/14 18:19:49 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/15 18:14:56 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ g_struct	*new_g_struct(char *name);
 g_struct	**graphe_join(g_struct **src, g_struct *add);
 g_struct	*graphchr(g_struct **list_salles, char *salles);
 g_struct	**ptr_join(g_struct **list, g_struct *add);
+g_struct	**ptr_join_not_free(g_struct **list, g_struct *add);
 f_path		**find_path(g_struct *start, g_struct *end);
 f_path		**path_join(f_path ***list, g_struct **add);
 f_path		*new_f_path(g_struct **add);
@@ -56,4 +57,8 @@ int			is_in_list(g_struct **list_salles, g_struct *salle);
 int			fourmis_chemins(f_path **best_path, int nb_fourmis);
 
 void		afficher_error(void);
+void		ft_free_list_g_struct(g_struct **list_ptr);
+void		ft_free_list_f_path(f_path **list_ptr);
+void		ft_free_split(char **str);
+void		ft_free_s_fourmis(s_fourmis **list);
 #endif

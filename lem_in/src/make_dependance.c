@@ -4,7 +4,9 @@ static int dep_find(f_path *path, f_path *path2)
 {
 	int i;
 	f_path **new;
+	f_path **stock;
 
+	stock = path->dependance;
 	i = 1;
 	while (path->dependance[i])
 		i++;
@@ -19,6 +21,7 @@ static int dep_find(f_path *path, f_path *path2)
 	new[i] = path2;
 	new[i + 1] = NULL;
 	path->dependance = new;
+	free(stock);
 	ft_putendl("dep trouvé");
 	return (1);
 }

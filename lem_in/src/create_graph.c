@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:52:00 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/14 21:57:21 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/15 15:37:43 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static int		parse_tubes(g_struct **list_salles, char *line)
 	split = NULL;
 	while (cont)
 	{
-	ft_putendl("yolo3");
 		if (!(split = ft_strsplit(line, '-')))
 			return (0);
 		if (split_not_valid_salle(split, 2))
@@ -50,11 +49,10 @@ static int		parse_tubes(g_struct **list_salles, char *line)
 			return (0);
 		if (!(salle2->liaisons = ptr_join(salle2->liaisons, salle1)))
 			return (0);
-		ft_putendl("yolo5");
-		//free(line);
+		free(line);
+		ft_free_split(split);
 		cont = get_next_line(0, &line);
 	}
-	ft_putendl("sortie");
 	return (1);
 }
 
@@ -67,7 +65,6 @@ static g_struct	**parse_salles(g_struct **list_salles, int *start, int *end)
 	i = 0;
 	while (get_next_line(0, &line))
 	{
-		ft_printf("i=%d\n", i);
 		if (!(split = ft_strsplit(line, ' ')))
 			return (NULL);
 		else if (!(ft_strcmp("##start", split[0])))
@@ -86,7 +83,9 @@ static g_struct	**parse_salles(g_struct **list_salles, int *start, int *end)
 			i++;
 		}
 		free(line);
+		ft_free_split(split);
 	}
+	ft_free_split(split);
 	i = 0;
 	afficher(list_salles);
 	if (parse_tubes(list_salles, line) == 0)
@@ -104,16 +103,13 @@ g_struct	**create_graph(g_struct **start, g_struct **end)
 	fin = -1;
 	if (!(list_salles = (g_struct**)malloc(sizeof(g_struct*))))
 		return (NULL);
-	list_salles[0] = NULL;
+	*list_salles = NULL;
 	list_salles = parse_salles(list_salles, &debut, &fin);
 	if (debut == fin || debut == -1 || fin == -1)
 		return (NULL);
-	ft_putendl("srotie@");
-	ft_printf("fin: %d\n", fin);
 	*start = list_salles[debut];
 	*end = list_salles[fin];
 	if (!(*start) || !(*end))
 		return (NULL);
-
 	return (list_salles);
 }

@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 23:47:46 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/14 20:06:04 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/15 18:19:17 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ static s_fourmis	**add_fourmis(s_fourmis **list, f_path **best_path)
 		if (best_path[i]->nb_fourmis > 0)
 		{
 			new = s_fourmis_join(list, new_fourmis(best_path[i], i + 1));
+			free(list);
 			list = new;
 			best_path[i]->nb_fourmis--;
 		}
@@ -156,6 +157,7 @@ int		fourmis_chemins(f_path **best_path, int nb_fourmis)
 	}
 	while (affichage_final(list_fourmis))
 		list_fourmis = add_fourmis(list_fourmis, best_path);
-
+	
+	ft_free_s_fourmis(list_fourmis);
 	return (0);
 }

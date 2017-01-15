@@ -6,7 +6,7 @@
 #    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2017/01/14 20:03:13 by bandre           ###   ########.fr        #
+#    Updated: 2017/01/15 14:44:49 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC = create_graph.o\
 	  test_nbtour.o\
 	  afficher.o\
 	  fourmis_chemins.o\
+	  ft_free.o\
 
 CC = gcc
 
@@ -41,13 +42,13 @@ SRC_O = $(addprefix $(SRC_PATH)/,$(SRC))
 all: EXEC $(NAME)
 
 $(NAME): $(SRC_O)
-	$(CC) $(FLAG) -o $(NAME) $(SRC_O) $(LIB)
+	$(CC) -o $(NAME) $(SRC_O) $(LIB)
 
 EXEC: 
 	make -C libft
 
 %.o: %.c
-	$(CC) $(FLAG) -c $< -o $@
+	$(CC) -c $< -o $@
 
 clean:
 	rm -f $(addprefix $(SRC_PATH)/,$(SRC))

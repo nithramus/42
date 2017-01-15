@@ -32,7 +32,6 @@ static int	dep_test(f_path **act_path, f_path *path_to_add)
 		road = 0;
 		while (act_path[i]->dependance[road])
 		{
-			ft_printf("dep:");
 			if (act_path[i]->dependance[road] == path_to_add)
 				return (0);
 			road++;
@@ -56,15 +55,19 @@ f_path	**path_combinaison(f_path **all_path, f_path ***best_path_comb, f_path **
 				path_combinaison(all_path, best_path_comb, new_dep, nb_path + 1, nb_road, nb_fourmis);
 			else if (nb_road == 0)
 			{
-				afficher_road(new_dep);
-				ft_printf("nb-tours: %d\n", test_nbtour(new_dep, nb_fourmis));
 				if (*best_path_comb == NULL)
 					*best_path_comb = new_dep;
 				else if (test_nbtour(new_dep, nb_fourmis) < test_nbtour(*best_path_comb, nb_fourmis))
+				{
+					free(*best_path_comb);
 					*best_path_comb = new_dep;
+				}
+				else
+					free(new_dep);
 			}
 		}
 		nb_path++;
 	}
+	free(act_path);
 	return (NULL);
 }

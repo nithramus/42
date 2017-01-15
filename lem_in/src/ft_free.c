@@ -1,56 +1,69 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ptr_join.c                                         :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/04 22:37:32 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 15:41:29 by bandre           ###   ########.fr       */
+/*   Created: 2017/01/15 14:06:13 by bandre            #+#    #+#             */
+/*   Updated: 2017/01/15 18:13:04 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-g_struct	**ptr_join_not_free(g_struct **list, g_struct *add)
+void	ft_free_list_g_struct(g_struct **list_ptr)
 {
 	int i;
-	g_struct **new;
 
 	i = 0;
-	while (list[i])
-		i++;
-	if (!(new = (g_struct**)malloc((i + 2)  * sizeof(g_struct*))))
-		return (NULL);
-	i = 0;
-	while (list[i])
+	while (list_ptr[i])
 	{
-		new[i] = list[i];
+		free(list_ptr[i]->liaisons);
+		free(list_ptr[i]->name);
+		free(list_ptr[i]);
 		i++;
 	}
-	new[i] = add;
-	new[i + 1] = NULL;
-	return (new);
+	free(list_ptr);
 }
 
-g_struct	**ptr_join(g_struct **list, g_struct *add)
+void	ft_free_list_f_path(f_path **list_ptr)
 {
 	int i;
-	g_struct **new;
+
+	i = 0;
+	while (list_ptr[i])
+	{
+		free(list_ptr[i]->path);
+		free(list_ptr[i]->dependance);
+		free(list_ptr[i]);
+		i++;
+	}
+	free(list_ptr);
+}
+
+void	ft_free_s_fourmis(s_fourmis **list)
+{
+	int i;
 
 	i = 0;
 	while (list[i])
-		i++;
-	if (!(new = (g_struct**)malloc((i + 2)  * sizeof(g_struct*))))
-		return (NULL);
-	i = 0;
-	while (list[i])
 	{
-		new[i] = list[i];
+		free(list[i]);
 		i++;
 	}
-	new[i] = add;
-	new[i + 1] = NULL;
 	free(list);
-	return (new);
+}
+
+void	ft_free_split(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
