@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 19:36:15 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 15:37:06 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/15 21:35:46 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ g_struct	**graphe_join(g_struct **src, g_struct *add)
 	}
 	while (src[i])
 		i++;
-	new = (g_struct**)malloc((i + 2) * sizeof(g_struct*));
-	if (!new)
+	if (!(new = (g_struct**)malloc((i + 2) * sizeof(g_struct*))))
 		return (NULL);
 	i = 0;
 	while (src[i])

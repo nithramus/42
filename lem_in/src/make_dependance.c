@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 20:53:39 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 21:06:58 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/15 22:26:58 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,14 @@ static int	dep_find(f_path *path, f_path *path2)
 	new[i + 1] = NULL;
 	path->dependance = new;
 	free(stock);
-	ft_putendl("dep trouvé");
 	return (1);
 }
 
-static int	add_dependance(f_path **list_path, int i)
+static int	add_dependance(f_path **list_path, int i, int u)
 {
-	int u;
 	int k;
 	int m;
 
-	u = i;
 	while (list_path[u])
 	{
 		u++;
@@ -72,12 +69,14 @@ static int	add_dependance(f_path **list_path, int i)
 int			make_dependance(f_path **list_path)
 {
 	int i;
+	int u;
 
 	i = 0;
 	ft_putendl("newyolo");
 	while (list_path[i])
 	{
-		if ((add_dependance(list_path, i) == 0))
+		u = i;
+		if ((add_dependance(list_path, i, u) == 0))
 			return (0);
 		i++;
 	}

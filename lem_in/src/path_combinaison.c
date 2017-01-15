@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_combinaison.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/15 21:58:06 by bandre            #+#    #+#             */
+/*   Updated: 2017/01/15 22:02:18 by bandre           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 static f_path	**f_path_join(f_path **act_path, f_path *path_to_add)
@@ -41,18 +53,17 @@ static int	dep_test(f_path **act_path, f_path *path_to_add)
 	return (1);
 }
 
-f_path	**path_combinaison(f_path **all_path, f_path ***best_path_comb, f_path **act_path, int nb_path, int nb_road, int nb_fourmis)
+void		path_combinaison(f_path **all_path, f_path ***best_path_comb, f_path **act_path, int nb_path, int nb_road, int nb_fourmis)
 {
 	f_path **new_dep;
 
-	nb_road--;
 	while (all_path[nb_path])
 	{
 		if (dep_test(act_path, all_path[nb_path]))
 		{
 			new_dep = f_path_join(act_path, all_path[nb_path]);
 			if (nb_road > 0)
-				path_combinaison(all_path, best_path_comb, new_dep, nb_path + 1, nb_road, nb_fourmis);
+				path_combinaison(all_path, best_path_comb, new_dep, nb_path + 1, nb_road--, nb_fourmis);
 			else if (nb_road == 0)
 			{
 				if (*best_path_comb == NULL)
@@ -69,5 +80,4 @@ f_path	**path_combinaison(f_path **all_path, f_path ***best_path_comb, f_path **
 		nb_path++;
 	}
 	free(act_path);
-	return (NULL);
 }

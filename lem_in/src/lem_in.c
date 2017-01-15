@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:36:02 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 21:01:19 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/15 22:06:00 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static	f_path **best_path_comb(f_path **a_path, int nbfoumis)
 	f_path	**new_best;
 	int		i;
 
-	i = 1;
+	i = 0;
 	ac_path = (f_path**)malloc(sizeof(f_path*));
 	*ac_path = NULL;
 	new_best = NULL;
@@ -29,7 +29,7 @@ static	f_path **best_path_comb(f_path **a_path, int nbfoumis)
 	if (!(new_best))
 		afficher_error();
 	best_path = new_best;
-	i = 2;
+	i = 1;
 	while (new_best)
 	{
 		ac_path = (f_path**)malloc(sizeof(f_path*));
@@ -68,7 +68,7 @@ int		main(void)
 		afficher_error();
 	if (make_dependance(path) == 0)
 		return (0);
-	best_path_comb(path, 10);
+	best_path_comb(path, 3);
 	ft_free_list_g_struct(graphe);
 	ft_putendl("sortie");
 	ft_free_list_f_path(path);

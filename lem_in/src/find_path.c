@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 13:36:53 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 20:46:21 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/15 21:36:41 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,8 @@ static int	find_all_way(f_path ***list_path, g_struct *start,
 	i = 0;
 	if (start == end)
 	{
-		ft_putendl("bugici");
 		if (!(path_join(list_path, list_salles)))
-		{
-			ft_putendl("ERROR");
-			exit(0);
-		}
-		afficher(list_salles);
-		ft_putendl("fin du prog");
+			afficher_error();
 		return (1);
 	}
 	while (start->liaisons[i])
@@ -36,10 +30,7 @@ static int	find_all_way(f_path ***list_path, g_struct *start,
 		if (!(is_in_list(list_salles, start->liaisons[i])))
 		{
 			if (!(list = ptr_join_not_free(list_salles, start->liaisons[i])))
-			{
-				ft_putendl("ERROR");
-				exit(0);
-			}
+				afficher_error();
 			find_all_way(list_path, start->liaisons[i], end, list);
 		}
 		i++;

@@ -6,7 +6,7 @@
 #    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2017/01/15 14:44:49 by bandre           ###   ########.fr        #
+#    Updated: 2017/01/15 22:16:30 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ SRC = create_graph.o\
 	  afficher.o\
 	  fourmis_chemins.o\
 	  ft_free.o\
+	  fourmis_join.o\
+	  new_fourmis.o\
 
 CC = gcc
 
@@ -42,7 +44,7 @@ SRC_O = $(addprefix $(SRC_PATH)/,$(SRC))
 all: EXEC $(NAME)
 
 $(NAME): $(SRC_O)
-	$(CC) -o $(NAME) $(SRC_O) $(LIB)
+	$(CC) $(FLAG) -o $(NAME) $(SRC_O) $(LIB)
 
 EXEC: 
 	make -C libft
