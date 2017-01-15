@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:52:00 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/05 13:34:41 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/14 21:57:21 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ static int		parse_tubes(g_struct **list_salles, char *line)
 		if (!(salle2->liaisons = ptr_join(salle2->liaisons, salle1)))
 			return (0);
 		ft_putendl("yolo5");
-		free(line);
+		//free(line);
 		cont = get_next_line(0, &line);
 	}
-
+	ft_putendl("sortie");
 	return (1);
 }
 
@@ -67,18 +67,19 @@ static g_struct	**parse_salles(g_struct **list_salles, int *start, int *end)
 	i = 0;
 	while (get_next_line(0, &line))
 	{
-		if (ft_strchr(line, '-'))
-			break;
+		ft_printf("i=%d\n", i);
 		if (!(split = ft_strsplit(line, ' ')))
 			return (NULL);
-		if (split_not_valid_salle(split, 1))
-			return (list_salles);
-		if (!(ft_strcmp("##start", split[0])))
+		else if (!(ft_strcmp("##start", split[0])))
 			*start = i;
 		else if (!(ft_strcmp("##end", split[0])))
 			*end = i;
 		else if (split[0][0] == '#')
-			i++;
+			i = i + 1 - 1;
+		else if (ft_strchr(line, '-'))
+			break;
+		else if (split_not_valid_salle(split, 1))
+			return (list_salles);
 		else
 		{
 			list_salles = graphe_join(list_salles, new_g_struct(split[0]));
@@ -107,9 +108,12 @@ g_struct	**create_graph(g_struct **start, g_struct **end)
 	list_salles = parse_salles(list_salles, &debut, &fin);
 	if (debut == fin || debut == -1 || fin == -1)
 		return (NULL);
+	ft_putendl("srotie@");
+	ft_printf("fin: %d\n", fin);
 	*start = list_salles[debut];
 	*end = list_salles[fin];
 	if (!(*start) || !(*end))
 		return (NULL);
+
 	return (list_salles);
 }

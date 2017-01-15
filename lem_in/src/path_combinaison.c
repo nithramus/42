@@ -60,7 +60,7 @@ f_path	**path_combinaison(f_path **all_path, f_path ***best_path_comb, f_path **
 				ft_printf("nb-tours: %d\n", test_nbtour(new_dep, nb_fourmis));
 				if (*best_path_comb == NULL)
 					*best_path_comb = new_dep;
-				else if (test_nbtour(new_dep, 10) < test_nbtour(*best_path_comb, nb_fourmis))
+				else if (test_nbtour(new_dep, nb_fourmis) < test_nbtour(*best_path_comb, nb_fourmis))
 					*best_path_comb = new_dep;
 			}
 		}

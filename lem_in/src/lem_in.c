@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:36:02 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/14 13:44:59 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/15 00:43:21 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static f_path **best_path_comb(f_path **a_path, int nbfoumis)
 	while (new_best)
 	{
 		new_best = NULL;
-		path_combinaison(a_path, &new_best, ac_path, 0, i, 10);
+		path_combinaison(a_path, &new_best, ac_path, 0, i, nbfoumis);
 		if (new_best)
 			best_path = new_best;
 		i++;
@@ -66,10 +66,9 @@ int		main()
 		afficher_error();
 	if (path[0] == NULL)
 		afficher_error();
-
 	if (make_dependance(path) == 0)
 		return (0);
-	best_path = best_path_comb(path, 15);
+	best_path = best_path_comb(path, 3);
 	ft_putendl("fin");
 	return (1);
 

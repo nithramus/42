@@ -8,7 +8,7 @@ static int dep_find(f_path *path, f_path *path2)
 	i = 1;
 	while (path->dependance[i])
 		i++;
-	if (!(new = (f_path**)malloc(i * sizeof(f_path*))))
+	if (!(new = (f_path**)malloc((i + 2) * sizeof(f_path*))))
 		return (0);
 	i = 0;
 	while (path->dependance[i])
@@ -26,7 +26,6 @@ static int dep_find(f_path *path, f_path *path2)
 static int add_dependance(f_path **list_path, int i)
 {
 	int u;
-	int j;
 	int k;
 	int m;
 

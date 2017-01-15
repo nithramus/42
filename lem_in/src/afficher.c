@@ -3,7 +3,6 @@
 int		afficher(g_struct **list_salles)
 {
 	int i = 0;
-	int j = 0;
 
 
 	ft_putendl("###############");
@@ -19,7 +18,6 @@ int		afficher(g_struct **list_salles)
 int		afficher_road(f_path **path)
 {
 	int i = 0;
-	int j = 0;
 	ft_putendl("##############################");
 	while (path[i])
 	{
