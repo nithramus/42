@@ -48,4 +48,8 @@ re: fclean all
 flag: $(SRC)
 	$(CC) $(NAME) $(LIB) -o $(NAME)
 
+do: all
+	./ft_ls
+
+
 .PHONY: $(NAME) all %.o clean fclean re flag EXEC

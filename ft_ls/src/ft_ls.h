@@ -15,6 +15,20 @@
 
 #include "../libft/ft_printf/ft_printf.h"
 #include <dirent.h>
+#include <sys/types.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <pwd.h>
 
+typedef struct s_attrib
+{
+	int		R;
+	int		r;
+	int		a;
+	int		l;
+	int		t;
+	char	**list_fichier = NULL;
+}			s_param;
 
 #endif

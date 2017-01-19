@@ -11,17 +11,29 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
+#include <stdio.h>
 int		main()
 {
 	DIR *test;
 	char *line;
+	struct dirent *recup;
+	struct stat info;
+	struct passwd *uid;
 
 	test = opendir(".");
-	while (get_next_line(test, &line))
+	while (recup = readdir(test))
 	{
-		ft_printf(line);
-		free(line);
+		stat(recup->d_name, &info);
+		uid = getpwuid(info.st_uid);
+		ft_printf("uid :%s\n", uid->pw_name);
+		if (S_ISDIR(info.st_mode))
+		{
+			ft_printf("un dossier:%s\n ", recup->d_name);
+		}
+		else
+		{
+			printf("autre chose:%s\n ", recup->d_name);
+		}
 	}
 	return (1);
 }
