@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include "../libft/libft.h"
+# include "libft.h"
 # include <wchar.h>
 # include <limits.h>
 # include <string.h>

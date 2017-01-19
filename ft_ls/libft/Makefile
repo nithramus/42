@@ -14,8 +14,6 @@ NAME = libftprintf.a
 
 SRC_PATH = libft
 
-SRC_PATH_PRINTF = ft_printf
-
 SRC_NAME = ft_atoi.c\
 		   ft_isdigit.c\
 		   ft_memchr.c\
@@ -76,27 +74,25 @@ SRC_NAME = ft_atoi.c\
 		   ft_lstiter.c\
 		   ft_lstmap.c\
 		   ft_putlst.c\
-		   ft_itoa_base_signed.c\
 		   ft_itoa_base.c\
-		   get_next_line.c
+		   ft_itoa_base_signed.c\
+		   get_next_line.c\
+		   ft_affichage.c\
+		   ft_gestion_flag.c\
+		   ft_gestion_precision.c\
+		   ft_gestionspe.c\
+		   ft_printf.c\
+		   ft_unicode.c\
+		   ft_cassupp.c\
+		   ft_initparam.c\
+		   specifier.c\
+		   ft_ptradd.c\
+		   ft_ptradd_free.c\
 
-SRC_PRINTF = ft_affichage.c\
-			 ft_gestion_flag.c\
-			 ft_gestion_precision.c\
-			 ft_gestionspe.c\
-			 ft_printf.c\
-			 ft_unicode.c\
-			 ft_cassupp.c\
-			 ft_initparam.c\
-			 specifier.c\
-
-OBJ_PATH = obj
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-OBJ_PRINTF = $(SRC_PRINTF:.c=.o)
 
 OBJ = $(addprefix $(SRC_PATH)/,$(OBJ_NAME))
-OBJPRINTF = $(addprefix $(SRC_PATH_PRINTF)/,$(OBJ_PRINTF))
 
 CPPFLAGS = -I.
 
@@ -105,14 +101,14 @@ CFLAGS = -Werror -Wall -Wextra
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(OBJPRINTF)
-	ar rc $(NAME) $(OBJ) $(OBJPRINTF)
+$(NAME): $(OBJ)
+	ar rc $(NAME) $(OBJ)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ) $(OBJPRINTF)
+	rm -rf $(OBJ)
 
 fclean: clean
 	rm -rf $(NAME)

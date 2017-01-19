@@ -13,7 +13,7 @@
 #ifndef FT_LS_H
 # define FT_LS_H
 
-#include "../libft/ft_printf/ft_printf.h"
+#include "../libft/libft/libft.h"
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/types.h>
@@ -28,7 +28,10 @@ typedef struct s_attrib
 	int		a;
 	int		l;
 	int		t;
-	char	**list_fichier = NULL;
+	char	**list_fichier;
 }			s_param;
+
+s_param		*new_s_param(void);
+s_param		*recup_param(char **list_param);
 
 #endif

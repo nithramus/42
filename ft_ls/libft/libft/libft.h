@@ -16,6 +16,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "ft_printf.h"
 
 typedef struct		s_list
 {
@@ -98,5 +99,8 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_putlst(t_list *lst);
 int					get_next_line(const int fd, char **line);
+
+void				**ft_ptradd(void **list, void *add);
+void				**ft_ptradd_free(void **list, void *add);
 
 #endif

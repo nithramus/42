@@ -15,6 +15,8 @@ NAME = ft_ls
 SRC_PATH = src
 
 SRC = ft_ls.o\
+	  new_s_param.o\
+	  recup_param.o\
 
 CC = gcc
 

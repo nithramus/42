@@ -12,14 +12,23 @@
 
 #include "ft_ls.h"
 #include <stdio.h>
-int		main()
+int		main(int argc, char **argv)
 {
 	DIR *test;
 	char *line;
 	struct dirent *recup;
 	struct stat info;
 	struct passwd *uid;
+	s_param *param;
+	int i;
 
+	i = 0;
+	param = recup_param(argv);
+	while (param->list_fichier[i])
+	{
+		ft_printf("%s\n", param->list_fichier[i]);
+		i++;
+	}
 	test = opendir(".");
 	while (recup = readdir(test))
 	{
