@@ -23,7 +23,7 @@
 
 typedef struct s_attrib
 {
-	int		R;
+	int		rmaj;
 	int		r;
 	int		a;
 	int		l;
@@ -33,5 +33,9 @@ typedef struct s_attrib
 
 s_param		*new_s_param(void);
 s_param		*recup_param(char **list_param);
+void		option_invalide(char *option, s_param *param);
 
+
+
+void		free_s_param(s_param *param);
 #endif

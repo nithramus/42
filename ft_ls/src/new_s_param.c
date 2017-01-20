@@ -6,7 +6,7 @@ s_param		*new_s_param(void)
 
 	if (!(new = (s_param*)malloc(sizeof(new))))
 		return (NULL);
-	new->R = 0;
+	new->rmaj = 0;
 	new->r = 0;
 	new->a = 0;
 	new->l = 0;

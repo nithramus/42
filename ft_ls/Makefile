@@ -17,6 +17,8 @@ SRC_PATH = src
 SRC = ft_ls.o\
 	  new_s_param.o\
 	  recup_param.o\
+	  ft_free.o\
+	  afficher_error.o\
 
 CC = gcc
 
