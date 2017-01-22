@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	**ft_ptradd(void **list, void *add)
+void	**ft_ptradd_free(void **list, void *add)
 {
 	int i;
 	void **new;

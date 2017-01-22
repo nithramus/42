@@ -19,6 +19,9 @@ SRC = ft_ls.o\
 	  recup_param.o\
 	  ft_free.o\
 	  afficher_error.o\
+	  go_to_dir.o\
+	  tab_of_dir.o\
+	  print_list_fichier.o\
 
 CC = gcc
 

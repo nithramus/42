@@ -21,15 +21,25 @@ int		main(int argc, char **argv)
 	struct passwd *uid;
 	s_param *param;
 	int i;
+	char **tab;
 
-	i = 0;
+
 	param = recup_param(argv);
-	while (param->list_fichier[i])
+	i = 1;
+	if (param->list_fichier[1])
 	{
-		ft_printf("%s\n", param->list_fichier[i]);
-		i++;
+		while (param->list_fichier[i])
+		{
+			go_to_dir(param->list_fichier[i], param);
+			i++;
+		}
 	}
-	test = opendir(".");
+	else
+	{
+		go_to_dir(".", param);
+	}
+	//go_to_dir(".", param);
+	/*test = opendir(".");
 	while (recup = readdir(test))
 	{
 		stat(recup->d_name, &info);
@@ -43,6 +53,6 @@ int		main(int argc, char **argv)
 		{
 			printf("autre chose:%s\n ", recup->d_name);
 		}
-	}
+	}*/
 	return (1);
 }

@@ -31,11 +31,15 @@ typedef struct s_attrib
 	char	**list_fichier;
 }			s_param;
 
+
+
 s_param		*new_s_param(void);
 s_param		*recup_param(char **list_param);
 void		option_invalide(char *option, s_param *param);
-
-
-
+void		go_to_dir(char *path, s_param *param);
+void		afficher_error_malloc(void);
+void		afficher_error_connais_pas(void);
 void		free_s_param(s_param *param);
+char		**tab_of_dir(char *path, s_param *param);
+void		print_list_fichier(char *path, s_param *param);
 #endif

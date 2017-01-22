@@ -7,7 +7,7 @@ static int add_param(s_param *param, char *chaine)
 	i = 1;
 	while (chaine[i])
 	{
-		if (ft_strchr("alrRt", chaine[i]))
+		if (ft_strchr("alrRt", (int)chaine[i]))
 		{
 			if (chaine[i] == 'r' )
 				param->r = 1;
@@ -19,9 +19,9 @@ static int add_param(s_param *param, char *chaine)
 				param->l = 1;
 			if (chaine[i] ==  't')
 				param->t = 1;
+		}
 		else
 			option_invalide((chaine + 1), param);
-		}
 		i++;
 	}
 	return (1);
@@ -32,7 +32,7 @@ s_param		*recup_param(char **list_param)
 	int i;
 	s_param *param;
 
-	i = 0;
+	i = 1;
 	param = new_s_param();
 	while (list_param[i])
 	{
