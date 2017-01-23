@@ -19,19 +19,18 @@ void	go_to_dir(char *path, s_param *param)
 	char	*new_path;
 
 
-	dir = opendir(path);
 	print_list_fichier(path, param);
-	/*while ((list_elem = readdir(dir)) != NULL)
+dir = opendir(path);
+
+	while ((list_elem = readdir(dir)) != NULL && param->rmaj)
 	{
 		new_path = create_path(path, list_elem->d_name);
 		if (stat(new_path, &info) == -1)
 			afficher_error_malloc();
 		else if (S_ISDIR(info.st_mode) && list_elem->d_name[0] != '.')
 		{
-			ft_printf("%c\n", list_elem->d_name[0]);
-			ft_printf("\n%s:\n\n", new_path);
-			if (param->rmaj)
-				go_to_dir(new_path, param);
+			ft_printf("\n%s:\n", new_path);
+			go_to_dir(new_path, param);
 		}
-	}*/
+	}
 }

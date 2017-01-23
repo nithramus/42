@@ -36,9 +36,7 @@ int		main(int argc, char **argv)
 		}
 	}
 	else
-	{
 		go_to_dir(".", param);
-	}
 	//go_to_dir(".", param);
 	/*test = opendir(".");
 	while (recup = readdir(test))

@@ -18,6 +18,8 @@ static void	print_type(struct stat info)
 
 	if (S_ISDIR(info.st_mode))
 		ft_printf("d");
+	else if (S_ISLNK(info.st_mode))
+		ft_printf("l");
 	else if (S_ISREG(info.st_mode))
 		ft_printf("-");
 	else if (S_ISCHR(info.st_mode))
@@ -32,11 +34,32 @@ static void print_l(char *path, char *fichier)
 {
 	char *new_path;
 	struct stat info;
+	struct passwd *uid;
+	struct group *gid;
+	char buff[256];
+	int nb_carac;
 
 	new_path = create_path(path, fichier);
-	stat(new_path, &info);
+	lstat(new_path, &info);
 	print_type(info);
 	print_droit(info);
+	ft_printf("%d ", info.st_nlink);
+	uid = getpwuid(info.st_uid);
+	ft_printf("%s ", uid->pw_name);
+	gid = getgrgid(info.st_gid);
+	ft_printf("%s ", gid->gr_name);
+	ft_printf("%d ", info.st_size);
+	ft_printf("%s ", ctime(&(info.st_mtime)));
+	ft_printf("%s", fichier);
+	if (S_ISLNK(info.st_mode))
+	{
+		if ((nb_carac = readlink(new_path, buff, 255)) == -1)
+			afficher_error_connais_pas();
+		buff[nb_carac] = '\0';
+		ft_printf(" -> %s\n", buff);
+	}
+	else
+		ft_printf("\n");
 	free(new_path);
 }
 
@@ -57,14 +80,16 @@ void	print_list_fichier(char *path, s_param *param)
 			{
 				if (param->l)
 					print_l(path, list[i]);
-				ft_printf("%s\n", list[i]);
+				else
+					ft_printf("%s\n", list[i]);
 			}
 		}
 		else
 		{
 			if (param->l)
 				print_l(path, list[i]);
-			ft_printf("%s\n", list[i]);
+			else
+				ft_printf("%s\n", list[i]);
 		}
 		i++;
 	}
