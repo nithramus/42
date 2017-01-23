@@ -42,4 +42,5 @@ void		afficher_error_connais_pas(void);
 void		free_s_param(s_param *param);
 char		**tab_of_dir(char *path, s_param *param);
 void		print_list_fichier(char *path, s_param *param);
+char		*create_path(char *path, char *dir);
 #endif

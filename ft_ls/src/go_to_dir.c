@@ -1,6 +1,6 @@
 #include "ft_ls.h"
 
-static char		*create_path(char *path, char *dir)
+char		*create_path(char *path, char *dir)
 {
 	char *new;
 
@@ -19,9 +19,9 @@ void	go_to_dir(char *path, s_param *param)
 	char	*new_path;
 
 
-	print_list_fichier(path, param);
 	dir = opendir(path);
-	while ((list_elem = readdir(dir)) != NULL)
+	print_list_fichier(path, param);
+	/*while ((list_elem = readdir(dir)) != NULL)
 	{
 		new_path = create_path(path, list_elem->d_name);
 		if (stat(new_path, &info) == -1)
@@ -33,5 +33,5 @@ void	go_to_dir(char *path, s_param *param)
 			if (param->rmaj)
 				go_to_dir(new_path, param);
 		}
-	}
+	}*/
 }

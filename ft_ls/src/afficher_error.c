@@ -16,6 +16,6 @@ void	afficher_error_malloc(void)
 
 void	afficher_error_connais_pas(void)
 {
-	ft_putendl("erreur non géré");
+	ft_putendl("Franchement je sais pas ce qu'il s'est passé\n");
 	exit(0);
 }

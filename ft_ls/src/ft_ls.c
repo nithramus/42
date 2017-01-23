@@ -25,9 +25,10 @@ int		main(int argc, char **argv)
 
 
 	param = recup_param(argv);
-	i = 1;
-	if (param->list_fichier[1])
+	i = 0;
+	if (param->list_fichier[0])
 	{
+		ft_putendl(param->list_fichier[0]);
 		while (param->list_fichier[i])
 		{
 			go_to_dir(param->list_fichier[i], param);
