@@ -30,6 +30,15 @@ static void	print_type(struct stat info)
 		afficher_error_connais_pas();
 }
 
+static void print_hour(struct stat info)
+{
+	char **split;
+
+	split = ft_strsplit(ctime(&(info.st_mtime)), ' ');
+	ft_printf("%s. %s %s ", split[1], split[2], split[3]);
+
+}
+
 static void print_l(char *path, char *fichier)
 {
 	char *new_path;
@@ -49,8 +58,9 @@ static void print_l(char *path, char *fichier)
 	gid = getgrgid(info.st_gid);
 	ft_printf("%s ", gid->gr_name);
 	ft_printf("%d ", info.st_size);
-	ft_printf("%s ", ctime(&(info.st_mtime)));
+	print_hour(info);
 	ft_printf("%s", fichier);
+	ft_printf("%ud\n", minor(info.st_rdev));
 	if (S_ISLNK(info.st_mode))
 	{
 		if ((nb_carac = readlink(new_path, buff, 255)) == -1)
@@ -60,6 +70,7 @@ static void print_l(char *path, char *fichier)
 	}
 	else
 		ft_printf("\n");
+
 	free(new_path);
 }
 
