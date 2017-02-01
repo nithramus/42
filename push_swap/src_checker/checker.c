@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 16:29:30 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/01 15:40:06 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/01 15:42:07 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,5 @@ int		main(int argv, char **argc)
 		ft_printf("Error\n");
 	else
 		ft_printf("OK\n");
-	while (1);
 	return (1);
 }
