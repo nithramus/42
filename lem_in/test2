@@ -1,24 +1,14 @@
 ##start
-t
+a 1 2
 ##end
-d
-#test du prog
-#tyolo
-e
-z
-z
-r
-u
-r
-p
-o
-t-e
-t-z
-t-d
-z-d
-t-u
-u-e
-e-d
-u-p
-p-o
-t-o
+f 1 2
+b 1 2
+c 1 2
+d 1 2
+a-f
+a-b
+b-c
+c-f
+a-d
+d-c
+d-f

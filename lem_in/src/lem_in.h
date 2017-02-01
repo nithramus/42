@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:47:43 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 22:44:31 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/01 21:13:30 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,5 @@ void				ft_free_list_g_struct(g_struct **list_ptr);
 void				ft_free_list_f_path(f_path **list_ptr);
 void				ft_free_split(char **str);
 void				ft_free_s_fourmis(s_fourmis **list);
+int					ft_is_number(int *fourmis);
 #endif

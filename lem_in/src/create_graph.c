@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:52:00 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/30 22:19:01 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/01 21:41:53 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static int		parse_tubes(g_struct **list_salles, char *line)
 			return (0);
 		if (!(salle2->liaisons = ptr_join(salle2->liaisons, salle1)))
 			return (0);
+		ft_putendl(line);
 		free(line);
 		ft_free_split(split);
 		cont = get_next_line(0, &line);
@@ -99,6 +100,7 @@ static g_struct	**parse_salles(g_struct **list_salles, int *start, int *end)
 			list_salles = graphe_join(list_salles, new_g_struct(split[0]));
 			i++;
 		}
+		ft_putendl(line);
 		free(line);
 		ft_free_split(split);
 	}
@@ -114,6 +116,8 @@ g_struct	**create_graph(g_struct **start, g_struct **end)
 	g_struct	**list_salles;
 	int			debut;
 	int			fin;
+	char		*line;
+
 
 	debut = -1;
 	fin = -1;
@@ -127,5 +131,6 @@ g_struct	**create_graph(g_struct **start, g_struct **end)
 	*end = list_salles[fin];
 	if (!(*start) || !(*end))
 		return (NULL);
+	ft_putstr("\n");
 	return (list_salles);
 }
