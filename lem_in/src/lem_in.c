@@ -6,67 +6,65 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:36:02 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/02 15:25:54 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/02 18:26:28 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static	f_path **best_path_comb(f_path **a_path, int nbfoumis)
+static void		search_solution(f_path **a_path, int tab[3], f_path ***best)
 {
-	f_path	**best_path;
 	f_path	**ac_path;
-	f_path	**new_best;
-	int		i;
-	int		tab[3];
 
-	i = 1;
-	//ft_putendl("entree");
+	*best = NULL;
 	ac_path = (f_path**)malloc(sizeof(f_path*));
 	*ac_path = NULL;
-	new_best = NULL;
-	path_combinaison(a_path, &new_best, ac_path, 0, i, nbfoumis);
+	path_combinaison(a_path, best, ac_path, tab[0], tab[1], tab[2]);
+}
+
+static f_path	**best_path_comb(f_path **a_path, int nbfoumis)
+{
+	f_path	**best_path;
+	f_path	**new_best;
+	int		tab[3];
+
+	tab[0] = 0;
+	tab[1] = 1;
+	tab[2] = nbfoumis;
+	search_solution(a_path, tab, &new_best);
 	if (!(new_best))
 		afficher_error();
 	best_path = new_best;
-	i = 2;
+	tab[1] = 2;
 	while (new_best)
 	{
-		//afficher_road(best_path);
-		ac_path = (f_path**)malloc(sizeof(f_path*));
-		*ac_path = NULL;
-		new_best = NULL;
-		path_combinaison(a_path, &new_best, ac_path, 0, i, nbfoumis);
+		search_solution(a_path, tab, &new_best);
 		if (new_best)
 		{
-			//ft_putendl("test");
 			free(best_path);
 			best_path = new_best;
 		}
-		i++;
+		tab[1]++;
 	}
-	//ft_putendl("final");
-	//afficher_road(best_path);
 	fourmis_chemins(best_path, nbfoumis);
 	free(best_path);
 	return (best_path);
 }
 
-int		main(void)
+int				main(void)
 {
 	g_struct	**graphe;
 	f_path		**path;
-	g_struct	*start;
-	g_struct	*end;
+	g_struct	*start_end[2];
 	int			nbfourmis;
 	char		*fichier;
 
 	if (ft_is_number(&nbfourmis, &fichier) == 0)
 		afficher_error();
-	graphe = create_graph(&start, &end, &fichier);
+	graphe = create_graph(&start_end[0], &start_end[1], &fichier);
 	if (!(graphe))
 		afficher_error();
-	if (!(path = find_path(start, end)))
+	if (!(path = find_path(start_end[0], start_end[1])))
 		afficher_error_path(path, graphe, fichier);
 	if (path[0] == NULL)
 		afficher_error_path(path, graphe, fichier);

@@ -6,18 +6,14 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:52:00 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/02 15:15:51 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/02 18:21:03 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int		split_not_valid_salle(char **split, int nb_split)
+static int		split_not_valid_salle(char **split, int nb_split, int i, int j)
 {
-	int i;
-	int j;
-
-	i = 0;
 	if (split[0] == NULL)
 		return (1);
 	if (split[0][0] == '#')
@@ -27,14 +23,14 @@ static int		split_not_valid_salle(char **split, int nb_split)
 	if (i != nb_split)
 		return (1);
 	i = 1;
-	while (split[i])
+	while (split[i] && j)
 	{
 		j = 0;
 		while (split[i][j])
 		{
-			if (j == 0 && ft_strchr("+-", split[i][j]))
+			if ((j == 0 && ft_strchr("+-", split[i][j])) && split[i][j + 1])
 				j++;
-			else if (ft_isdigit(split[i][j] == 0))
+			if (ft_isdigit(split[i][j]) == 0)
 				return (1);
 			j++;
 		}
@@ -43,7 +39,7 @@ static int		split_not_valid_salle(char **split, int nb_split)
 	return (0);
 }
 
-static g_struct	**parse_tubes(g_struct **list_salles, char *line, char **fichier)
+static g_struct	**parse_tubes(g_struct **list_salles, char *line, char **fich)
 {
 	g_struct	*salle1;
 	g_struct	*salle2;
@@ -55,8 +51,8 @@ static g_struct	**parse_tubes(g_struct **list_salles, char *line, char **fichier
 	{
 		if (!(split = ft_strsplit(line, '-')))
 			return (NULL);
-		if (split_not_valid_salle(split, 2))
-			return (list_salles);
+		if (split_not_valid_salle(split, 2, 0, 0))
+			return (NULL);
 		salle1 = graphchr(list_salles, split[0]);
 		salle2 = graphchr(list_salles, split[1]);
 		if (!salle1 || !salle2)
@@ -64,7 +60,7 @@ static g_struct	**parse_tubes(g_struct **list_salles, char *line, char **fichier
 		if (!(salle1->liaisons = ptr_join(salle1->liaisons, salle2)) ||
 			(!(salle2->liaisons = ptr_join(salle2->liaisons, salle1))))
 			return (NULL);
-		fichier_comp(fichier, line);
+		fichier_comp(fich, line);
 		free(line);
 		ft_free_split(split);
 		cont = get_next_line(0, &line);
@@ -103,8 +99,8 @@ static g_struct	**parse_salles(g_struct **list_salles, int *start, int *end,
 			i = i + 1 - 1;
 		else if (ft_strchr(line, '-'))
 			break ;
-		else if (split_not_valid_salle(split, 3))
-			return (list_salles);
+		else if (split_not_valid_salle(split, 3, 0, 1))
+			return (NULL);
 		else if ((i = i + 1))
 			list_salles = graphe_join(list_salles, new_g_struct(split[0]));
 		free(line);
@@ -126,7 +122,8 @@ g_struct		**create_graph(g_struct **start, g_struct **end, char **fichier)
 	if (!(list_salles = (g_struct**)malloc(sizeof(g_struct*))))
 		return (NULL);
 	*list_salles = NULL;
-	list_salles = parse_salles(list_salles, &debut, &fin, fichier);
+	if (!(list_salles = parse_salles(list_salles, &debut, &fin, fichier)))
+		return (NULL);
 	if (debut == fin || debut == -1 || fin == -1)
 		return (NULL);
 	*start = list_salles[debut];
