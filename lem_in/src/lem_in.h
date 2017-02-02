@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:47:43 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/02 13:24:36 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/02 15:25:50 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,5 @@ void				ft_free_split(char **str);
 void				ft_free_s_fourmis(s_fourmis **list);
 int					ft_is_number(int *fourmis, char **ficheir);
 int					fichier_comp(char **fichier, char *str);
+void	afficher_error_path(f_path **path, g_struct **graph, char *fichier);
 #endif

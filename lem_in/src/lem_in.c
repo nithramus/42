@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:36:02 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/02 13:53:51 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/02 15:25:54 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,16 @@ int		main(void)
 	graphe = create_graph(&start, &end, &fichier);
 	if (!(graphe))
 		afficher_error();
-	//afficher(graphe);
 	if (!(path = find_path(start, end)))
-		afficher_error();
-	else if (path[0] == NULL)
-		afficher_error();
-	else
-		ft_putendl(fichier);
+		afficher_error_path(path, graphe, fichier);
+	if (path[0] == NULL)
+		afficher_error_path(path, graphe, fichier);
+	ft_putendl(fichier);
+	free(fichier);
 	if (make_dependance(path) == 0)
 		return (0);
-	//afficher_road(path);
-	//ft_putendl("yolo");
-	/*while (path[i])
-	{
-		afficher_road(path[i]->dependance);
-		i++;
-	}*/
-	//ft_putendl("fin");
 	best_path_comb(path, nbfourmis);
 	ft_free_list_g_struct(graphe);
-	free(fichier);
 	ft_free_list_f_path(path);
 	return (1);
 }

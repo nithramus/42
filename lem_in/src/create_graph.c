@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:52:00 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/02 13:55:19 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/02 15:15:51 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int		split_not_valid_salle(char **split, int nb_split)
 	int j;
 
 	i = 0;
+	if (split[0] == NULL)
+		return (1);
 	if (split[0][0] == '#')
 		return (0);
 	while (split[i])
