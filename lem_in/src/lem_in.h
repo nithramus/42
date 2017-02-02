@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:47:43 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/01 21:13:30 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/02 13:24:36 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct		s_fourmis_path
 int					afficher(g_struct **list_salles);
 int					afficher_road(f_path **road);
 
-g_struct			**create_graph(g_struct **start, g_struct **end);
+g_struct			**create_graph(g_struct **start, g_struct **end, char **fichier);
 g_struct			*new_g_struct(char *name);
 g_struct			**graphe_join(g_struct **src, g_struct *add);
 g_struct			*graphchr(g_struct **list_salles, char *salles);
@@ -62,5 +62,6 @@ void				ft_free_list_g_struct(g_struct **list_ptr);
 void				ft_free_list_f_path(f_path **list_ptr);
 void				ft_free_split(char **str);
 void				ft_free_s_fourmis(s_fourmis **list);
-int					ft_is_number(int *fourmis);
+int					ft_is_number(int *fourmis, char **ficheir);
+int					fichier_comp(char **fichier, char *str);
 #endif

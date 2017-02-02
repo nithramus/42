@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 23:47:46 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/31 21:15:02 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/01 22:41:12 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,9 @@ static int			affichage_final(s_fourmis **list_fourmis)
 		{
 			if (list_fourmis[i]->road->path[list_fourmis[i]->pos + 1])
 			{
-				ft_printf("L%s-%s ",
-						list_fourmis[i]->road->path[list_fourmis[i]->pos]->name,
-						list_fourmis[i]->road->path[list_fourmis[i]->pos
-						+ 1]->name);
+				ft_printf("L%s-%s ", list_fourmis[i]->road->path
+						[list_fourmis[i]->pos]->name, list_fourmis[i]->road
+						->path[list_fourmis[i]->pos + 1]->name);
 				list_fourmis[i]->pos++;
 				cont = 1;
 			}

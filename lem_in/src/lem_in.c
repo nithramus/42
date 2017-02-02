@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:36:02 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/01 21:40:11 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/02 13:53:51 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static	f_path **best_path_comb(f_path **a_path, int nbfoumis)
 	f_path	**ac_path;
 	f_path	**new_best;
 	int		i;
+	int		tab[3];
 
 	i = 1;
 	//ft_putendl("entree");
@@ -58,17 +59,20 @@ int		main(void)
 	g_struct	*start;
 	g_struct	*end;
 	int			nbfourmis;
+	char		*fichier;
 
-	if (ft_is_number(&nbfourmis) == 0)
+	if (ft_is_number(&nbfourmis, &fichier) == 0)
 		afficher_error();
-	graphe = create_graph(&start, &end);
+	graphe = create_graph(&start, &end, &fichier);
 	if (!(graphe))
 		afficher_error();
 	//afficher(graphe);
 	if (!(path = find_path(start, end)))
 		afficher_error();
-	if (path[0] == NULL)
+	else if (path[0] == NULL)
 		afficher_error();
+	else
+		ft_putendl(fichier);
 	if (make_dependance(path) == 0)
 		return (0);
 	//afficher_road(path);
@@ -81,6 +85,7 @@ int		main(void)
 	//ft_putendl("fin");
 	best_path_comb(path, nbfourmis);
 	ft_free_list_g_struct(graphe);
+	free(fichier);
 	ft_free_list_f_path(path);
 	return (1);
 }

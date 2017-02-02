@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 20:53:39 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/01 19:18:18 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/01 22:07:22 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,20 @@ static int	add_dependance(f_path **list_path, int i, int u)
 	int k;
 	int m;
 
-
-		k = 1;
-		while (list_path[i]->path[k])
+	k = 1;
+	while (list_path[i]->path[k])
+	{
+		m = 1;
+		while (list_path[u]->path[m])
 		{
-			m = 1;
-			while (list_path[u]->path[m])
-			{
-				if (!(list_path[u]->path[m + 1]))
-					break ;
-				if (list_path[i]->path[k] == list_path[u]->path[m])
-					return (dep_find(list_path[i], list_path[u]));
-				m++;
-			}
-			k++;
+			if (!(list_path[u]->path[m + 1]))
+				break ;
+			if (list_path[i]->path[k] == list_path[u]->path[m])
+				return (dep_find(list_path[i], list_path[u]));
+			m++;
 		}
+		k++;
+	}
 	return (1);
 }
 

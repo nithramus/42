@@ -6,7 +6,7 @@
 #    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2017/02/01 20:58:24 by bandre           ###   ########.fr        #
+#    Updated: 2017/02/02 13:29:33 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC = create_graph.o\
 	  fourmis_join.o\
 	  new_fourmis.o\
 	  ft_is_number.o\
+	  fichier_comp.o\
 
 CC = gcc
 
