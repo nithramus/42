@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 23:47:46 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/01 22:41:12 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/06 19:02:56 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static s_fourmis	**add_fourmis(s_fourmis **list, f_path **best_path)
 {
 	int			i;
 	s_fourmis	**new;
-	int nbfour;
+	int			nbfour;
 
 	nbfour = 0;
 	while (list[nbfour])
@@ -90,7 +90,8 @@ static int			affichage_final(s_fourmis **list_fourmis)
 		{
 			if (list_fourmis[i]->road->path[list_fourmis[i]->pos + 1])
 			{
-				ft_printf("L%d-%s ", list_fourmis[i]->num_fourmis, list_fourmis[i]->road
+				ft_printf("L%d-%s ", list_fourmis[i]->num_fourmis,
+						list_fourmis[i]->road
 						->path[list_fourmis[i]->pos + 1]->name);
 				list_fourmis[i]->pos++;
 				cont = 1;

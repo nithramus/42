@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 21:58:06 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/16 00:29:52 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/06 23:51:02 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static f_path	**f_path_join(f_path **act_path, f_path *path_to_add)
 	return (new);
 }
 
-static int	dep_test(f_path **act_path, f_path *path_to_add)
+static int		dep_test(f_path **act_path, f_path *path_to_add)
 {
 	int road;
 	int i;
@@ -53,35 +53,45 @@ static int	dep_test(f_path **act_path, f_path *path_to_add)
 	return (1);
 }
 
-void		path_combinaison(f_path **all_path, f_path ***best_path_comb,
-		f_path **act_path, int nb_path, int nb_road, int nb_fourmis)
+static void		netab(int new[3], int tab[3])
 {
-	f_path **new_dep;
+	tab[0] = new[0] + 1;
+	tab[1] = new[1] - 1;
+	tab[2] = new[2];
+}
 
-	nb_road--;
-	while (all_path[nb_path])
+static void		extend(f_path ***best_path_comb, f_path **new_dep)
+{
+	free(*best_path_comb);
+	*best_path_comb = new_dep;
+}
+
+void			path_combinaison(f_path **all_path, f_path ***best_path_comb,
+		f_path **act_path, int new[3])
+{
+	f_path	**new_dep;
+	int		tab[3];
+
+	netab(new, tab);
+	while (all_path[tab[0]])
 	{
-		if (dep_test(act_path, all_path[nb_path]))
+		if (dep_test(act_path, all_path[tab[0]]))
 		{
-			new_dep = f_path_join(act_path, all_path[nb_path]);
-			if (nb_road > 0)
-				path_combinaison(all_path, best_path_comb, new_dep, nb_path
-						+ 1, nb_road, nb_fourmis);
-			else if (nb_road == 0)
+			new_dep = f_path_join(act_path, all_path[tab[0]]);
+			if (tab[1] > 0)
+				path_combinaison(all_path, best_path_comb, new_dep, tab);
+			else if (tab[1] == 0)
 			{
 				if (*best_path_comb == NULL)
 					*best_path_comb = new_dep;
-				else if (test_nbtour(new_dep, nb_fourmis) <
-						test_nbtour(*best_path_comb, nb_fourmis))
-				{
-					free(*best_path_comb);
-					*best_path_comb = new_dep;
-				}
+				else if (test_nbtour(new_dep, tab[2]) <
+						test_nbtour(*best_path_comb, tab[2]))
+					extend(best_path_comb, new_dep);
 				else
 					free(new_dep);
 			}
 		}
-		nb_path++;
+		tab[0] += 1;
 	}
 	free(act_path);
 }

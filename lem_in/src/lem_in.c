@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:36:02 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/02 18:26:28 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/06 22:57:05 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		search_solution(f_path **a_path, int tab[3], f_path ***best)
 	*best = NULL;
 	ac_path = (f_path**)malloc(sizeof(f_path*));
 	*ac_path = NULL;
-	path_combinaison(a_path, best, ac_path, tab[0], tab[1], tab[2]);
+	path_combinaison(a_path, best, ac_path, tab);
 }
 
 static f_path	**best_path_comb(f_path **a_path, int nbfoumis)
@@ -28,7 +28,7 @@ static f_path	**best_path_comb(f_path **a_path, int nbfoumis)
 	f_path	**new_best;
 	int		tab[3];
 
-	tab[0] = 0;
+	tab[0] = -1;
 	tab[1] = 1;
 	tab[2] = nbfoumis;
 	search_solution(a_path, tab, &new_best);

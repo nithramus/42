@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:47:43 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/02 16:29:51 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/06 19:59:30 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ f_path				**path_join(f_path ***list, g_struct **add);
 f_path				*new_f_path(g_struct **add);
 s_fourmis			*new_fourmis(f_path *road, int num_fourmis);
 void				path_combinaison(f_path **a_path, f_path ***dependance,
-		f_path **ac_path, int nb_path, int nb_max, int nb_fourmis);
+		f_path **ac_path, int tab[3]);
 
 int					test_nbtour(f_path **act_path, int nb_fourmis);
 int					make_dependance(f_path **path);

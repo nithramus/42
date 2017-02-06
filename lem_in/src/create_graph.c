@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:52:00 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/02 18:21:03 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/06 19:36:14 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,15 @@ static int		split_not_valid_salle(char **split, int nb_split, int i, int j)
 	return (0);
 }
 
-static g_struct	**parse_tubes(g_struct **list_salles, char *line, char **fich)
+static g_struct	**parse_tubes(g_struct **list_salles, char *line, char **fich,
+		int cont)
 {
 	g_struct	*salle1;
 	g_struct	*salle2;
 	char		**split;
-	int			cont;
 
-	cont = 1;
+	if (!line)
+		return (NULL);
 	while (cont)
 	{
 		if (!(split = ft_strsplit(line, '-')))
@@ -108,9 +109,7 @@ static g_struct	**parse_salles(g_struct **list_salles, int *start, int *end,
 		ft_free_split(split);
 	}
 	ft_free_split(split);
-	if (!line)
-		return (NULL);
-	return (parse_tubes(list_salles, line, fichier));
+	return (parse_tubes(list_salles, line, fichier, 1));
 }
 
 g_struct		**create_graph(g_struct **start, g_struct **end, char **fichier)
