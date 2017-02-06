@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 23:47:46 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 22:24:19 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/01 22:41:12 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,9 @@ static int			affichage_final(s_fourmis **list_fourmis)
 		{
 			if (list_fourmis[i]->road->path[list_fourmis[i]->pos + 1])
 			{
-				ft_printf("L%s-%s ",
-						list_fourmis[i]->road->path[list_fourmis[i]->pos]->name,
-						list_fourmis[i]->road->path[list_fourmis[i]->pos
-						+ 1]->name);
+				ft_printf("L%s-%s ", list_fourmis[i]->road->path
+						[list_fourmis[i]->pos]->name, list_fourmis[i]->road
+						->path[list_fourmis[i]->pos + 1]->name);
 				list_fourmis[i]->pos++;
 				cont = 1;
 			}
@@ -97,7 +96,8 @@ static int			affichage_final(s_fourmis **list_fourmis)
 		}
 		i++;
 	}
-	ft_printf("\n");
+	if (cont)
+		ft_printf("\n");
 	return (cont);
 }
 
@@ -117,13 +117,8 @@ int					fourmis_chemins(f_path **best_path, int nb_fourmis)
 		afficher_error();
 	*list_fourmis = NULL;
 	list_fourmis = add_fourmis(list_fourmis, best_path);
-	ft_putendl("test");
 	while (list_fourmis[i])
-	{
-		ft_printf("%s\n", list_fourmis[i]->road->path[1]->name);
-		ft_putendl("test");
 		i++;
-	}
 	while (affichage_final(list_fourmis))
 		list_fourmis = add_fourmis(list_fourmis, best_path);
 	ft_free_s_fourmis(list_fourmis);

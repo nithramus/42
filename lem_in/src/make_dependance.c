@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 20:53:39 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 22:26:58 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/01 22:07:22 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,19 @@ static int	add_dependance(f_path **list_path, int i, int u)
 	int k;
 	int m;
 
-	while (list_path[u])
+	k = 1;
+	while (list_path[i]->path[k])
 	{
-		u++;
-		if (!(list_path[u]))
-			return (1);
-		k = 1;
-		while (list_path[i]->path[k])
+		m = 1;
+		while (list_path[u]->path[m])
 		{
-			m = 1;
-			while (list_path[u]->path[m])
-			{
-				if (!(list_path[u]->path[m + 1]))
-					break ;
-				if (list_path[i]->path[k] == list_path[u]->path[m])
-					return (dep_find(list_path[i], list_path[u]) +
-							dep_find(list_path[u], list_path[i]));
-				m++;
-			}
-			k++;
+			if (!(list_path[u]->path[m + 1]))
+				break ;
+			if (list_path[i]->path[k] == list_path[u]->path[m])
+				return (dep_find(list_path[i], list_path[u]));
+			m++;
 		}
+		k++;
 	}
 	return (1);
 }
@@ -72,14 +65,18 @@ int			make_dependance(f_path **list_path)
 	int u;
 
 	i = 0;
-	ft_putendl("newyolo");
 	while (list_path[i])
 	{
-		u = i;
-		if ((add_dependance(list_path, i, u) == 0))
-			return (0);
+		u = 0;
+		while (list_path[u])
+		{
+			if (!(list_path[u]))
+				return (1);
+			if ((add_dependance(list_path, i, u) == 0))
+				return (0);
+			u++;
+		}
 		i++;
 	}
-	ft_putendl("finyolo");
 	return (1);
 }

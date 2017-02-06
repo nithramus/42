@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 16:29:30 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 00:01:46 by bandre           ###   ########.fr       */
+/*   Updated: 2017/01/30 20:16:49 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,10 @@ static int	expend(t_checker *a_list, t_checker *b_list, int len)
 	return (1);
 }
 
-
 int			main(int argv, char **argc)
 {
 	int			len;
-	char *ret;
+	char		*ret;
 	t_checker	*a_list;
 	t_checker	*b_list;
 
