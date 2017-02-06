@@ -30,6 +30,8 @@ int		ft_is_number(int *fourmis, char **fichier)
 			return (0);
 		i++;
 	}
+	if (ft_atoi(str) == 0)
+		return (0);
 	*fourmis = ft_atoi(str);
 	if (!(*fichier = ft_strjoin(str, "\n")))
 		return (0);

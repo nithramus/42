@@ -56,16 +56,21 @@ static s_fourmis	**add_fourmis(s_fourmis **list, f_path **best_path)
 {
 	int			i;
 	s_fourmis	**new;
+	int nbfour;
 
+	nbfour = 0;
+	while (list[nbfour])
+		nbfour++;
 	i = 0;
 	while (best_path[i])
 	{
 		if (best_path[i]->nb_fourmis > 0)
 		{
-			new = s_fourmis_join(list, new_fourmis(best_path[i], i + 1));
+			new = s_fourmis_join(list, new_fourmis(best_path[i], 1 + nbfour));
 			free(list);
 			list = new;
 			best_path[i]->nb_fourmis--;
+			nbfour++;
 		}
 		i++;
 	}
@@ -85,8 +90,7 @@ static int			affichage_final(s_fourmis **list_fourmis)
 		{
 			if (list_fourmis[i]->road->path[list_fourmis[i]->pos + 1])
 			{
-				ft_printf("L%s-%s ", list_fourmis[i]->road->path
-						[list_fourmis[i]->pos]->name, list_fourmis[i]->road
+				ft_printf("L%d-%s ", list_fourmis[i]->num_fourmis, list_fourmis[i]->road
 						->path[list_fourmis[i]->pos + 1]->name);
 				list_fourmis[i]->pos++;
 				cont = 1;

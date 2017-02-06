@@ -89,6 +89,7 @@ static g_struct	**parse_salles(g_struct **list_salles, int *start, int *end,
 	int		i;
 
 	i = 0;
+	line = NULL;
 	while (get_next_line(0, &line))
 	{
 		if (!(split = ft_strsplit(line, ' ')) || !(fichier_comp(fichier, line)))
@@ -107,6 +108,8 @@ static g_struct	**parse_salles(g_struct **list_salles, int *start, int *end,
 		ft_free_split(split);
 	}
 	ft_free_split(split);
+	if (!line)
+		return (NULL);
 	return (parse_tubes(list_salles, line, fichier));
 }
 
