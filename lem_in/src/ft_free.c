@@ -6,13 +6,13 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 14:06:13 by bandre            #+#    #+#             */
-/*   Updated: 2017/01/15 18:13:04 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/07 00:46:45 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	ft_free_list_g_struct(g_struct **list_ptr)
+void	ft_free_list_t_struct(t_struct **list_ptr)
 {
 	int i;
 
@@ -27,7 +27,7 @@ void	ft_free_list_g_struct(g_struct **list_ptr)
 	free(list_ptr);
 }
 
-void	ft_free_list_f_path(f_path **list_ptr)
+void	ft_free_list_t_path(t_path **list_ptr)
 {
 	int i;
 
@@ -42,7 +42,7 @@ void	ft_free_list_f_path(f_path **list_ptr)
 	free(list_ptr);
 }
 
-void	ft_free_s_fourmis(s_fourmis **list)
+void	ft_free_t_fourmis(t_fourmis **list)
 {
 	int i;
 
@@ -59,11 +59,14 @@ void	ft_free_split(char **str)
 {
 	int i;
 
-	i = 0;
-	while (str[i])
+	if (str)
 	{
-		free(str[i]);
-		i++;
+		i = 0;
+		while (str[i])
+		{
+			free(str[i]);
+			i++;
+		}
+		free(str);
 	}
-	free(str);
 }

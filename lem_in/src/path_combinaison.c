@@ -12,15 +12,15 @@
 
 #include "lem_in.h"
 
-static f_path	**f_path_join(f_path **act_path, f_path *path_to_add)
+static t_path	**t_path_join(t_path **act_path, t_path *path_to_add)
 {
-	f_path	**new;
+	t_path	**new;
 	int		i;
 
 	i = 0;
 	while (act_path[i])
 		i++;
-	if (!(new = (f_path**)malloc((i + 2) * sizeof(f_path*))))
+	if (!(new = (t_path**)malloc((i + 2) * sizeof(t_path*))))
 		afficher_error();
 	i = 0;
 	while (act_path[i])
@@ -33,7 +33,7 @@ static f_path	**f_path_join(f_path **act_path, f_path *path_to_add)
 	return (new);
 }
 
-static int		dep_test(f_path **act_path, f_path *path_to_add)
+static int		dep_test(t_path **act_path, t_path *path_to_add)
 {
 	int road;
 	int i;
@@ -60,16 +60,16 @@ static void		netab(int new[3], int tab[3])
 	tab[2] = new[2];
 }
 
-static void		extend(f_path ***best_path_comb, f_path **new_dep)
+static void		extend(t_path ***best_path_comb, t_path **new_dep)
 {
 	free(*best_path_comb);
 	*best_path_comb = new_dep;
 }
 
-void			path_combinaison(f_path **all_path, f_path ***best_path_comb,
-		f_path **act_path, int new[3])
+void			path_combinaison(t_path **all_path, t_path ***best_path_comb,
+		t_path **act_path, int new[3])
 {
-	f_path	**new_dep;
+	t_path	**new_dep;
 	int		tab[3];
 
 	netab(new, tab);
@@ -77,7 +77,7 @@ void			path_combinaison(f_path **all_path, f_path ***best_path_comb,
 	{
 		if (dep_test(act_path, all_path[tab[0]]))
 		{
-			new_dep = f_path_join(act_path, all_path[tab[0]]);
+			new_dep = t_path_join(act_path, all_path[tab[0]]);
 			if (tab[1] > 0)
 				path_combinaison(all_path, best_path_comb, new_dep, tab);
 			else if (tab[1] == 0)

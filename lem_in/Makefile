@@ -6,7 +6,7 @@
 #    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2017/02/02 13:29:33 by bandre           ###   ########.fr        #
+#    Updated: 2017/02/08 17:12:45 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,11 +48,11 @@ all: EXEC $(NAME)
 $(NAME): $(SRC_O)
 	$(CC) $(FLAG) -o $(NAME) $(SRC_O) $(LIB)
 
-EXEC: 
+EXEC:
 	make -C libft
 
 %.o: %.c
-	$(CC) -c $< -o $@
+	$(CC) $(FLAG) -c $< -o $@
 
 clean:
 	rm -f $(addprefix $(SRC_PATH)/,$(SRC))

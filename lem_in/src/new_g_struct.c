@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_g_struct.c                                     :+:      :+:    :+:   */
+/*   new_t_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,11 @@
 
 #include "lem_in.h"
 
-g_struct	*new_g_struct(char *name)
+t_struct	*new_t_struct(char *name)
 {
-	g_struct *new;
+	t_struct *new;
 
-	new = (g_struct*)malloc(sizeof(new));
+	new = (t_struct*)malloc(sizeof(new));
 	if (!new)
 		return (NULL);
 	new->name = (char*)malloc(ft_strlen(name) + 1);
@@ -25,7 +25,7 @@ g_struct	*new_g_struct(char *name)
 		free(new);
 		return (NULL);
 	}
-	new->liaisons = (g_struct**)malloc(sizeof(g_struct*));
+	new->liaisons = (t_struct**)malloc(sizeof(t_struct*));
 	if (!new->liaisons)
 	{
 		free(new);

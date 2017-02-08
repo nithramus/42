@@ -6,26 +6,26 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:36:02 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/06 22:57:05 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/07 01:06:00 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void		search_solution(f_path **a_path, int tab[3], f_path ***best)
+static void		search_solution(t_path **a_path, int tab[3], t_path ***best)
 {
-	f_path	**ac_path;
+	t_path	**ac_path;
 
 	*best = NULL;
-	ac_path = (f_path**)malloc(sizeof(f_path*));
+	ac_path = (t_path**)malloc(sizeof(t_path*));
 	*ac_path = NULL;
 	path_combinaison(a_path, best, ac_path, tab);
 }
 
-static f_path	**best_path_comb(f_path **a_path, int nbfoumis)
+static t_path	**best_path_comb(t_path **a_path, int nbfoumis)
 {
-	f_path	**best_path;
-	f_path	**new_best;
+	t_path	**best_path;
+	t_path	**new_best;
 	int		tab[3];
 
 	tab[0] = -1;
@@ -53,9 +53,9 @@ static f_path	**best_path_comb(f_path **a_path, int nbfoumis)
 
 int				main(void)
 {
-	g_struct	**graphe;
-	f_path		**path;
-	g_struct	*start_end[2];
+	t_struct	**graphe;
+	t_path		**path;
+	t_struct	*start_end[2];
 	int			nbfourmis;
 	char		*fichier;
 
@@ -73,7 +73,7 @@ int				main(void)
 	if (make_dependance(path) == 0)
 		return (0);
 	best_path_comb(path, nbfourmis);
-	ft_free_list_g_struct(graphe);
-	ft_free_list_f_path(path);
+	ft_free_list_t_struct(graphe);
+	ft_free_list_t_path(path);
 	return (1);
 }

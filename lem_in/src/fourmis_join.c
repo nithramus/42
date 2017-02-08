@@ -12,15 +12,15 @@
 
 #include "lem_in.h"
 
-s_fourmis	**s_fourmis_join(s_fourmis **list, s_fourmis *new)
+t_fourmis	**t_fourmis_join(t_fourmis **list, t_fourmis *new)
 {
 	int			i;
-	s_fourmis	**new_list;
+	t_fourmis	**new_list;
 
 	i = 0;
 	while (list[i])
 		i++;
-	if (!(new_list = (s_fourmis**)malloc(sizeof(s_fourmis*) * (i + 2))))
+	if (!(new_list = (t_fourmis**)malloc(sizeof(t_fourmis*) * (i + 2))))
 		afficher_error();
 	i = 0;
 	while (list[i])

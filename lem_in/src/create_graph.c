@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:52:00 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/06 19:36:14 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/08 17:13:04 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ static int		split_not_valid_salle(char **split, int nb_split, int i, int j)
 	return (0);
 }
 
-static g_struct	**parse_tubes(g_struct **list_salles, char *line, char **fich,
+static t_struct	**parse_tubes(t_struct **list_salles, char *line, char **fich,
 		int cont)
 {
-	g_struct	*salle1;
-	g_struct	*salle2;
+	t_struct	*salle1;
+	t_struct	*salle2;
 	char		**split;
 
 	if (!line)
@@ -82,7 +82,7 @@ static int		parse_test(int *start, int *end, char **split, int i)
 	return (1);
 }
 
-static g_struct	**parse_salles(g_struct **list_salles, int *start, int *end,
+static t_struct	**parse_salles(t_struct **list_salles, int *start, int *end,
 		char **fichier)
 {
 	char	*line;
@@ -93,35 +93,33 @@ static g_struct	**parse_salles(g_struct **list_salles, int *start, int *end,
 	line = NULL;
 	while (get_next_line(0, &line))
 	{
+		if (ft_strchr(line, '-'))
+			break ;
 		if (!(split = ft_strsplit(line, ' ')) || !(fichier_comp(fichier, line)))
-			return (NULL);
+			i = i + 1 - 1;
 		else if (!split[0])
 			return (list_salles);
 		else if (parse_test(start, end, split, i))
 			i = i + 1 - 1;
-		else if (ft_strchr(line, '-'))
-			break ;
 		else if (split_not_valid_salle(split, 3, 0, 1))
 			return (NULL);
 		else if ((i = i + 1))
-			list_salles = graphe_join(list_salles, new_g_struct(split[0]));
+			list_salles = graphe_join(list_salles, new_t_struct(split[0]));
 		free(line);
 		ft_free_split(split);
 	}
-	ft_free_split(split);
 	return (parse_tubes(list_salles, line, fichier, 1));
 }
 
-g_struct		**create_graph(g_struct **start, g_struct **end, char **fichier)
+t_struct		**create_graph(t_struct **start, t_struct **end, char **fichier)
 {
-	g_struct	**list_salles;
+	t_struct	**list_salles;
 	int			debut;
 	int			fin;
-	char		*line;
 
 	debut = -1;
 	fin = -1;
-	if (!(list_salles = (g_struct**)malloc(sizeof(g_struct*))))
+	if (!(list_salles = (t_struct**)malloc(sizeof(t_struct*))))
 		return (NULL);
 	*list_salles = NULL;
 	if (!(list_salles = parse_salles(list_salles, &debut, &fin, fichier)))

@@ -12,11 +12,11 @@
 
 #include "lem_in.h"
 
-s_fourmis	*new_fourmis(f_path *road, int num_fourmis)
+t_fourmis	*new_fourmis(t_path *road, int num_fourmis)
 {
-	s_fourmis *new;
+	t_fourmis *new;
 
-	if (!(new = (s_fourmis*)malloc(sizeof(s_fourmis))))
+	if (!(new = (t_fourmis*)malloc(sizeof(t_fourmis))))
 		afficher_error();
 	new->pos = 0;
 	new->road = road;

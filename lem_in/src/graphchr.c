@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-g_struct	*graphchr(g_struct **list_salles, char *name)
+t_struct	*graphchr(t_struct **list_salles, char *name)
 {
 	int i;
 

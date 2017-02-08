@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-int		is_in_list(g_struct **list, g_struct *add)
+int		is_in_list(t_struct **list, t_struct *add)
 {
 	int i;
 

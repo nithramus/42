@@ -12,10 +12,10 @@
 
 #include "lem_in.h"
 
-g_struct	**graphe_join(g_struct **src, g_struct *add)
+t_struct	**graphe_join(t_struct **src, t_struct *add)
 {
 	int			i;
-	g_struct	**new;
+	t_struct	**new;
 
 	i = 0;
 	if (is_in_list(src, add))
@@ -27,7 +27,7 @@ g_struct	**graphe_join(g_struct **src, g_struct *add)
 	}
 	while (src[i])
 		i++;
-	if (!(new = (g_struct**)malloc((i + 2) * sizeof(g_struct*))))
+	if (!(new = (t_struct**)malloc((i + 2) * sizeof(t_struct*))))
 		return (NULL);
 	i = 0;
 	while (src[i])

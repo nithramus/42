@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_f_path.c                                       :+:      :+:    :+:   */
+/*   new_t_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,13 @@
 
 #include "lem_in.h"
 
-f_path	*new_f_path(g_struct **add)
+t_path	*new_t_path(t_struct **add)
 {
-	f_path	*new;
+	t_path	*new;
 
-	if (!(new = (f_path*)malloc(sizeof(f_path))))
+	if (!(new = (t_path*)malloc(sizeof(t_path))))
 		return (NULL);
-	if (!(new->dependance = (f_path**)malloc(sizeof(f_path*))))
+	if (!(new->dependance = (t_path**)malloc(sizeof(t_path*))))
 		return (NULL);
 	new->dependance[0] = NULL;
 	new->path = add;

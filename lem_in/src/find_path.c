@@ -12,11 +12,11 @@
 
 #include "lem_in.h"
 
-static int	find_all_way(f_path ***list_path, g_struct *start,
-		g_struct *end, g_struct **list_salles)
+static int	find_all_way(t_path ***list_path, t_struct *start,
+		t_struct *end, t_struct **list_salles)
 {
 	int			i;
-	g_struct	**list;
+	t_struct	**list;
 
 	i = 0;
 	if (start == end)
@@ -39,15 +39,15 @@ static int	find_all_way(f_path ***list_path, g_struct *start,
 	return (1);
 }
 
-f_path		**find_path(g_struct *start, g_struct *end)
+t_path		**find_path(t_struct *start, t_struct *end)
 {
-	f_path		**list_path;
-	g_struct	**list_salles;
+	t_path		**list_path;
+	t_struct	**list_salles;
 
-	if (!(list_path = (f_path**)malloc(sizeof(f_path*))))
+	if (!(list_path = (t_path**)malloc(sizeof(t_path*))))
 		return (NULL);
 	*list_path = NULL;
-	if (!(list_salles = (g_struct**)malloc(sizeof(g_struct*) * 2)))
+	if (!(list_salles = (t_struct**)malloc(sizeof(t_struct*) * 2)))
 		return (NULL);
 	*list_salles = start;
 	list_salles[1] = NULL;

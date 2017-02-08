@@ -12,15 +12,15 @@
 
 #include "lem_in.h"
 
-g_struct	**ptr_join_not_free(g_struct **list, g_struct *add)
+t_struct	**ptr_join_not_free(t_struct **list, t_struct *add)
 {
 	int			i;
-	g_struct	**new;
+	t_struct	**new;
 
 	i = 0;
 	while (list[i])
 		i++;
-	if (!(new = (g_struct**)malloc((i + 2) * sizeof(g_struct*))))
+	if (!(new = (t_struct**)malloc((i + 2) * sizeof(t_struct*))))
 		return (NULL);
 	i = 0;
 	while (list[i])
@@ -33,15 +33,15 @@ g_struct	**ptr_join_not_free(g_struct **list, g_struct *add)
 	return (new);
 }
 
-g_struct	**ptr_join(g_struct **list, g_struct *add)
+t_struct	**ptr_join(t_struct **list, t_struct *add)
 {
 	int			i;
-	g_struct	**new;
+	t_struct	**new;
 
 	i = 0;
 	while (list[i])
 		i++;
-	if (!(new = (g_struct**)malloc((i + 2) * sizeof(g_struct*))))
+	if (!(new = (t_struct**)malloc((i + 2) * sizeof(t_struct*))))
 		return (NULL);
 	i = 0;
 	while (list[i])

@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-static int	calc_len_road(f_path *path)
+static int	calc_len_road(t_path *path)
 {
 	int i;
 
@@ -23,7 +23,7 @@ static int	calc_len_road(f_path *path)
 	return (i);
 }
 
-int			test_nbtour(f_path **list_road, int nb_fourmis)
+int			test_nbtour(t_path **list_road, int nb_fourmis)
 {
 	int nb_road;
 	int len_road;

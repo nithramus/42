@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-int		afficher(g_struct **list_salles)
+int		afficher(t_struct **list_salles)
 {
 	int i;
 
@@ -27,7 +27,7 @@ int		afficher(g_struct **list_salles)
 	return (1);
 }
 
-int		afficher_road(f_path **path)
+int		afficher_road(t_path **path)
 {
 	int i;
 
@@ -48,11 +48,11 @@ void	afficher_error(void)
 	exit(0);
 }
 
-void	afficher_error_path(f_path **path, g_struct **graph, char *fichier)
+void	afficher_error_path(t_path **path, t_struct **graph, char *fichier)
 {
 	ft_putendl("ERROR");
-	ft_free_list_g_struct(graph);
-	ft_free_list_f_path(path);
+	ft_free_list_t_struct(graph);
+	ft_free_list_t_path(path);
 	free(fichier);
 	exit(0);
 }

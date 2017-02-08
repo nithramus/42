@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-static int			calc_len_road(f_path *path)
+static int			calc_len_road(t_path *path)
 {
 	int i;
 
@@ -23,7 +23,7 @@ static int			calc_len_road(f_path *path)
 	return (i);
 }
 
-static int			nb_fourmis_in_path(f_path **list_road, int nb_fourmis)
+static int			nb_fourmis_in_path(t_path **list_road, int nb_fourmis)
 {
 	int nb_road;
 	int len_road;
@@ -52,10 +52,10 @@ static int			nb_fourmis_in_path(f_path **list_road, int nb_fourmis)
 	return (nb_tour--);
 }
 
-static s_fourmis	**add_fourmis(s_fourmis **list, f_path **best_path)
+static t_fourmis	**add_fourmis(t_fourmis **list, t_path **best_path)
 {
 	int			i;
-	s_fourmis	**new;
+	t_fourmis	**new;
 	int			nbfour;
 
 	nbfour = 0;
@@ -66,7 +66,7 @@ static s_fourmis	**add_fourmis(s_fourmis **list, f_path **best_path)
 	{
 		if (best_path[i]->nb_fourmis > 0)
 		{
-			new = s_fourmis_join(list, new_fourmis(best_path[i], 1 + nbfour));
+			new = t_fourmis_join(list, new_fourmis(best_path[i], 1 + nbfour));
 			free(list);
 			list = new;
 			best_path[i]->nb_fourmis--;
@@ -77,7 +77,7 @@ static s_fourmis	**add_fourmis(s_fourmis **list, f_path **best_path)
 	return (list);
 }
 
-static int			affichage_final(s_fourmis **list_fourmis)
+static int			affichage_final(t_fourmis **list_fourmis)
 {
 	int i;
 	int cont;
@@ -106,9 +106,9 @@ static int			affichage_final(s_fourmis **list_fourmis)
 	return (cont);
 }
 
-int					fourmis_chemins(f_path **best_path, int nb_fourmis)
+int					fourmis_chemins(t_path **best_path, int nb_fourmis)
 {
-	s_fourmis	**list_fourmis;
+	t_fourmis	**list_fourmis;
 	int			i;
 	int			nb_road;
 
@@ -117,7 +117,7 @@ int					fourmis_chemins(f_path **best_path, int nb_fourmis)
 		nb_road++;
 	i = 0;
 	nb_fourmis_in_path(best_path, nb_fourmis);
-	if (!(list_fourmis = (s_fourmis**)malloc(sizeof(s_fourmis*) *
+	if (!(list_fourmis = (t_fourmis**)malloc(sizeof(t_fourmis*) *
 					(nb_fourmis + 1))))
 		afficher_error();
 	*list_fourmis = NULL;
@@ -126,6 +126,6 @@ int					fourmis_chemins(f_path **best_path, int nb_fourmis)
 		i++;
 	while (affichage_final(list_fourmis))
 		list_fourmis = add_fourmis(list_fourmis, best_path);
-	ft_free_s_fourmis(list_fourmis);
+	ft_free_t_fourmis(list_fourmis);
 	return (0);
 }
