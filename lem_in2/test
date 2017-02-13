@@ -1,0 +1,14 @@
+10
+##start
+a 23 3
+##end
+b 9 5
+c 5 8
+#test
+d 4 8
+a-b
+a-c
+#test
+c-b
+c-d
+#test
