@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:52:00 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/13 21:05:23 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/13 21:16:46 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ static int		split_not_valid_salle(char **split, int nb_split, int i, int j)
 	return (0);
 }
 
-static void nothing(void)
-{
-}
-
 static t_struct	**parse_tubes(t_struct **list_salles, char *line, char **fich,
 		int cont)
 {
@@ -57,7 +53,7 @@ static t_struct	**parse_tubes(t_struct **list_salles, char *line, char **fich,
 		else if (test_error(split, line))
 			break ;
 		else if (split[0][0] == '#')
-			nothing();
+			line = line + 1 - 1;
 		else if (!(salle1 = graphchr(list_salles, split[0])) ||
 				!(salle2 = graphchr(list_salles, split[1])))
 			break ;

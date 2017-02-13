@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:36:02 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/13 20:27:41 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/13 21:16:23 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,5 @@ int				main(void)
 	best_path_comb(path, nbfourmis);
 	ft_free_list_t_struct(graphe);
 	ft_free_list_t_path(path);
-	while(1);
 	return (1);
 }
