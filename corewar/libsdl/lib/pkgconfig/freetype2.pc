@@ -1,0 +1,14 @@
+prefix=/Users/msrun/.brew/opt/freetype
+exec_prefix=/Users/msrun/.brew/opt/freetype
+libdir=/Users/msrun/.brew/opt/freetype/lib
+includedir=/Users/msrun/.brew/opt/freetype/include
+
+Name: FreeType 2
+URL: http://freetype.org
+Description: A free, high-quality, and portable font engine.
+Version: 19.0.13
+Requires:
+Requires.private: 
+Libs: -L${libdir} -lfreetype
+Libs.private: -lz -lbz2 -L/Users/msrun/.brew/Cellar/libpng/1.6.27/lib -lpng16 -lz
+Cflags: -I${includedir}/freetype2

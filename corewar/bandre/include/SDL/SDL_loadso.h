@@ -1,0 +1,1 @@
+../../Cellar/sdl/1.2.15/include/SDL/SDL_loadso.h
