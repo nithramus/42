@@ -6,13 +6,21 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:47:43 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/13 20:57:20 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/15 18:19:55 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 # include "../libft/ft_printf/ft_printf.h"
+
+# define COLOR_RED     "\x1b[31m"
+# define COLOR_GREEN   "\x1b[32m"
+# define COLOR_YELLOW  "\x1b[33m"
+# define COLOR_BLUE    "\x1b[34m"
+# define COLOR_MAGENTA "\x1b[35m"
+# define COLOR_CYAN    "\x1b[36m"
+# define COLOR_RESET   "\x1b[0m"
 
 typedef struct		s_graphe
 {
@@ -70,4 +78,5 @@ void				afficher_error_path(t_path **path, t_struct **graph,
 int					test_valide(char **split, char *line);
 int					test_error(char **split, char *line);
 void				ft_free(char **split, char *line);
+t_path				**find_path_fast(t_struct *start, t_struct *end);
 #endif

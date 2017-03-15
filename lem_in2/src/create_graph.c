@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:52:00 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/13 21:16:46 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/15 18:25:17 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_struct	**parse_tubes(t_struct **list_salles, char *line, char **fich,
 	while (cont && line)
 	{
 		if (!(split = ft_strsplit(line, '-')))
-			break ;
+			return (NULL);
 		else if (test_error(split, line))
 			break ;
 		else if (split[0][0] == '#')
@@ -65,7 +65,7 @@ static t_struct	**parse_tubes(t_struct **list_salles, char *line, char **fich,
 		cont = get_next_line(0, &line);
 	}
 	if (cont)
-		ft_free(split, line);
+		ft_free_split(split);
 	return (list_salles);
 }
 
@@ -93,13 +93,14 @@ static t_struct	**parse_salles(t_struct **list_salles, int *start, int *end,
 	line = NULL;
 	while (get_next_line(0, &line))
 	{
-		if (!(split = ft_strsplit(line, ' ')) || !(fichier_comp(fichier, line)))
+		if (!(split = ft_strsplit(line, ' ')))
 			return (NULL);
 		else if (!split[0])
 			return (list_salles);
 		if (test_valide(split, line))
 			break ;
-		else if (parse_test(start, end, split, i))
+		else if (!(fichier_comp(fichier, line))
+				|| parse_test(start, end, split, i))
 			i = i + 1 - 1;
 		else if (split_not_valid_salle(split, 3, 0, 1))
 			return (NULL);

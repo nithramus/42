@@ -6,7 +6,7 @@
 #    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2017/02/13 15:24:52 by bandre           ###   ########.fr        #
+#    Updated: 2017/02/15 16:49:36 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC = create_graph.o\
 	  ft_is_number.o\
 	  fichier_comp.o\
 	  test_valide.o\
+	  find_path_fast.o\
 
 CC = gcc
 

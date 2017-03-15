@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 18:36:02 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/13 21:16:23 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/15 18:22:58 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,24 @@ static void		search_solution(t_path **a_path, int tab[3], t_path ***best)
 	path_combinaison(a_path, best, ac_path, tab);
 }
 
-static t_path	**best_path_comb(t_path **a_path, int nbfoumis)
+static void		gestion_param2(t_path **best_path, int nbfoumis, int argc,
+		char **argv)
+{
+	if (argc == 2)
+		if (ft_strcmp(argv[1], "-path") == 0)
+			afficher_road(best_path);
+	if (argc == 3)
+	{
+		if (ft_strcmp(argv[2], "-path") == 0)
+			afficher_road(best_path);
+		if (ft_strcmp(argv[1], "-path") == 0)
+			afficher_road(best_path);
+	}
+	fourmis_chemins(best_path, nbfoumis);
+}
+
+static t_path	**best_path_comb(t_path **a_path, int nbfourmis, int argc,
+		char **argv)
 {
 	t_path	**best_path;
 	t_path	**new_best;
@@ -30,7 +47,7 @@ static t_path	**best_path_comb(t_path **a_path, int nbfoumis)
 
 	tab[0] = -1;
 	tab[1] = 1;
-	tab[2] = nbfoumis;
+	tab[2] = nbfourmis;
 	search_solution(a_path, tab, &new_best);
 	if (!(new_best))
 		afficher_error();
@@ -46,12 +63,30 @@ static t_path	**best_path_comb(t_path **a_path, int nbfoumis)
 		}
 		tab[1]++;
 	}
-	fourmis_chemins(best_path, nbfoumis);
+	gestion_param2(best_path, nbfourmis, argc, argv);
 	free(best_path);
 	return (best_path);
 }
 
-int				main(void)
+static t_path	**gestion_param(int argc, char **argv, t_struct *start,
+		t_struct *end)
+{
+
+	if (argc == 2)
+		if (ft_strcmp("-fast", argv[1]) == 0)
+			return (find_path_fast(start, end));
+	if (argc == 3)
+	{
+		if (ft_strcmp("-fast", argv[1]) == 0)
+			return (find_path_fast(start, end));
+		if (ft_strcmp("-fast", argv[2]) == 0)
+			return (find_path_fast(start, end));
+	}
+	return (find_path(start, end));
+
+}
+
+int				main(int argc, char **argv)
 {
 	t_struct	**graphe;
 	t_path		**path;
@@ -64,7 +99,7 @@ int				main(void)
 	graphe = create_graph(&start_end[0], &start_end[1], &fichier);
 	if (!(graphe))
 		afficher_error();
-	if (!(path = find_path(start_end[0], start_end[1])))
+	if (!(path = gestion_param(argc, argv, start_end[0], start_end[1])))
 		afficher_error_path(path, graphe, fichier);
 	if (path[0] == NULL)
 		afficher_error_path(path, graphe, fichier);
@@ -72,7 +107,7 @@ int				main(void)
 	free(fichier);
 	if (make_dependance(path) == 0)
 		return (0);
-	best_path_comb(path, nbfourmis);
+	best_path_comb(path, nbfourmis, argc, argv);
 	ft_free_list_t_struct(graphe);
 	ft_free_list_t_path(path);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 19:52:16 by bandre            #+#    #+#             */
-/*   Updated: 2017/02/02 13:56:31 by bandre           ###   ########.fr       */
+/*   Updated: 2017/02/15 14:30:15 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_is_number(int *fourmis, char **fichier)
 			return (0);
 		i++;
 	}
-	if (ft_atoi(str) == 0)
+	if (ft_atoi(str) < 0)
 		return (0);
 	*fourmis = ft_atoi(str);
 	if (!(*fichier = ft_strjoin(str, "\n")))
