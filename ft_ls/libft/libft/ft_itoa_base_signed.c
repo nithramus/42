@@ -33,7 +33,7 @@ char		*ft_itoa_base_signed(ssize_t value, int base, int maj)
 	len = (value < 0) ? 2 : 1;
 	while (stock /= base)
 		len++;
-	if (!(chaine = (char*)malloc((sizeof(chaine) * len) + 1)))
+	if (!(chaine = (char*)mem_stock((sizeof(chaine) * len) + 1)))
 		return (NULL);
 	chaine[0] = '-';
 	chaine[len] = '\0';

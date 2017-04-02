@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	lenmalloc(int n)
+static int	lenmem_stock(int n)
 {
 	int len;
 
@@ -43,8 +43,8 @@ char		*ft_itoa(int n)
 	char	*chainretour;
 	int		i;
 
-	i = lenmalloc(n);
-	chainretour = (char*)malloc(i + 1);
+	i = lenmem_stock(n);
+	chainretour = (char*)mem_stock(i + 1);
 	if (chainretour == NULL)
 		return (NULL);
 	chainretour[0] = '-';

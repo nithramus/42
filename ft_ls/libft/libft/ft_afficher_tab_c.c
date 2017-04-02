@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_afficher_tab_c.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 16:13:38 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/09 16:27:37 by bandre           ###   ########.fr       */
+/*   Created: 2017/02/01 19:59:39 by bandre            #+#    #+#             */
+/*   Updated: 2017/02/01 19:59:40 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
+void	ft_afficher_tab_c(char **tab)
 {
-	del((*alst)->content, (*alst)->content_size);
-	mem_free_ptr(*alst);
-	*alst = NULL;
+	int i;
+
+	i = 0;
+	while (tab[i])
+	{
+		ft_putendl(tab[i]);
+		i++;
+	}
 }

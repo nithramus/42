@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 20:40:27 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/07 22:09:51 by bandre           ###   ########.fr       */
+/*   Updated: 2017/03/21 00:18:25 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_mem_stock
+{
+	void			**list_ptr;
+	struct			s_mem_stock *next;
+}					t_mem_stock;
+
+void				*mem_stock(int i);
+t_mem_stock			**mem_ptr(void);
+void				mem_stock_free(void);
+void				mem_free_ptr(void *ptr);
 
 void				*ft_memset(void *str, int c, size_t n);
 void				ft_bzero(void *str, size_t n);
@@ -90,6 +101,7 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
+int					ft_is_number(char *str);
 
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
@@ -102,5 +114,6 @@ int					get_next_line(const int fd, char **line);
 
 void				**ft_ptradd(void **list, void *add);
 void				**ft_ptradd_free(void **list, void *add);
+void				ft_afficher_tab_c(char **tab);
 
 #endif

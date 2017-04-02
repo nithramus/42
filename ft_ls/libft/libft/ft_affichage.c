@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 15:40:41 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/06 00:16:26 by bandre           ###   ########.fr       */
+/*   Updated: 2017/03/21 01:08:45 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		ft_end(t_param list, char *s, int value)
 		return (-1);
 	value = ft_strlen(s) + value;
 	ft_putstr(s);
-	free(s);
+	mem_free_ptr(s);
 	return (value);
 }
 

@@ -18,7 +18,7 @@ void	ft_strdel(char **as)
 	{
 		if (as != NULL)
 		{
-			free(*as);
+			mem_free_ptr(*as);
 			*as = NULL;
 		}
 	}

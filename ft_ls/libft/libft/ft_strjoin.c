@@ -24,7 +24,7 @@ char	*ft_strjoin(char const *str1, char const *str2)
 		i = -1;
 		len1 = ft_strlen(str1);
 		len2 = ft_strlen(str2);
-		chainretour = (char*)malloc((len1 + len2 + 1) * sizeof(char));
+		chainretour = (char*)mem_stock((len1 + len2 + 1) * sizeof(char));
 		if (chainretour == NULL)
 			return (NULL);
 		while (++i < len1 || i < len2)

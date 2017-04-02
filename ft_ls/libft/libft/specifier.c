@@ -91,8 +91,8 @@ static char	*cas_ls(wchar_t *wchar)
 	{
 		uni = ft_unicode(wchar[i]);
 		new = ft_strjoin(s, uni);
-		free(s);
-		free(uni);
+		mem_free_ptr(s);
+		mem_free_ptr(uni);
 		if (new)
 			s = new;
 		else

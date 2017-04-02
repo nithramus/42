@@ -1,20 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   mem_stock_free.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 16:13:38 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/09 16:27:37 by bandre           ###   ########.fr       */
+/*   Created: 2017/03/15 22:38:53 by bandre            #+#    #+#             */
+/*   Updated: 2017/03/21 00:38:44 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
+static void free_void(t_mem_stock *list)
 {
-	del((*alst)->content, (*alst)->content_size);
-	mem_free_ptr(*alst);
-	*alst = NULL;
+	int j;
+
+	j = 0;
+	while (j < 50)
+	{
+		if (list->list_ptr[j])
+			mem_free_ptr(list->list_ptr[j]);
+		j++;
+	}
+	mem_free_ptr(list->list_ptr);
 }
+
+void	mem_stock_free(void)
+{
+	t_mem_stock **list;
+	t_mem_stock *tmp;
+
+	list = mem_ptr();
+	while (*list)
+	{
+		free_void(*list);
+		tmp = (*list)->next;
+		mem_free_ptr(*list);
+		*list = tmp;
+	}
+	*list = NULL;
+}
+

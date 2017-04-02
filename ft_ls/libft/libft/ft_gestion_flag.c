@@ -23,7 +23,7 @@ char	*list_minus(int len, t_param list, char *s, char *string_zero)
 		list.width--;
 	}
 	s = ft_strjoin(tmp, string_zero);
-	free(tmp);
+	mem_free_ptr(tmp);
 	return (s);
 }
 
@@ -39,7 +39,7 @@ char	*list_zero(int len, t_param list, char *string_zero, char *s)
 	}
 	if (!(s = ft_strjoin(string_zero, tmp)))
 		return (NULL);
-	free(tmp);
+	mem_free_ptr(tmp);
 	tmp = NULL;
 	if (list.diese && list.specifier == 'x')
 	{
@@ -78,9 +78,9 @@ char	*ft_gestion_attrib_moins(t_param list, char *tmp)
 			while ((list.width--) && len != list.width)
 				string_zero[list.width - len - 1] = ' ';
 			s = ft_strjoin(string_zero, tmp);
-			free(tmp);
+			mem_free_ptr(tmp);
 		}
-		free(string_zero);
+		mem_free_ptr(string_zero);
 	}
 	return (s);
 }
@@ -98,14 +98,14 @@ char	*ft_gestion_attrib_plus(t_param list, char *s)
 		{
 			chain_zero[0] = '+';
 			tmp = ft_strjoin(chain_zero, s);
-			free(s);
+			mem_free_ptr(s);
 		}
 	}
 	else if (list.space && s[0] != '-' && ft_strchr("idD", list.specifier))
 	{
 		chain_zero[0] = ' ';
 		tmp = ft_strjoin(chain_zero, s);
-		free(s);
+		mem_free_ptr(s);
 	}
 	return (tmp);
 }
@@ -135,6 +135,6 @@ char	*ft_gestion_attrib_diese(t_param list, char *s)
 	else if (list.specifier == 'p')
 		chain[1] = 'x';
 	tmp = ft_strjoin(chain, s);
-	free(s);
+	mem_free_ptr(s);
 	return (tmp);
 }

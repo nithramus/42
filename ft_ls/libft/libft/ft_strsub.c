@@ -22,7 +22,7 @@ char	*ft_strsub(char const *str, unsigned int start, size_t len)
 	{
 		j = 0;
 		end = start + len;
-		retour = (char*)malloc(len + 1);
+		retour = (char*)mem_stock(len + 1);
 		if (retour == NULL)
 			return (NULL);
 		while (start < end)

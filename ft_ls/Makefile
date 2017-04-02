@@ -6,22 +6,18 @@
 #    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2017/01/16 11:22:00 by bandre           ###   ########.fr        #
+#    Updated: 2017/04/02 19:56:14 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-SRC_PATH = src
+SRC_PATH = ls_src
 
 SRC = ft_ls.o\
-	  new_s_param.o\
-	  recup_param.o\
-	  ft_free.o\
-	  afficher_error.o\
-	  go_to_dir.o\
-	  tab_of_dir.o\
-	  print_list_fichier.o\
+	  get_option.o\
+	  quit_clean.o\
+	  test.o\
 
 CC = gcc
 

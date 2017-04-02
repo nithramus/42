@@ -22,7 +22,7 @@ char	*ft_strmapi(char const *str, char (*f)(unsigned int, char))
 		len = 0;
 		while (str[len])
 			len++;
-		chainretour = (char*)malloc(sizeof(char) * len + 1);
+		chainretour = (char*)mem_stock(sizeof(char) * len + 1);
 		if (chainretour == NULL)
 			return (NULL);
 		len = 0;

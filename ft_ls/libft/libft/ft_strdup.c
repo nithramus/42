@@ -17,7 +17,7 @@ char	*ft_strdup(const char *str)
 	size_t	i;
 	char	*chaineretour;
 
-	chaineretour = (char*)malloc(sizeof(char) * (ft_strlen(str) + 1));
+	chaineretour = (char*)mem_stock(sizeof(char) * (ft_strlen(str) + 1));
 	if (!chaineretour)
 		return (NULL);
 	i = 0;

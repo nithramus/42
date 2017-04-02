@@ -21,8 +21,8 @@ static char		*put_line(t_list **elem, int *pos, char **line)
 	{
 		ft_strcat(*line, &((const char*)(*elem)->content)[*pos]);
 		*elem = (*elem)->next;
-		free(elem_avant->content);
-		free(elem_avant);
+		mem_free_ptr(elem_avant->content);
+		mem_free_ptr(elem_avant);
 		*pos = 0;
 	}
 	if ((n = ft_strchr(&((char*)(*elem)->content)[*pos], '\n')) && n)
@@ -34,8 +34,8 @@ static char		*put_line(t_list **elem, int *pos, char **line)
 	else
 	{
 		ft_strcat(*line, &((const char*)(*elem)->content)[*pos]);
-		free((*elem)->content);
-		free(*elem);
+		mem_free_ptr((*elem)->content);
+		mem_free_ptr(*elem);
 		*elem = NULL;
 	}
 	return (*line);
@@ -131,13 +131,13 @@ int				get_next_line(const int fd, char **line)
 	if (first)
 		if (first->fd != fd)
 		{
-			free(first->firstelem);
-			free(first);
+			mem_free_ptr(first->firstelem);
+			mem_free_ptr(first);
 			first = NULL;
 		}
 	if (!first)
 	{
-		first = (t_listchain*)malloc(sizeof(t_listchain));
+		first = (t_listchain*)mem_stock(sizeof(t_listchain));
 		if (!first)
 			return (-1);
 		first->n = 0;
@@ -146,7 +146,7 @@ int				get_next_line(const int fd, char **line)
 	}
 	if ((ret = get_next(fd, line, &first->firstelem, &first->n)) && ret == 0)
 	{
-		free(first);
+		mem_free_ptr(first);
 		first = NULL;
 	}
 	return (ret);

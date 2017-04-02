@@ -72,7 +72,7 @@ static char	**fextend(char const *str, char **tab, char c, int i)
 			i++;
 		else
 		{
-			tab[j] = (char*)malloc(len_occurence(str, c, i) + 1);
+			tab[j] = (char*)mem_stock(len_occurence(str, c, i) + 1);
 			if (tab[j] == NULL)
 				return (NULL);
 			else
@@ -96,7 +96,7 @@ char		**ft_strsplit(char const *str, char c)
 	{
 		i = 0;
 		nbroccu = occurences(str, c);
-		tab = (char**)malloc((nbroccu + 1) * sizeof(char**));
+		tab = (char**)mem_stock((nbroccu + 1) * sizeof(char**));
 		if (tab == NULL)
 			return (NULL);
 		return (fextend(str, tab, c, i));
