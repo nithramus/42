@@ -1,0 +1,14 @@
+The Class Vertex represent a vector with 5 composants.
+
+To create a vector you need to gieve at least 3 values like in the example: 
+$red   = new Color( array( 'red' => 255, 'green' =>   0, 'blue' =>   0 ) );
+You can add a Homogeneous coordinates with the key 'w' and a Color with the
+class Color and the key 'color' (see the color doc for more informartions;
+$blue  = new Color( array( 'red' =>   0, 'green' =>   0, 'blue' => 255 ) );
+
+$unitX = new Vertex( array( 'x' => 1.0, 'y' => 0.0, 'z' => 0.0, 'w' => 3.0, 'color' => $green ) );
+
+Use Color::$verbose = True to get more informartions while class running.
+To get value from the class, use the assesor function "get_x, get_y, get_z, get_w, get_color".
+Same to set a value, use "set_x..."
+

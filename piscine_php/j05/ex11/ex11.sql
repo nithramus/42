@@ -1,0 +1,1 @@
+SELECT UPPER(f.nom) as NOM, prix FROM membre LEFT JOIN abonnement abo ON membre.id_abo = abo.id_abo JOIN fiche_personne f ON membre.id_fiche_perso = f.id_perso  WHERE abo.prix > 42 ORDER BY f.nom, f.prenom;

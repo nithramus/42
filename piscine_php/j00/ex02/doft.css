@@ -1,0 +1,165 @@
+.baniere
+{
+	float: left;
+	width: 430px;
+	height: 120px;
+	margin: 10px;
+}
+
+body
+{
+	background-color: #505050;
+}
+
+#top
+{
+	width: 1423px;
+	height: 138px;
+	background-color: #909090;
+	border-radius: 10px 10px 10px 10px;
+	margin: 15px auto;
+	box-shadow: 5px 5px 5px 5px #212121;
+	clear:both;
+}
+
+#reload
+{
+	float:right;
+	width: 20px;
+	height: 20px;
+	margin: 10px;
+}
+#loupe
+{
+	float: right;
+	width: 230px;
+	height: 130px;
+	margin-top: -20px;
+	margin-right: 10px;
+}
+#close
+{
+	clear: right;
+	clear: right;
+	float:right;
+	width: 20px;
+	height: 20px;
+	margin-top: 70px;
+	margin-right: 10;
+}
+
+#left
+{
+	position:relative;
+	left:14%;
+	clear:both;
+	float:center;
+	width: 150px;
+	height: 430px;
+	background-color: #909090;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 5px 5px 5px 5px #212121;
+}
+
+.left
+{
+	float: left;
+	width: 70px;
+	height: 70px;
+	margin-left: 35px;
+	margin-top: 10px;
+}
+
+#middle
+{
+	position:relative;
+	top: -430px;
+	left: 21%;
+	width: 1050px;
+	height: 600px;
+	background-color: #909090;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 5px 5px 5px 5px #212121;
+	margin: 0px 30px;
+}
+
+#cluster
+{
+	position:relative;
+	top:10px;
+	left:10px;
+}
+
+.right
+{
+	position:relative;
+	top:-1020px;
+	left:80%;
+	width: 142px;
+	height: 425px;
+	background-color: #909090;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 5px 5px 5px 5px #212121;
+}
+
+#book
+{
+	float: left;
+	width: 65px;
+	height: 85px;
+	margin-left: 35px;
+	margin-top: 20px;
+}
+
+#towel
+{
+	float: left;
+	width: 50px;
+	height: 40px;
+	margin-left: 40px;
+	margin-top: 10px;
+}
+.book
+{
+	float: left;
+	width: 65px;
+	height: 85px;
+	margin-left: 35px;
+	margin-top: 20px;
+}
+#brick
+{
+	float: left;
+	width: 120px;
+	height: 70px;
+	margin-left: 10px;
+	margin-top: 10px;
+	background-image: url("ressources/brick.jpg");
+}
+.chat-box
+{
+	position: relative;
+	top: -840px;
+	left: 100px;
+	width: 520px;
+	height: 163px;
+	background-color: #88FF89;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 5px 5px 5px 5px #212121;
+	margin-left: 10%;
+	margin-top: -100px;
+}
+p
+{
+	margin: 10px;
+}
+
+.ordi
+{
+	text-shadow: 5px 5px 3px #BA8047;
+}
+
+.little-height
+{
+	 line-height: 4px;
+}

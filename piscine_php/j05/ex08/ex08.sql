@@ -1,0 +1,1 @@
+SELECT nom, prenom, CONVERT(date_naissance, date) FROM fiche_personne WHERE EXTRACT(YEAR from date_naissance) = 1989 order by nom;
