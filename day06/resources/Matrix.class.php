@@ -56,6 +56,11 @@ Class Matrix {
 			$i++;
 		}
 	}
+	private function projection () {
+	}
+	private function identity() {
+		return (0);
+	}
 
 	private function Rot($x, $y, $z) {
 		$this->_final_matrice[0][0] = $x * $x * (1 - cos($this->_angle)) + cos($this->_angle);
