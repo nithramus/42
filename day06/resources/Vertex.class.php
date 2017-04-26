@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 date_default_timezone_set('Europe/Paris');
 
 
-
+require_once 'Color.class.php';
 Class Vertex {
 	private $_x, $_y, $_z = 0;
 	private $_w = 1.0;
