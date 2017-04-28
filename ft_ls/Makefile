@@ -6,7 +6,7 @@
 #    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2017/04/02 19:56:14 by bandre           ###   ########.fr        #
+#    Updated: 2017/04/28 19:58:33 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC = ft_ls.o\
 	  get_option.o\
 	  quit_clean.o\
 	  test.o\
+	  path_mov.o\
 
 CC = gcc
 

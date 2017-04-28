@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 18:52:42 by bandre            #+#    #+#             */
-/*   Updated: 2017/04/02 19:40:42 by bandre           ###   ########.fr       */
+/*   Updated: 2017/04/28 20:27:39 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,7 @@ void	quit_clean(int error)
 		ft_putendl("usage");
 		exit(0);
 	}
+	ft_putendl("fin du prog");
+	mem_stock_free();
+	exit(0);
 }
