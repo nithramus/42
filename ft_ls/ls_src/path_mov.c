@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/28 19:11:04 by bandre            #+#    #+#             */
-/*   Updated: 2017/04/28 21:30:51 by bandre           ###   ########.fr       */
+/*   Updated: 2017/04/29 21:01:21 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,53 @@
 char *create_path(char *path, char *dir)
 {
 	char *new;
-	int i;
+	int len_dir;
+	int len_path;
 
-	i = 0;
-	if (!(new = mem_stock(ft_strlen(path) + ft_strlen(dir) + 1)))
+	len_dir = ft_strlen(dir);
+	len_path = ft_strlen(path);
+	if (!(new = mem_stock(len_path + len_dir + 2)))
 		quit_clean(1);
-	i = ft_strlen(path);
-	ft_strncpy(new, path, i);
-	new[i] = '/';
-	i++;
-	ft_strncpy(new + i, dir, ft_strlen(dir) + 1);
+	ft_strncpy(new, path, len_path);
+	new[len_path] = '/';
+	ft_strncpy(new + len_path + 1, dir, len_dir);
+	new[len_dir + len_path + 1] = '\0';
 	return (new);
 }
+
+t_mem_stock	*stock_file(char *path)
+{
+	DIR *dir;
+	t_mem_stock **ptr;
+	struct dirent *list_elem;
+	struct stat info;
+	char *new_path;
+
+	ptr = mem_ptr();
+	*ptr = NULL;
+	if (!(dir = opendir(path)))
+	{
+		perror("");
+		ft_putendl("opendir failed");
+	}
+	while ((list_elem = readdir(dir)) != NULL)
+	{
+		new_path = create_path(path, list_elem->d_name);
+		if (stat(new_path, &info) == -1)
+		{
+			ft_putendl(new_path);
+			perror("");
+			mem_free_ptr(new_path);
+		}
+		else if (!S_ISDIR(info.st_mode) || list_elem->d_name[0] == '.')
+			mem_free_ptr(new_path);
+	}
+	closedir(dir);
+	ptr = mem_ptr();
+	return (*ptr);
+}
+
+
 
 int		show_dir(char *path, t_option option)
 {
@@ -35,27 +70,27 @@ int		show_dir(char *path, t_option option)
 
 int		path_mov(char *path, t_option option)
 {
-	DIR *dir;
-	struct dirent *list_elem;
-	struct stat info;
-	char *new_path;
+	t_mem_stock *file_stock;
+	int j;
+	t_mem_stock *next;
 
-	ft_putendl("entree");
 	show_dir(path, option);
 	if (!ft_printf("%s\n",path))
 		quit_clean(1);
 	if (option.rmaj)
 	{
-		if (!(dir = opendir(path)))
-			quit_clean(4);
-		while ((list_elem = readdir(dir)) != NULL)
+		file_stock = stock_file(path);
+		next = file_stock;
+		while (next)
 		{
-			new_path = create_path(path, list_elem->d_name);
-			if (stat(new_path, &info) == -1)
-				quit_clean(4);
-			else if (S_ISDIR(info.st_mode) && list_elem->d_name[0] != '.')
-				path_mov(new_path, option);
-			mem_free_ptr(new_path);
+		j = 0;
+			while (j < 50)
+			{
+				if (next->list_ptr[j])
+					path_mov(next->list_ptr[j], option);
+				j++;
+			}
+			next = next->next;
 		}
 	}
 	ft_putendl("sortie path mov");

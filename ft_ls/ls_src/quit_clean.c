@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 18:52:42 by bandre            #+#    #+#             */
-/*   Updated: 2017/04/28 20:27:39 by bandre           ###   ########.fr       */
+/*   Updated: 2017/04/29 18:48:04 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ void	quit_clean(int error)
 	else if (error == 1)
 	{
 		ft_putendl("L'allocation de memoire a echoue, la memoire Ram est sans doute pleine");
-		exit(0);
 	}
 	else if (error == 2)
 	{
 		ft_putendl("usage");
-		exit(0);
+	}
+	else if (error == 4)
+	{
+		ft_putendl("Erreur des fonctions systemes");
 	}
 	ft_putendl("fin du prog");
 	mem_stock_free();
