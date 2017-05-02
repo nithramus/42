@@ -6,7 +6,7 @@
 #    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2017/04/29 20:57:07 by bandre           ###   ########.fr        #
+#    Updated: 2017/05/03 00:05:29 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,13 @@ SRC = ft_ls.o\
 	  quit_clean.o\
 	  test.o\
 	  path_mov.o\
+	  sort.o\
 
 CC = gcc
 
 LIB =  libft/libftprintf.a
 
-FLAG = -Wall -Wextra -Werror
+FLAG = -Wall -Wextra -Werror -o
 
 SRC_O = $(addprefix $(SRC_PATH)/,$(SRC))
 

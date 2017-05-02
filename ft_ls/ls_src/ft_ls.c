@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 18:44:20 by bandre            #+#    #+#             */
-/*   Updated: 2017/04/28 20:18:05 by bandre           ###   ########.fr       */
+/*   Updated: 2017/05/02 23:28:05 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int main(int argc, char **argv)
 	t_option	option;
 	char		**files;
 	int			i;
+	char stock[4097];
 
 	i = get_option(argc, argv, &option);
 	printf_option(option);
@@ -24,13 +25,15 @@ int main(int argc, char **argv)
 	{
 		while (i < argc)
 		{
-			path_mov(argv[i], option);
+			ft_strcpy(stock, argv[i]);
+			path_mov(stock, option, 0);
 			i++;
 		}
 	}
 	else
 	{
-		path_mov(".", option);
+		ft_strcpy(stock, ".");
+		path_mov(stock, option, 0);
 	}
 
 	return (0);
