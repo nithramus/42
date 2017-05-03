@@ -1,121 +1,99 @@
 #include "ft_ls.h"
 
-void	swap_ptr(char **one, char **two)
+int	sort_time(t_file *first)
 {
-	char *tmp;
+	t_file *tmp;
+	int action;
+	char *swap_ptr;
+	t_file *previous;
+	t_file *yolo;
 
-	tmp = *one;
-	*one = *two;
-	*two = tmp;
-}
-
-int		sort_ascii(t_mem_stock *mem_ptr)
-{
-	int j;
-	t_mem_stock *tmp;
-	char **swap;
-	int effect;
-
-	effect = 0;
-	tmp = mem_ptr;
-	if (!mem_ptr)
+	action = 1;
+	if (!tmp)
 		return (0);
-	j = 0;
-	swap = (char**)&mem_ptr->list_ptr[0];
-	while (tmp->list_ptr[j])
+	while (action)
 	{
-		if (ft_strcmp(*swap, tmp->list_ptr[j]) > 0)
+		action = 0;
+		tmp = first;
+		previous = NULL;
+		while (tmp->next)
 		{
-			effect = 1;
-			swap_ptr(swap, (char**)&tmp->list_ptr[j]);
-		}
-		swap = (char**)&tmp->list_ptr[j];
-		j++;
-		if (j == 50 && tmp->next)
-		{
-			j = 0;
-			tmp = tmp->next;
-		}
-		if (!(tmp->list_ptr[j]) || (j == 50 && !tmp->next))
-		{
-			if (effect)
+			if (tmp->info.st_mtime > tmp->next->info.st_mtime)
 			{
-				effect = 0;
-				swap = (char**)&mem_ptr->list_ptr[0];
-				j = 0;
-				tmp = mem_ptr;
+				action = 1;
+				if (previous)
+				{
+					yolo = tmp->next->next;
+					previous->next = tmp->next;
+					tmp->next->next = tmp;
+					tmp->next = yolo;
+				}
+				else
+				{
+					yolo = tmp->next->next;
+					first = tmp->next;
+					first->next = tmp;
+					tmp->next = yolo;
+				}
 			}
-			else
-				break ;
+			previous = tmp;
+			if (tmp->next)
+				tmp = tmp->next;
 		}
 	}
-	return (0);
+	return (1);
 }
 
-static int swap_time(char **a, char **b)
+int		sort_ascii(t_file *first)
 {
-	struct stat infoa;
-	struct stat infob;
+	t_file *tmp;
+	int action;
+	char *swap_ptr;
+	t_file *previous;
+	t_file *yolo;
 
-	stat(*a, &infoa);
-	stat(*b, &infob);
-	if (infoa.st_mtime < infob.st_mtime)
+	action = 1;
+	if (!tmp)
+		return (0);
+	while (action)
 	{
-		swap_ptr(a, b);
-		return (1);
-	}
-	return (0);
-}
-
-
-static int		sort_time(t_mem_stock *mem_ptr)
-{
-	int j;
-	t_mem_stock *tmp;
-	char **swap;
-	int effect;
-
-	effect = 0;
-	tmp = mem_ptr;
-	j = 0;
-	swap = (char**)&mem_ptr->list_ptr[0];
-	while (tmp->list_ptr[j])
-	{
-		if (swap_time(swap, (char**)&tmp->list_ptr[j]))
-			effect = 1;
-		swap = (char**)&tmp->list_ptr[j];
-		j++;
-		if (j == 50)
+		action = 0;
+		tmp = first;
+		previous = NULL;
+		while (tmp->next)
 		{
-			j = 0;
-			tmp = tmp->next;
-		}
-		if (!(tmp->list_ptr[j]))
-		{
-			if (effect)
+			if (ft_strcmp(tmp->file, tmp->next->file) > 0)
 			{
-				swap = (char**)&mem_ptr->list_ptr[0];
-				j = 0;
-				tmp = mem_ptr;
-				effect = 0;
+				action = 1;
+				if (previous)
+				{
+					yolo = tmp->next->next;
+					previous->next = tmp->next;
+					tmp->next->next = tmp;
+					tmp->next = yolo;
+				}
+				else
+				{
+					yolo = tmp->next->next;
+					first = tmp->next;
+					first->next = tmp;
+					tmp->next = yolo;
+				}
 			}
+			previous = tmp;
+			if (tmp->next)
+				tmp = tmp->next;
 		}
 	}
-	return (0);
+	return (1);
 }
 
-static int reverse_sort(t_mem_stock *mem_ptr)
-{
-
-	return (0);
-}
-
-int		ft_sort(t_mem_stock *mem_ptr, t_option option)
+int		ft_sort(t_file *first, t_option option)
 {
 	if (option.t)
-		sort_time(mem_ptr);
+		sort_time(first);
 	else
-		sort_ascii(mem_ptr);
+		sort_ascii(first);
 
 	return (0);
 }

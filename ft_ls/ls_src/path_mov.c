@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:04:05 by bandre            #+#    #+#             */
-/*   Updated: 2017/05/03 00:14:42 by bandre           ###   ########.fr       */
+/*   Updated: 2017/05/03 21:01:13 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 static t_file	*create_file(char stock[4097], t_option option, int ptr, char *name)
 {
 	t_file *new;
+	int size;
 
+	size = ft_strlen(name);
 	if (name[0] == '.' && option.a == 0)
 		return (NULL);
-	if (!(new = malloc(sizeof(t_file))))
+	if (!(new = malloc(sizeof(t_file) + size + 3)))
 		return (NULL);
-	if (!(new->file = malloc(ft_strlen(name) + 1)))
-		return (NULL);
+	new->file = (char*)&new[1];
 	ft_strcpy(new->file, name);
+	new->file[size] = '\n';
+	new->file[size + 1] = '\0';
 	new->next = NULL;
 	ft_strcpy(&stock[ptr], name);
 	if (stat(stock, &new->info) == -1)
@@ -66,7 +69,9 @@ static t_file	*stock_file(char stock[4097], t_option option, int ptr)
 		}
 	}
 	closedir(dir);
-	show_dir();
+	//show_dir();
+	ft_sort(first, option);
+//	show_dir();
 	return (first);
 }
 
@@ -82,11 +87,14 @@ int		path_mov(char stock[4097], t_option option, int ptr)
 	t_file *file_stock;
 	t_file *next;
 
-	ptr = ft_strlen(stock);
+	ft_putendl("");
+	ptr = ft_strlen(stock) - 1;
 	stock[ptr] = '/';
-	ptr++;
+	stock[ptr + 1] = '\n';
+	stock[ptr + 2] = '\0';
+	ft_putstr(stock);
+	ptr += 1;
 	stock[ptr] = '\0';
-	ft_putendl(stock);
 	if (option.rmaj)
 	{
 		if (!(file_stock = stock_file(stock, option, ptr)))
@@ -94,7 +102,7 @@ int		path_mov(char stock[4097], t_option option, int ptr)
 		next = file_stock;
 		while (next)
 		{
-			ft_putendl(next->file);
+			ft_putstr(next->file);
 			if (ft_strcmp(".", next->file) == 0 || ft_strcmp("..", next->file) == 0)
 				do_nothing();
 			else if (S_ISDIR(next->info.st_mode))

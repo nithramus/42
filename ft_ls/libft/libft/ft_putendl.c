@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 21:56:58 by bandre            #+#    #+#             */
-/*   Updated: 2016/11/08 19:50:53 by bandre           ###   ########.fr       */
+/*   Updated: 2017/05/03 18:35:40 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_putendl(char const *c)
 {
-	if (c)
-		ft_putendl_fd(c, 1);
+	write(1, c, ft_strlen(c));
+	write(1, "\n", 1);
 }

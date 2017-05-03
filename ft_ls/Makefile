@@ -6,7 +6,7 @@
 #    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2017/05/03 00:05:29 by bandre           ###   ########.fr        #
+#    Updated: 2017/05/03 19:23:58 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CC = gcc
 
 LIB =  libft/libftprintf.a
 
-FLAG = -Wall -Wextra -Werror -o
+FLAG = -Wall -Wextra -Werror -O
 
 SRC_O = $(addprefix $(SRC_PATH)/,$(SRC))
 

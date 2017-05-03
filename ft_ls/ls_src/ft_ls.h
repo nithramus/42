@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 18:45:35 by bandre            #+#    #+#             */
-/*   Updated: 2017/05/02 23:26:12 by bandre           ###   ########.fr       */
+/*   Updated: 2017/05/03 20:56:34 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,14 @@ typedef struct	s_file
 	char		*file;
 	struct stat 	info;
 	struct s_file	*next;
-	
 }				t_file;
 
 void	quit_clean(int error);
 int			get_option(int argc, char **argv, t_option *option);
 void	printf_option(t_option option);
 int		path_mov(char stock[4097], t_option option, int ptr);
-int		ft_sort(t_mem_stock *mem_ptr, t_option option);
+int		ft_sort(t_file *mem_ptr, t_option option);
+
+void	print_list(t_file *first);
 
 #endif
