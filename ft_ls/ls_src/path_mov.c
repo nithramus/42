@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:04:05 by bandre            #+#    #+#             */
-/*   Updated: 2017/05/03 21:01:13 by bandre           ###   ########.fr       */
+/*   Updated: 2017/05/04 22:16:15 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ static t_file	*create_file(char stock[4097], t_option option, int ptr, char *nam
 	return (new);
 }
 
-int		show_dir()
+void do_nothing()
 {
-	return (0);
 }
 
 static t_file	*stock_file(char stock[4097], t_option option, int ptr)
@@ -57,29 +56,30 @@ static t_file	*stock_file(char stock[4097], t_option option, int ptr)
 	}
 	while ((list_elem = readdir(dir)))
 	{
-		if (first)
-		{
-			if ((tmp->next = create_file(stock, option, ptr, list_elem->d_name)))
-				tmp = tmp->next;
-		}
+		if (list_elem->d_name[0] == '.' && option.a != 1)
+			do_nothing();
 		else
 		{
-			if ((first = create_file(stock, option, ptr, list_elem->d_name)))
-				tmp = first;
+			if (first)
+			{
+				if ((tmp->next = create_file(stock, option, ptr, list_elem->d_name)))
+					tmp = tmp->next;
+			}
+			else
+			{
+				if ((first = create_file(stock, option, ptr, list_elem->d_name)))
+					tmp = first;
+			}
 		}
 	}
 	closedir(dir);
-	//show_dir();
-	ft_sort(first, option);
-//	show_dir();
+	ft_sort(&first, option);
+	if (option.l)
+		show_dir(first);
 	return (first);
 }
 
 
-
-void do_nothing()
-{
-}
 
 int		path_mov(char stock[4097], t_option option, int ptr)
 {
@@ -102,8 +102,7 @@ int		path_mov(char stock[4097], t_option option, int ptr)
 		next = file_stock;
 		while (next)
 		{
-			ft_putstr(next->file);
-			if (ft_strcmp(".", next->file) == 0 || ft_strcmp("..", next->file) == 0)
+			if (ft_strcmp(".\n", next->file) == 0 || ft_strcmp("..\n", next->file) == 0)
 				do_nothing();
 			else if (S_ISDIR(next->info.st_mode))
 			{

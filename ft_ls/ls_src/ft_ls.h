@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 18:45:35 by bandre            #+#    #+#             */
-/*   Updated: 2017/05/03 20:56:34 by bandre           ###   ########.fr       */
+/*   Updated: 2017/05/04 21:34:57 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "../libft/libft/libft.h"
 #include <errno.h>
 #include <dirent.h>
-#include <sys/types.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -47,8 +46,9 @@ void	quit_clean(int error);
 int			get_option(int argc, char **argv, t_option *option);
 void	printf_option(t_option option);
 int		path_mov(char stock[4097], t_option option, int ptr);
-int		ft_sort(t_file *mem_ptr, t_option option);
+int		ft_sort(t_file **mem_ptr, t_option option);
 
 void	print_list(t_file *first);
+void		show_dir(t_file *first);
 
 #endif

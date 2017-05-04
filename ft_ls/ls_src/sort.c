@@ -1,6 +1,6 @@
 #include "ft_ls.h"
 
-int	sort_time(t_file *first)
+t_file	*sort_time(t_file *first)
 {
 	t_file *tmp;
 	int action;
@@ -9,8 +9,8 @@ int	sort_time(t_file *first)
 	t_file *yolo;
 
 	action = 1;
-	if (!tmp)
-		return (0);
+	if (!first)
+		return (NULL);
 	while (action)
 	{
 		action = 0;
@@ -18,7 +18,7 @@ int	sort_time(t_file *first)
 		previous = NULL;
 		while (tmp->next)
 		{
-			if (tmp->info.st_mtime > tmp->next->info.st_mtime)
+			if (tmp->info.st_mtime < tmp->next->info.st_mtime)
 			{
 				action = 1;
 				if (previous)
@@ -41,20 +41,22 @@ int	sort_time(t_file *first)
 				tmp = tmp->next;
 		}
 	}
-	return (1);
+	return (first);
 }
 
-int		sort_ascii(t_file *first)
+t_file	*sort_ascii(t_file *first)
 {
 	t_file *tmp;
 	int action;
 	char *swap_ptr;
 	t_file *previous;
 	t_file *yolo;
+	int i;
 
+	i = 0;
 	action = 1;
-	if (!tmp)
-		return (0);
+	if (!first)
+		return (NULL);
 	while (action)
 	{
 		action = 0;
@@ -83,17 +85,19 @@ int		sort_ascii(t_file *first)
 			previous = tmp;
 			if (tmp->next)
 				tmp = tmp->next;
+			i++;
 		}
 	}
-	return (1);
+	ft_printf("%d\n", i);
+	return (first);
 }
 
-int		ft_sort(t_file *first, t_option option)
+int		ft_sort(t_file **first, t_option option)
 {
 	if (option.t)
-		sort_time(first);
+		*first = sort_time(*first);
 	else
-		sort_ascii(first);
+		*first =sort_ascii(*first);
 
 	return (0);
 }
