@@ -16,7 +16,7 @@ void	quit_clean(int error)
 {
 	if (error == 0)
 	{
-		perror("ft_ls:");
+		//perror("ft_ls:");
 	}
 	else if (error == 1)
 	{
