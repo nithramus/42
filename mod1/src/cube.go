@@ -6,10 +6,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"runtime"
 
+	"fmt"
 	"github.com/go-gl/gl/v2.1/gl"
 	"github.com/go-gl/glfw/v3.2/glfw"
 )
@@ -44,7 +44,13 @@ func draw(surface *[width][height]float32) {
 	if err := gl.Init(); err != nil {
 		panic(err)
 	}
+	rotationX = 120
+	rotationY = 360
+	rotationZ = 0
 
+	for i := 0; float32(i) < width; i++ {
+		fmt.Println(surface[int(i)])
+	}
 	setupScene()
 	for !window.ShouldClose() {
 		drawScene(surface)
@@ -75,30 +81,41 @@ func drawScene(surface *[width][height]float32) {
 
 	var i float32 = 0
 	var j float32 = 0
+	var k int
+	var t int
 	gl.MatrixMode(gl.MODELVIEW)
 	gl.LoadIdentity()
-	gl.Translatef(0, 0, -3.0)
+	gl.Translatef(-1, -1, -4)
 	gl.Rotatef(rotationX, 1, 0, 0)
 	gl.Rotatef(rotationY, 0, 1, 0)
 	gl.Rotatef(rotationZ, 0, 0, 1)
 
-	rotationX += 0.5
-	rotationY += 0.5
-	rotationZ += 0
-
+	rotationX -= 0.5
+	rotationY -= 0.5
 	gl.Begin(gl.TRIANGLES)
 
 	gl.Color3ub(200, 0, 0)
 	for i < width-1 {
-		fmt.Println("salut")
 		j = 0
+		gl.Color3ub(200, 0, 0)
 		for j < height-1 {
-			gl.Vertex3f(i/width, j/height, surface[int(i)][int(j)])
-			gl.Vertex3f((i+1)/width, j/height, surface[int(i+1)][int(j)])
-			gl.Vertex3f(i/width, (j+1)/height, surface[int(i)][int(j+1)])
-			gl.Vertex3f((i+1)/width, j/height, surface[int(i+1)][int(j)])
-			gl.Vertex3f(i/width, (j+1)/height, surface[int(i)][int(j+1)])
-			gl.Vertex3f((i+1)/width, (j+1)/height, surface[int(i+1)][int(j+1)])
+			k = int(i)
+			for k < int(i)+2 {
+				t = int(j)
+				for t < int(j)+2 {
+					if surface[k][t] != 0 {
+						gl.Color3ub(200, 200, uint8(surface[k][t]))
+					}
+					t++
+				}
+				k++
+			}
+			gl.Vertex3f(i*2/width, j*2/height, -surface[int(i)][int(j)]/200)
+			gl.Vertex3f((i+1)*2/width, j*2/height, -surface[int(i+1)][int(j)]/200)
+			gl.Vertex3f(i*2/width, (j+1)*2/height, -surface[int(i)][int(j+1)]/200)
+			gl.Vertex3f((i+1)*2/width, j*2/height, -surface[int(i+1)][int(j)]/200)
+			gl.Vertex3f(i*2/width, (j+1)*2/height, -surface[int(i)][int(j+1)]/200)
+			gl.Vertex3f((i+1)*2/width, (j+1)*2/height, -surface[int(i+1)][int(j+1)]/200)
 			j += 1
 		}
 		i += 1

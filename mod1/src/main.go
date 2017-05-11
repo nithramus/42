@@ -29,7 +29,7 @@ func main() {
 	option := flag.String("option", "value", "message erreur")
 	flag.Parse()
 	fmt.Println("yolo", *option)
-	surface[25][25] = 200
+	create_surface(&surface)
 	if strings.Compare(*option, "draw") == 0 {
 		draw(&surface)
 	}
