@@ -29,7 +29,7 @@ func bez_deg3(p0 point, p1 point, p2 point, p3 point, t float32) float32 {
 
 	var ret float32 = float32(p0.z) * power(1-t, 3)
 	ret = ret + 3*float32(p2.z)*t*power(1-t, 2)
-	ret = ret + 3*float32(p3.z)*t*power(1-t, 2)
+	ret = ret + 3*float32(p3.z)*(1-t)*power(t, 2)
 	ret = ret + float32(p1.z)*power(t, 3)
 	return ret
 }

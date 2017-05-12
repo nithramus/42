@@ -9,7 +9,6 @@ import (
 	"log"
 	"runtime"
 
-	"fmt"
 	"github.com/go-gl/gl/v2.1/gl"
 	"github.com/go-gl/glfw/v3.2/glfw"
 )
@@ -48,9 +47,6 @@ func draw(surface *[width][height]float32) {
 	rotationY = 360
 	rotationZ = 0
 
-	for i := 0; float32(i) < width; i++ {
-		fmt.Println(surface[int(i)])
-	}
 	setupScene()
 	for !window.ShouldClose() {
 		drawScene(surface)
@@ -85,7 +81,7 @@ func drawScene(surface *[width][height]float32) {
 	var t int
 	gl.MatrixMode(gl.MODELVIEW)
 	gl.LoadIdentity()
-	gl.Translatef(-1, -1, -4)
+	gl.Translatef(-1, -1, -3)
 	gl.Rotatef(rotationX, 1, 0, 0)
 	gl.Rotatef(rotationY, 0, 1, 0)
 	gl.Rotatef(rotationZ, 0, 0, 1)
@@ -104,7 +100,7 @@ func drawScene(surface *[width][height]float32) {
 				t = int(j)
 				for t < int(j)+2 {
 					if surface[k][t] != 0 {
-						gl.Color3ub(200, 200, uint8(surface[k][t]))
+						gl.Color3ub(200, uint8(surface[k][t]), uint8(surface[k][t]))
 					}
 					t++
 				}

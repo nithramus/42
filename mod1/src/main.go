@@ -8,8 +8,8 @@ import (
 )
 
 const (
-	width  float32 = 50
-	height float32 = 50
+	width  float32 = 100
+	height float32 = 100
 )
 
 func puissance(value int, power int) int {
