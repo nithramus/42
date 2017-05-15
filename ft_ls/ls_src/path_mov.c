@@ -31,7 +31,7 @@ static t_file	*create_file(char stock[4097], t_option option, int ptr, char *nam
 	if (stat(stock, &new->info) == -1)
 	{
 		ft_putendl("stat error");
-		perror("");
+//		perror("");
 		return (NULL);
 	}
 	return (new);
@@ -51,7 +51,7 @@ static t_file	*stock_file(char stock[4097], t_option option, int ptr)
 	first = NULL;
 	if (!(dir = opendir(stock)))
 	{
-		perror("");
+//		perror("");
 		return (NULL);
 	}
 	while ((list_elem = readdir(dir)))
