@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 20:50:13 by bandre            #+#    #+#             */
-/*   Updated: 2017/05/04 21:45:14 by bandre           ###   ########.fr       */
+/*   Updated: 2017/05/15 14:28:20 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void print_hour(struct stat info)
 
 }
 
-static void print_l(struct stat info, char *file)
+static void print_l(struct stat info, char *file, char stock[4097], int ptr)
 {
 	struct passwd *uid;
 	struct group *gid;
@@ -67,22 +67,26 @@ static void print_l(struct stat info, char *file)
 	ft_printf("%s ", gid->gr_name);
 	ft_printf("%d ", info.st_size);
 	print_hour(info);
-	ft_putstr(file);
 	//ft_printf("%ud\n", minor(info.st_rdev));
-	/*if (S_ISLNK(info.st_mode))
+	if (S_ISLNK(info.st_mode))
 	{
-		if ((nb_carac = readlink(new_path, buff, 255)) == -1)
+		file[ft_strlen(file) - 1] = '\0';
+		ft_strcpy(&stock[ptr], file);
+		if ((nb_carac = readlink(stock, buff, 255)) == -1)
 			ft_putendl("erreur print_l");
 		buff[nb_carac] = '\0';
-		ft_printf(" -> %s\n", buff);
-	}*/
+		ft_printf("%s -> %s\n", file, buff);
+	}
+	else
+		ft_putstr(file);
 }
 
-void	show_dir(t_file *first)
+void	show_dir(t_file *first, char stock[4097], int ptr)
 {
+	ptr--;
 	while (first)
 	{
-		print_l(first->info, first->file);
+		print_l(first->info, first->file, stock, ptr);
 		first = first->next;
 	}
 }

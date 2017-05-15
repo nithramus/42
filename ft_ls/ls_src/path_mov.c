@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:04:05 by bandre            #+#    #+#             */
-/*   Updated: 2017/05/04 22:34:52 by bandre           ###   ########.fr       */
+/*   Updated: 2017/05/15 15:17:00 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static t_file	*create_file(char stock[4097], t_option option, int ptr, char *nam
 	new->file[size + 1] = '\0';
 	new->next = NULL;
 	ft_strcpy(&stock[ptr], name);
-	if (stat(stock, &new->info) == -1)
+	if (lstat(stock, &new->info) == -1)
 	{
 		ft_putendl("stat error");
-//		perror("");
+		perror("");
 		return (NULL);
 	}
 	return (new);
@@ -51,7 +51,7 @@ static t_file	*stock_file(char stock[4097], t_option option, int ptr)
 	first = NULL;
 	if (!(dir = opendir(stock)))
 	{
-//		perror("");
+	perror("");
 		return (NULL);
 	}
 	while ((list_elem = readdir(dir)))
@@ -75,7 +75,16 @@ static t_file	*stock_file(char stock[4097], t_option option, int ptr)
 	closedir(dir);
 	ft_sort(&first, option);
 	if (option.l)
-		show_dir(first);
+		show_dir(first, stock, ptr);
+	else
+	{
+		tmp = first;
+		while (tmp)
+		{
+			ft_putstr(tmp->file);
+			tmp = tmp->next;
+		}
+	}
 	return (first);
 }
 
@@ -87,14 +96,11 @@ int		path_mov(char stock[4097], t_option option, int ptr)
 	t_file *file_stock;
 	t_file *next;
 
-	ft_putendl("");
-	ptr = ft_strlen(stock) - 1;
 	stock[ptr] = '/';
-	stock[ptr + 1] = '\n';
-	stock[ptr + 2] = '\0';
-	ft_putstr(stock);
 	ptr += 1;
 	stock[ptr] = '\0';
+	ft_putendl(stock);
+
 	if (!(file_stock = stock_file(stock, option, ptr)))
 		return (1);
 	if (option.rmaj)
@@ -107,8 +113,12 @@ int		path_mov(char stock[4097], t_option option, int ptr)
 				do_nothing();
 			else if (S_ISDIR(next->info.st_mode))
 			{
+				ft_putendl("");
+				stock[ptr] = '\n';
+				stock[ptr + 1] = '\0';
+				stock[ptr] = '\0';
 				ft_strcpy(&stock[ptr], next->file);
-				path_mov(stock, option, ptr);
+				path_mov(stock, option, ft_strlen(stock) - 1);
 			}
 			next = next->next;
 		}
