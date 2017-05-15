@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 18:45:35 by bandre            #+#    #+#             */
-/*   Updated: 2017/05/15 14:11:03 by bandre           ###   ########.fr       */
+/*   Updated: 2017/05/15 16:37:41 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int		ft_sort(t_file **mem_ptr, t_option option);
 
 void	print_list(t_file *first);
 void		show_dir(t_file *first, char stock[4097], int ptr);
+t_file	*create_file(char stock[4097], t_option option, int ptr, char *name);
 
 #endif

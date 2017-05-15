@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 20:50:13 by bandre            #+#    #+#             */
-/*   Updated: 2017/05/15 14:28:20 by bandre           ###   ########.fr       */
+/*   Updated: 2017/05/15 16:58:45 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ static void print_l(struct stat info, char *file, char stock[4097], int ptr)
 		file[ft_strlen(file) - 1] = '\0';
 		ft_strcpy(&stock[ptr], file);
 		if ((nb_carac = readlink(stock, buff, 255)) == -1)
+		{
 			ft_putendl("erreur print_l");
+			perror("");
+		}
 		buff[nb_carac] = '\0';
 		ft_printf("%s -> %s\n", file, buff);
 	}

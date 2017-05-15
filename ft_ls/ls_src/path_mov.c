@@ -6,13 +6,13 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:04:05 by bandre            #+#    #+#             */
-/*   Updated: 2017/05/15 15:17:00 by bandre           ###   ########.fr       */
+/*   Updated: 2017/05/15 16:41:10 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static t_file	*create_file(char stock[4097], t_option option, int ptr, char *name)
+t_file	*create_file(char stock[4097], t_option option, int ptr, char *name)
 {
 	t_file *new;
 	int size;
@@ -87,8 +87,6 @@ static t_file	*stock_file(char stock[4097], t_option option, int ptr)
 	}
 	return (first);
 }
-
-
 
 int		path_mov(char stock[4097], t_option option, int ptr)
 {
