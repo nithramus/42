@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 19:04:05 by bandre            #+#    #+#             */
-/*   Updated: 2017/05/04 22:16:15 by bandre           ###   ########.fr       */
+/*   Updated: 2017/05/04 22:34:52 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,11 @@ int		path_mov(char stock[4097], t_option option, int ptr)
 	ft_putstr(stock);
 	ptr += 1;
 	stock[ptr] = '\0';
+	if (!(file_stock = stock_file(stock, option, ptr)))
+		return (1);
 	if (option.rmaj)
 	{
-		if (!(file_stock = stock_file(stock, option, ptr)))
-			return (1);
+
 		next = file_stock;
 		while (next)
 		{
