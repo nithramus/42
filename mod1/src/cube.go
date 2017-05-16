@@ -9,7 +9,6 @@ import (
 	"log"
 	"runtime"
 
-	"fmt"
 	"github.com/go-gl/gl/v2.1/gl"
 	"github.com/go-gl/glfw/v3.2/glfw"
 )
@@ -44,18 +43,27 @@ func draw(surface *[width][height]float32, water *[width][height][]float32) {
 	if err := gl.Init(); err != nil {
 		panic(err)
 	}
-	rotationX = 120
+	rotationX = 110
 	rotationY = 360
 	rotationZ = 0
 
 	setupScene()
-	//drawScene(surface)
-	window.SwapBuffers()
-
+	i := 0
+	var hauteur float32
 	for !window.ShouldClose() {
+		i = 0
+		for i < int(width) {
+			for j := range water {
+				if surface[i][j] < hauteur {
+					water[i][j] = append(water[0][0], 1)
+				}
+			}
+			i++
+		}
+		hauteur += 1
+		drawScene(surface)
 		draw_water(surface, water)
 		window.SwapBuffers()
-
 		glfw.PollEvents()
 	}
 }
@@ -85,16 +93,13 @@ func draw_water(surface *[width][height]float32, water *[width][height][]float32
 	var jfloatone float32
 	var kfloat float32
 
-	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 	gl.MatrixMode(gl.MODELVIEW)
 	gl.LoadIdentity()
-	gl.Translatef(0, 0, -4)
+	gl.Translatef(-1, -1, -4)
 	gl.Rotatef(rotationX, 1, 0, 0)
 	gl.Rotatef(rotationY, 0, 1, 0)
 	gl.Rotatef(rotationZ, 0, 0, 1)
 
-	rotationX -= 0.5
-	rotationY -= 0.5
 	gl.Color3ub(0, 0, 200)
 	gl.Begin(gl.QUADS)
 
@@ -106,7 +111,6 @@ func draw_water(surface *[width][height]float32, water *[width][height][]float32
 			jfloatone = (float32(j) + 1) * 2 / height
 			for k := range water[i][j] {
 				kfloat = float32(k)
-				fmt.Println(water[i][j][k])
 				gl.Vertex3f(ifloat, jfloat, (-surface[i][j]+kfloat)/200)
 				gl.Vertex3f(ifloat, jfloatone, (-surface[i][j]+kfloat)/200)
 				gl.Vertex3f(ifloatone, jfloatone, (-surface[i][j]+kfloat)/200)
@@ -157,8 +161,8 @@ func drawScene(surface *[width][height]float32) {
 	gl.Rotatef(rotationY, 0, 1, 0)
 	gl.Rotatef(rotationZ, 0, 0, 1)
 
-	//	rotationX -= surface[i][j]
-	//	rotationY -= surface[i][j]
+	/*rotationX -= 0.5
+	rotationY -= 0.5*/
 	gl.Begin(gl.TRIANGLES)
 
 	gl.Color3ub(200, 0, 0)

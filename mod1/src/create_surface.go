@@ -77,9 +77,9 @@ func create_surface(surface *[width][height]float32) {
 	var list_point []point
 
 	list_point = append(list_point, point{40, 40, 100})
-	list_point = append(list_point, point{80, 80, 100})
-	list_point = append(list_point, point{70, 35, 150})
-	list_point = append(list_point, point{80, 45, 90})
+	list_point = append(list_point, point{25, 30, 100})
+	list_point = append(list_point, point{10, 35, 150})
+	list_point = append(list_point, point{35, 20, 90})
 	projection_x(surface, list_point)
 	for i := 0; float32(i) < width; i++ {
 		fmt.Println(surface[int(i)])
