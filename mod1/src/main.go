@@ -25,13 +25,15 @@ func puissance(value int, power int) int {
 
 func main() {
 	var surface [width][height]float32
+	var water [width][height][]float32
 
+	water[0][0] = append(water[0][0], 0)
 	option := flag.String("option", "value", "message erreur")
 	flag.Parse()
 	fmt.Println("yolo", *option)
 	create_surface(&surface)
 	if strings.Compare(*option, "draw") == 0 {
-		draw(&surface)
+		draw(&surface, &water)
 	}
 
 }

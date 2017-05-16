@@ -45,7 +45,7 @@ func projection_x(surface *[width][height]float32, list_point []point) {
 				last_point = point{list_point[i].x, j, surface[int(list_point[i].x)][int(j)]}
 			}
 		}
-		b = bezier{last_point, point{list_point[i].x, j - 1, 0}, point{0, 0, last_point.z * float32(float32(7)/float32(8))}, point{0, 0, last_point.z * float32(float32(1)/float32(4))}}
+		b = bezier{last_point, point{list_point[i].x, j - 1, 0}, point{0, 0, last_point.z * float32(float32(7)/float32(8))}, point{0, 0, last_point.z * float32(float32(1)/float32(8))}}
 		bezier_func(b, surface)
 
 	}
@@ -78,13 +78,13 @@ func create_surface(surface *[width][height]float32) {
 
 	list_point = append(list_point, point{40, 40, 100})
 	list_point = append(list_point, point{80, 80, 100})
-	//	list_point = append(list_point, point{70, 35, 150})
-	//	list_point = append(list_point, point{80, 45, 200})
+	list_point = append(list_point, point{70, 35, 150})
+	list_point = append(list_point, point{80, 45, 90})
 	projection_x(surface, list_point)
 	for i := 0; float32(i) < width; i++ {
 		fmt.Println(surface[int(i)])
 	}
-	//	projection_y(surface)
+	projection_y(surface)
 	fmt.Println((surface[40]))
 
 	//b := bezier{point{0, 0, 200}, point{25, 25, 200}, point{5, 5, 10}, point{10, 10, 255}}
