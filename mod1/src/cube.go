@@ -1,16 +1,11 @@
-// Copyright 2014 The go-gl Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
-// Renders a textured spinning cube using GLFW 3 and OpenGL 2.1.
 package main
 
 import (
-	"log"
-	"runtime"
-
+	"fmt"
 	"github.com/go-gl/gl/v2.1/gl"
 	"github.com/go-gl/glfw/v3.2/glfw"
+	"log"
+	"runtime"
 )
 
 var (
@@ -25,7 +20,7 @@ func init() {
 	runtime.LockOSThread()
 }
 
-func draw(surface *[width][height]float32, water *[width][height][]float32) {
+func draw(surface *[width][height]float64, water *[width][height]block) {
 	if err := glfw.Init(); err != nil {
 		log.Fatalln("failed to initialize glfw:", err)
 	}
@@ -43,24 +38,18 @@ func draw(surface *[width][height]float32, water *[width][height][]float32) {
 	if err := gl.Init(); err != nil {
 		panic(err)
 	}
-	rotationX = 110
+	rotationX = 100
 	rotationY = 360
-	rotationZ = 0
+	rotationZ = 30
 
 	setupScene()
-	i := 0
-	var hauteur float32
+	var hauteur float64
+	drawScene(surface)
+	go showme("yolo")
+	go showme("yorfegty")
 	for !window.ShouldClose() {
-		i = 0
-		for i < int(width) {
-			for j := range water {
-				if surface[i][j] < hauteur {
-					water[i][j] = append(water[0][0], 1)
-				}
-			}
-			i++
-		}
 		hauteur += 1
+		water_gen(3, water, surface, hauteur)
 		drawScene(surface)
 		draw_water(surface, water)
 		window.SwapBuffers()
@@ -85,61 +74,71 @@ func setupScene() {
 func destroyScene() {
 }
 
-func draw_water(surface *[width][height]float32, water *[width][height][]float32) {
+func showme(tst string) {
+	i := 0
+	for i = 0; i < 40000; i++ {
+	}
+	fmt.Println(tst, i)
+}
+
+func draw_water(surface *[width][height]float64, water *[width][height]block) {
 
 	var ifloat float32
 	var ifloatone float32
 	var jfloat float32
 	var jfloatone float32
-	var kfloat float32
+	var kfloat float64
 
-	gl.MatrixMode(gl.MODELVIEW)
-	gl.LoadIdentity()
-	gl.Translatef(-1, -1, -4)
-	gl.Rotatef(rotationX, 1, 0, 0)
-	gl.Rotatef(rotationY, 0, 1, 0)
-	gl.Rotatef(rotationZ, 0, 0, 1)
-
+	/*	gl.MatrixMode(gl.MODELVIEW)
+		gl.LoadIdentity()
+		gl.Translatef(-1, -1, -4)
+		gl.Rotatef(rotationX, 1, 0, 0)
+		gl.Rotatef(rotationY, 0, 1, 0)
+		gl.Rotatef(rotationZ, 0, 0, 1)
+	*/
 	gl.Color3ub(0, 0, 200)
 	gl.Begin(gl.QUADS)
 
 	for i := range water {
-		ifloat = float32(i) * 2 / width
-		ifloatone = (float32(i) + 1) * 2 / width
+		ifloat = float32(float64(i*2) / float64(width))
+		ifloatone = float32(float64(i+1) * 2 / float64(width))
 		for j := range water[i] {
-			jfloat = float32(j) * 2 / height
-			jfloatone = (float32(j) + 1) * 2 / height
-			for k := range water[i][j] {
-				kfloat = float32(k)
-				gl.Vertex3f(ifloat, jfloat, (-surface[i][j]+kfloat)/200)
-				gl.Vertex3f(ifloat, jfloatone, (-surface[i][j]+kfloat)/200)
-				gl.Vertex3f(ifloatone, jfloatone, (-surface[i][j]+kfloat)/200)
-				gl.Vertex3f(ifloatone, jfloat, (-surface[i][j]+kfloat)/200)
+			jfloat = float32(float64(j*2) / float64(height))
+			jfloatone = float32(float32(j+1) * 2 / float32(height))
+			if water[i][j].block != 0 { //&& water[i][j].todraw == 1 {
+				water[i][j].todraw = 0
+				kfloat = float64(water[i][j].block)
+				//			fmt.Println(water[i][j].block, surface[i][j])
 
-				gl.Vertex3f(ifloat, jfloat, -(surface[i][j]+kfloat+1)/200)
-				gl.Vertex3f(ifloat, jfloatone, -(surface[i][j]+kfloat+1)/200)
-				gl.Vertex3f(ifloatone, jfloatone, -(surface[i][j]+kfloat+1)/200)
-				gl.Vertex3f(ifloatone, jfloat, -(surface[i][j]+kfloat+1)/200)
+				gl.Vertex3f(ifloat, jfloat, float32(-(surface[i][j]+kfloat)/200))
+				gl.Vertex3f(ifloat, jfloatone, float32(-(surface[i][j]+kfloat)/200))
+				gl.Vertex3f(ifloatone, jfloatone, float32(-(surface[i][j]+kfloat)/200))
+				gl.Vertex3f(ifloatone, jfloat, float32(-(surface[i][j]+kfloat)/200))
 
-				gl.Vertex3f(ifloat, jfloat, (-surface[i][j]+kfloat)/200)
-				gl.Vertex3f(ifloat, jfloat, -(surface[i][j]+kfloat+1)/200)
-				gl.Vertex3f(ifloat, jfloatone, -(surface[i][j]+kfloat+1)/200)
-				gl.Vertex3f(ifloat, jfloatone, -(surface[i][j]+kfloat)/200)
+				gl.Vertex3f(ifloat, jfloat, float32(-(surface[i][j]+kfloat+1)/200))
+				gl.Vertex3f(ifloat, jfloatone, float32(-(surface[i][j]+kfloat+1)/200))
+				gl.Vertex3f(ifloatone, jfloatone, float32(-(surface[i][j]+kfloat+1)/200))
+				gl.Vertex3f(ifloatone, jfloat, float32(-(surface[i][j]+kfloat+1)/200))
 
-				gl.Vertex3f(ifloatone, jfloat, -(surface[i][j]+kfloat)/200)
-				gl.Vertex3f(ifloatone, jfloat, -(surface[i][j]+kfloat+1)/200)
-				gl.Vertex3f(ifloatone, jfloatone, -(surface[i][j]+kfloat+1)/200)
-				gl.Vertex3f(ifloatone, jfloatone, -(surface[i][j]+kfloat)/200)
+				gl.Vertex3f(ifloat, jfloat, float32(-(surface[i][j]+kfloat)/200))
+				gl.Vertex3f(ifloat, jfloat, float32(-(surface[i][j]+kfloat+1)/200))
+				gl.Vertex3f(ifloat, jfloatone, float32(-(surface[i][j]+kfloat+1)/200))
+				gl.Vertex3f(ifloat, jfloatone, float32(-(surface[i][j]+kfloat)/200))
 
-				gl.Vertex3f(ifloat, jfloat, -(surface[i][j]+kfloat)/200)
-				gl.Vertex3f(ifloat, jfloat, -(surface[i][j]+kfloat+1)/200)
-				gl.Vertex3f(ifloatone, jfloat, -(surface[i][j]+kfloat+1)/200)
-				gl.Vertex3f(ifloatone, jfloat, -(surface[i][j]+kfloat)/200)
+				gl.Vertex3f(ifloatone, jfloat, float32(-(surface[i][j]+kfloat)/200))
+				gl.Vertex3f(ifloatone, jfloat, float32(-(surface[i][j]+kfloat+1)/200))
+				gl.Vertex3f(ifloatone, jfloatone, float32(-(surface[i][j]+kfloat+1)/200))
+				gl.Vertex3f(ifloatone, jfloatone, float32(-(surface[i][j]+kfloat)/200))
 
-				gl.Vertex3f(ifloat, jfloatone, -(surface[i][j]+kfloat)/200)
-				gl.Vertex3f(ifloat, jfloatone, -(surface[i][j]+kfloat+1)/200)
-				gl.Vertex3f(ifloatone, jfloatone, -(surface[i][j]+kfloat+1)/200)
-				gl.Vertex3f(ifloatone, jfloatone, -(surface[i][j]+kfloat)/200)
+				gl.Vertex3f(ifloat, jfloat, float32(-(surface[i][j]+kfloat)/200))
+				gl.Vertex3f(ifloat, jfloat, float32(-(surface[i][j]+kfloat+1)/200))
+				gl.Vertex3f(ifloatone, jfloat, float32(-(surface[i][j]+kfloat+1)/200))
+				gl.Vertex3f(ifloatone, jfloat, float32(-(surface[i][j]+kfloat)/200))
+
+				gl.Vertex3f(ifloat, jfloatone, float32(-(surface[i][j]+kfloat)/200))
+				gl.Vertex3f(ifloat, jfloatone, float32(-(surface[i][j]+kfloat+1)/200))
+				gl.Vertex3f(ifloatone, jfloatone, float32(-(surface[i][j]+kfloat+1)/200))
+				gl.Vertex3f(ifloatone, jfloatone, float32(-(surface[i][j]+kfloat)/200))
 
 			}
 		}
@@ -147,16 +146,21 @@ func draw_water(surface *[width][height]float32, water *[width][height][]float32
 	gl.End()
 }
 
-func drawScene(surface *[width][height]float32) {
-	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+func drawScene(surface *[width][height]float64) {
 
-	var i float32 = 0
-	var j float32 = 0
+	var i float64 = 0
+	var j float64 = 0
 	var k int
 	var t int
+	var inorm float32
+	var iplusone float32
+	var jnorm float32
+	var jplusone float32
+
+	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 	gl.MatrixMode(gl.MODELVIEW)
 	gl.LoadIdentity()
-	gl.Translatef(-1, -1, -4)
+	gl.Translatef(0, -1, -4)
 	gl.Rotatef(rotationX, 1, 0, 0)
 	gl.Rotatef(rotationY, 0, 1, 0)
 	gl.Rotatef(rotationZ, 0, 0, 1)
@@ -174,19 +178,26 @@ func drawScene(surface *[width][height]float32) {
 			for k < int(i)+2 {
 				t = int(j)
 				for t < int(j)+2 {
-					if surface[k][t] != 0 {
+					if surface[k][t] > 40 {
 						gl.Color3ub(20+uint8(surface[k][t]), uint8(surface[k][t]), uint8(surface[k][t]))
+					} else {
+						gl.Color3ub(20+uint8(surface[k][t]), 30+uint8(surface[k][t]), 0)
 					}
 					t++
 				}
 				k++
 			}
-			gl.Vertex3f(i*2/width, j*2/height, -surface[int(i)][int(j)]/200)
-			gl.Vertex3f((i+1)*2/width, j*2/height, -surface[int(i+1)][int(j)]/200)
-			gl.Vertex3f(i*2/width, (j+1)*2/height, -surface[int(i)][int(j+1)]/200)
-			gl.Vertex3f((i+1)*2/width, j*2/height, -surface[int(i+1)][int(j)]/200)
-			gl.Vertex3f(i*2/width, (j+1)*2/height, -surface[int(i)][int(j+1)]/200)
-			gl.Vertex3f((i+1)*2/width, (j+1)*2/height, -surface[int(i+1)][int(j+1)]/200)
+			inorm = float32(i * 2 / width)
+			iplusone = float32((i + 1) * 2 / width)
+			jnorm = float32(j * 2 / width)
+			jplusone = float32((j + 1) * 2 / width)
+
+			gl.Vertex3f(inorm, jnorm, float32(-surface[int(i)][int(j)]/200))
+			gl.Vertex3f(iplusone, jnorm, float32(-surface[int(i+1)][int(j)]/200))
+			gl.Vertex3f(inorm, jplusone, float32(-surface[int(i)][int(j+1)]/200))
+			gl.Vertex3f(iplusone, jnorm, float32(-surface[int(i+1)][int(j)]/200))
+			gl.Vertex3f(inorm, jplusone, float32(-surface[int(i)][int(j+1)]/200))
+			gl.Vertex3f(iplusone, jplusone, float32(-surface[int(i+1)][int(j+1)]/200))
 			j += 1
 		}
 		i += 1
