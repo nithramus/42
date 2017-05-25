@@ -1,0 +1,8 @@
+..O..O..
+.OO..OO.
+OOO..OOO
+...MM...
+...MM...
+OOO..OOO
+.OO..OO.
+..O..O..

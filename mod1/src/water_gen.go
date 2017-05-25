@@ -10,7 +10,7 @@ func water_gen(mode int, water *[width][height]block, surface *[width][height]fl
 		mode_normal(water, surface, hauteur)
 	}
 	if mode == 2 {
-		if int(hauteur)%20 == 0 {
+		if int(hauteur)%10 == 0 {
 			for x := range water {
 				water[0][x].block += 1
 			}
@@ -51,7 +51,7 @@ func mode_vague(water *[width][height]block, surface *[width][height]float64) {
 		j = 0
 		for j < int(height) {
 			if int16(water[i][j].block) > water[i][j].height {
-				if water[i][j].height == 0 {
+				if water[i][j].height == -1 {
 					water[i][j].height += 1
 					water[i][j].todraw = 1
 				} else {

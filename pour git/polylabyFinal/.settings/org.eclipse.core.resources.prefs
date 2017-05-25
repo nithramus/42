@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//common/constante.py=utf-8
+encoding//labyrinthC/client.py=utf-8
+encoding//labyrinthC/start.py=utf-8
+encoding//labyrinthC/test.py=utf-8
+encoding//labyrinthS/partie.py=utf-8
+encoding//labyrinthS/serveur.py=utf-8
+encoding//labyrinthS/start.py=utf-8
+encoding//labyrinthS/traitementRequete.py=utf-8
+encoding/main.py=utf-8
