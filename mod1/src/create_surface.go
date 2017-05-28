@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+//	"fmt"
 )
 
 func dist(point1 point, point2 point) float64 {
@@ -35,7 +35,7 @@ func projection_x(surface *[width][height]float64, list_point []point) {
 		for j = 0; float64(j) < height; j++ {
 			if surface[int(list_point[i].x)][int(j)] != 0 {
 
-				fmt.Println("##################### result\n", surface[int(list_point[i].x)][int(j)]*float64(7/8), "test")
+				//fmt.Println("##################### result\n", surface[int(list_point[i].x)][int(j)]*float64(7/8), "test")
 				b = bezier{
 					last_point,
 					point{list_point[i].x, j, surface[int(list_point[i].x)][int(j)]},
@@ -60,7 +60,7 @@ func projection_y(surface *[width][height]float64) {
 		last_point = point{0, float64(j), 0}
 		for i = 0; float64(i) < width-1; i++ {
 			if surface[int(i)][int(j)] != 0 {
-				fmt.Println("test")
+				//fmt.Println("test")
 				b = bezier{last_point, point{float64(i), float64(j), surface[int(i)][int(j)]}, last_point, point{0, 0, 0}}
 				bezier_func_y(b, surface)
 				last_point = point{float64(i), float64(j), surface[int(i)][int(j)]}
@@ -83,10 +83,10 @@ func create_surface(surface *[width][height]float64) {
 	//	list_point = append(list_point, point{150, 150, 90})
 	//	list_point = append(list_point, point{170, 70, 90})
 	projection_x(surface, list_point)
-	for i := 0; float64(i) < width; i++ {
+	/*for i := 0; float64(i) < width; i++ {
 		fmt.Println(surface[int(i)])
-	}
+	}*/
 	projection_y(surface)
-	fmt.Println((surface[40]))
+	//fmt.Println((surface[40]))
 
 }

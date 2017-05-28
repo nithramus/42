@@ -6,6 +6,7 @@ import (
 	"github.com/go-gl/glfw/v3.2/glfw"
 	"log"
 	"runtime"
+	"time"
 )
 
 var (
@@ -20,7 +21,11 @@ func init() {
 	runtime.LockOSThread()
 }
 
-func draw(surface *[width][height]float64, water *[width][height]block) {
+func draw(surface *[width][height]float64, water *[width][height]block, mode int) {
+	var time_for float64 = 0.0005
+	if mode == 1 {
+		time_for = -0.05
+	}
 	if err := glfw.Init(); err != nil {
 		log.Fatalln("failed to initialize glfw:", err)
 	}
@@ -45,15 +50,21 @@ func draw(surface *[width][height]float64, water *[width][height]block) {
 	setupScene()
 	var hauteur float64
 	drawScene(surface)
-	go showme("yolo")
-	go showme("yorfegty")
+	temps := time.Now()
 	for !window.ShouldClose() {
-		hauteur += 1
-		water_gen(3, water, surface, hauteur)
-		drawScene(surface)
-		draw_water(surface, water)
-		window.SwapBuffers()
 		glfw.PollEvents()
+		then := time.Now()
+		diff := temps.Sub(then)
+		if float64(diff.Seconds()) < time_for {
+			hauteur += 1
+			water_gen(mode, water, surface, hauteur)
+			if mode == 3 {
+				drawScene(surface)
+			}
+			draw_water(surface, water, mode)
+			window.SwapBuffers()
+			temps = time.Now()
+		}
 	}
 }
 
@@ -81,7 +92,7 @@ func showme(tst string) {
 	fmt.Println(tst, i)
 }
 
-func draw_water(surface *[width][height]float64, water *[width][height]block) {
+func draw_water(surface *[width][height]float64, water *[width][height]block, mode int) {
 
 	var ifloat float32
 	var ifloatone float32
@@ -105,7 +116,7 @@ func draw_water(surface *[width][height]float64, water *[width][height]block) {
 		for j := range water[i] {
 			jfloat = float32(float64(j*2) / float64(height))
 			jfloatone = float32(float32(j+1) * 2 / float32(height))
-			if water[i][j].block != 0 { //&& water[i][j].todraw == 1 {
+			if water[i][j].block != 0 && (mode == 3 || water[i][j].todraw == 1) {
 				water[i][j].todraw = 0
 				kfloat = float64(water[i][j].block)
 				//			fmt.Println(water[i][j].block, surface[i][j])

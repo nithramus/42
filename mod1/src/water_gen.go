@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"math/rand"
 )
 
@@ -22,7 +22,7 @@ func water_gen(mode int, water *[width][height]block, surface *[width][height]fl
 		x := rand.Intn(int(width))
 		y := rand.Intn(int(height))
 		water[x][y].block += 1
-		fmt.Println(x)
+		//fmt.Println(x)
 		mode_vague(water, surface)
 	}
 }
@@ -36,7 +36,7 @@ func mode_normal(water *[width][height]block, surface *[width][height]float64, h
 	for i < int(width) {
 		for j := range water {
 			if surface[i][j] < hauteur {
-				water[i][j].height += 1
+				water[i][j].block += 1
 				water[i][j].todraw = 1
 			}
 		}

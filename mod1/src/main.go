@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"strings"
 	//	"os"
 )
 
@@ -33,12 +32,13 @@ func main() {
 	var surface [width][height]float64
 	var water [width][height]block
 
-	option := flag.String("option", "value", "message erreur")
+	mode := flag.Int("mode", 1, "erreur dans le mode")
 	flag.Parse()
-	fmt.Println("yolo", *option)
 	create_surface(&surface)
-	if strings.Compare(*option, "draw") == 0 {
-		draw(&surface, &water)
+	if *mode < 1 || *mode > 3 {
+		fmt.Println("Seulement 3 mode, 1, 2 ou 3")
+	} else {
+		draw(&surface, &water, *mode)
 	}
 
 }
