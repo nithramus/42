@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"regexp"
 	//	"os"
 )
 
@@ -35,6 +36,9 @@ func main() {
 	mode := flag.Int("mode", 1, "erreur dans le mode")
 	flag.Parse()
 	create_surface(&surface)
+	re := regexp.MustCompile("( *\\((?:[0-9]+,){2}[0-9]+\\))+")
+	fmt.Println("%q\n", re.FindString("(1500,1550,1555) (2000,2500,2550)"))
+	panic("")
 	if *mode < 1 || *mode > 3 {
 		fmt.Println("Seulement 3 mode, 1, 2 ou 3")
 	} else {
