@@ -4,19 +4,24 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"regexp"
-	//	"os"
 )
 
 const (
-	width  float64 = 50
-	height float64 = 50
+	width  float64 = 100
+	height float64 = 100
 )
 
 type block struct {
 	height int16
 	todraw int8
 	block  int16
+}
+
+func exit(str string) {
+	fmt.Println(str)
+	os.Exit(0)
 }
 
 func puissance(value int, power int) int {
@@ -40,14 +45,12 @@ func main() {
 	if err != nil {
 		panic("")
 	}
-	fmt.Println(string(file))
 	yolo := regexp.MustCompile("^(([[:space:]]*\\(([0-9]+,)([0-9]+,)([0-9]+)\\))+[[:space:]]*)$")
 	if yolo.MatchString(string(file)) == false {
 		fmt.Println("erreur d'input file")
 	}
 	re := regexp.MustCompile(" *\\((?:([0-9]+),)(?:([0-9]+),)([0-9]+)\\)")
 	test := re.FindAllStringSubmatch(string(file), -1)
-	fmt.Println(test, "\nyolo :", test[1][1])
 	create_surface(&surface, test)
 	if *mode < 1 || *mode > 3 {
 		fmt.Println("Seulement 3 mode, 1, 2 ou 3")

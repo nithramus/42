@@ -81,8 +81,10 @@ func create_surface(surface *[width][height]float64, test [][]string) {
 		cor1, _ := strconv.ParseFloat(test[i][1], 64)
 		cor2, _ := strconv.ParseFloat(test[i][2], 64)
 		cor3, _ := strconv.ParseFloat(test[i][3], 64)
+		if cor1 == 0 || cor2 == 0 || cor1 > width-1 || cor2 > height-1 {
+			exit("Coordonnée ayant pour valeur 0")
+		}
 		list_point = append(list_point, point{cor1, cor2, cor3})
-
 	}
 	//	list_point = append(list_point, point{150, 150, 90})
 	//	list_point = append(list_point, point{170, 70, 90})
