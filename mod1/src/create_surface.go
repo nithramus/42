@@ -1,7 +1,8 @@
 package main
 
 import (
-//	"fmt"
+	//	"fmt"
+	"strconv"
 )
 
 func dist(point1 point, point2 point) float64 {
@@ -72,14 +73,17 @@ func projection_y(surface *[width][height]float64) {
 	}
 }
 
-func create_surface(surface *[width][height]float64) {
+func create_surface(surface *[width][height]float64, test [][]string) {
 
 	var list_point []point
 
-	list_point = append(list_point, point{40, 40, 100})
-	list_point = append(list_point, point{25, 30, 100})
-	list_point = append(list_point, point{10, 35, 150})
-	list_point = append(list_point, point{35, 20, 90})
+	for i := range test {
+		cor1, _ := strconv.ParseFloat(test[i][1], 64)
+		cor2, _ := strconv.ParseFloat(test[i][2], 64)
+		cor3, _ := strconv.ParseFloat(test[i][3], 64)
+		list_point = append(list_point, point{cor1, cor2, cor3})
+
+	}
 	//	list_point = append(list_point, point{150, 150, 90})
 	//	list_point = append(list_point, point{170, 70, 90})
 	projection_x(surface, list_point)

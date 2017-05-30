@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"regexp"
 	//	"os"
 )
@@ -35,15 +36,19 @@ func main() {
 
 	mode := flag.Int("mode", 1, "erreur dans le mode")
 	flag.Parse()
-	create_surface(&surface)
-	yolo := regexp.MustCompile("^(( *\\(([0-9]+,)([0-9]+,)([0-9]+)\\))+)$")
-	if yolo.MatchString("(1500,1550,1555)    (1,2,3)") {
-		fmt.Println(yolo.MatchString("(1500,1550,1555)"))
+	file, err := ioutil.ReadFile("test")
+	if err != nil {
+		panic("")
+	}
+	fmt.Println(string(file))
+	yolo := regexp.MustCompile("^(([[:space:]]*\\(([0-9]+,)([0-9]+,)([0-9]+)\\))+[[:space:]]*)$")
+	if yolo.MatchString(string(file)) == false {
+		fmt.Println("erreur d'input file")
 	}
 	re := regexp.MustCompile(" *\\((?:([0-9]+),)(?:([0-9]+),)([0-9]+)\\)")
-	test := re.FindAllStringSubmatch("(1500,1550,1555) (2000,2500,2550) (1200,1250,125)", -1)
+	test := re.FindAllStringSubmatch(string(file), -1)
 	fmt.Println(test, "\nyolo :", test[1][1])
-	panic("")
+	create_surface(&surface, test)
 	if *mode < 1 || *mode > 3 {
 		fmt.Println("Seulement 3 mode, 1, 2 ou 3")
 	} else {

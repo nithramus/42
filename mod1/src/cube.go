@@ -22,7 +22,7 @@ func init() {
 }
 
 func draw(surface *[width][height]float64, water *[width][height]block, mode int) {
-	var time_for float64 = 0.0005
+	var time_for float64 = -0.0005
 	if mode == 1 {
 		time_for = -0.05
 	}
@@ -56,6 +56,7 @@ func draw(surface *[width][height]float64, water *[width][height]block, mode int
 		then := time.Now()
 		diff := temps.Sub(then)
 		if float64(diff.Seconds()) < time_for {
+			fmt.Println(diff.Seconds())
 			hauteur += 1
 			water_gen(mode, water, surface, hauteur)
 			if mode == 3 {
