@@ -6,7 +6,7 @@ import (
 	"github.com/go-gl/glfw/v3.2/glfw"
 	"log"
 	"runtime"
-	"time"
+	//	"time"
 )
 
 var (
@@ -22,7 +22,7 @@ func init() {
 }
 
 func draw(surface *[width][height]float64, water *[width][height]block, mode int) {
-	var time_for float64 = -0.0005
+	//	var time_for float64 = -0.00000000005
 	if mode == 1 {
 		time_for = -0.05
 	}
@@ -50,21 +50,21 @@ func draw(surface *[width][height]float64, water *[width][height]block, mode int
 	setupScene()
 	var hauteur float64
 	drawScene(surface)
-	temps := time.Now()
+	//	temps := time.Now()
 	for !window.ShouldClose() {
 		glfw.PollEvents()
-		then := time.Now()
-		diff := temps.Sub(then)
-		if float64(diff.Seconds()) < time_for {
-			hauteur += 1
-			water_gen(mode, water, surface, hauteur)
-			if mode == 3 {
-				drawScene(surface)
-			}
-			draw_water(surface, water, mode)
-			window.SwapBuffers()
-			temps = time.Now()
+		//	then := time.Now()
+		//	diff := temps.Sub(then)
+		hauteur += 1
+		water_gen(mode, water, surface, hauteur)
+		if mode == 3 {
+			drawScene(surface)
 		}
+		if int(hauteur)%5 == 0 {
+			draw_water(surface, water, mode)
+		}
+		window.SwapBuffers()
+		//		temps = time.Now()
 	}
 }
 

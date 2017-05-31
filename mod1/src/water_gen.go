@@ -57,13 +57,16 @@ func mode_pluie(water *[width][height]block, surface *[width][height]float64) {
 					if min == 0 {
 						water[i][j].block -= 1
 						water[i+1][j].block += 1
+						water[i+1][j].todraw = 1
 					} else if min == 1 {
 						water[i][j].block -= 1
 						water[i][j+1].block += 1
+						water[i][j+1].todraw = 1
 
 					} else if min == 2 {
 						water[i][j].block -= 1
 						water[i][j-1].block += 1
+						water[i][j-1].todraw = 1
 
 					} else if min == 3 {
 						water[i][j].block -= 1
@@ -72,7 +75,7 @@ func mode_pluie(water *[width][height]block, surface *[width][height]float64) {
 				}
 
 			}
-			if water[i][j].height != int16(water[i][j].block) {
+			if water[i][j].height < int16(water[i][j].block) {
 				water[i][j].height = int16(water[i][j].block)
 				water[i][j].todraw = 1
 			}
