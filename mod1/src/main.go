@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	width  float64 = 50
-	height float64 = 50
+	width  float64 = 100
+	height float64 = 100
 )
 
 type block struct {
@@ -41,7 +41,7 @@ func main() {
 
 	mode := flag.Int("mode", 1, "erreur dans le mode")
 	flag.Parse()
-	file, err := ioutil.ReadFile("test50")
+	file, err := ioutil.ReadFile("test")
 	if err != nil {
 		panic("")
 	}

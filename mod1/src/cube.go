@@ -6,7 +6,7 @@ import (
 	"github.com/go-gl/glfw/v3.2/glfw"
 	"log"
 	"runtime"
-	//	"time"
+	"time"
 )
 
 var (
@@ -22,9 +22,9 @@ func init() {
 }
 
 func draw(surface *[width][height]float64, water *[width][height]block, mode int) {
-	//	var time_for float64 = -0.00000000005
+	var time_for float64 = -0.00000000005
 	if mode == 1 {
-		time_for = -0.05
+		time_for = -0.000005
 	}
 	if err := glfw.Init(); err != nil {
 		log.Fatalln("failed to initialize glfw:", err)
@@ -43,29 +43,33 @@ func draw(surface *[width][height]float64, water *[width][height]block, mode int
 	if err := gl.Init(); err != nil {
 		panic(err)
 	}
-	rotationX = 95
-	rotationY = 360
+	rotationX = 110
+	rotationY = 370
 	rotationZ = 30
 
 	setupScene()
 	var hauteur float64
 	drawScene(surface)
-	//	temps := time.Now()
-	for !window.ShouldClose() {
+	temps := time.Now()
+	/*	for x := range water[0] {
+		water[2][x].block += 90
+	}*/
+	for !window.ShouldClose() && hauteur < 300000 {
 		glfw.PollEvents()
-		//	then := time.Now()
-		//	diff := temps.Sub(then)
-		hauteur += 1
-		water_gen(mode, water, surface, hauteur)
-		if mode == 3 {
-			drawScene(surface)
-		}
-		if int(hauteur)%5 == 0 {
+		then := time.Now()
+		diff := temps.Sub(then)
+		if float64(diff.Seconds()) < time_for {
+			water_gen(mode, water, surface, hauteur)
+			if mode == 3 {
+				drawScene(surface)
+			}
 			draw_water(surface, water, mode)
+			window.SwapBuffers()
+			temps = time.Now()
+			hauteur += 1
 		}
-		window.SwapBuffers()
-		//		temps = time.Now()
 	}
+	test_water(water)
 }
 
 func setupScene() {
@@ -118,21 +122,20 @@ func draw_water(surface *[width][height]float64, water *[width][height]block, mo
 				if float64(j) != height-1 {
 					jfloat = float32(float64(j*2) / float64(height))
 					jfloatone = float32(float32(j+1) * 2 / float32(height))
-					if water[i][j].block != 0 && (mode == 3 || water[i][j].todraw == 1) {
+					if mode == 3 || water[i][j].todraw == 1 {
 						if mode == 3 {
 							k := int16(0)
-							for k < water[i][j].block {
-								kfloat = float64(water[i][j].block)
+							for k < water[i][j].height {
+								kfloat = float64(k)
 								draw_square_water(surface, water, kfloat, i, j, ifloat, jfloat, jfloatone, ifloatone)
-
 								k++
 							}
 						} else {
 							if mode == 2 {
-								gl.Color3ub(0, 0, 200-(uint8(water[i][j].block)+uint8(surface[i][j]))*20)
+								gl.Color3ub(0, 0, 200-(uint8(water[i][j].height)+uint8(surface[i][j]))*10)
 							}
 							water[i][j].todraw = 0
-							kfloat = float64(water[i][j].block)
+							kfloat = float64(water[i][j].height)
 							draw_square_water(surface, water, kfloat, i, j, ifloat, jfloat, jfloatone, ifloatone)
 						}
 
