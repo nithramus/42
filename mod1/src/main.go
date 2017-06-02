@@ -52,6 +52,14 @@ func main() {
 	re := regexp.MustCompile(" *\\((?:([0-9]+),)(?:([0-9]+),)([0-9]+)\\)")
 	test := re.FindAllStringSubmatch(string(file), -1)
 	create_surface(&surface, test)
+	for x := range water {
+		water[x][0].block = 20000
+		water[x][int(width-1)].block = 20000
+	}
+	for y := range water[0] {
+		water[0][y].block = 20000
+		water[int(height-1)][y].block = 20000
+	}
 	if *mode < 1 || *mode > 3 {
 		fmt.Println("Seulement 3 mode, 1, 2 ou 3")
 	} else {

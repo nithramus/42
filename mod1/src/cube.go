@@ -115,18 +115,19 @@ func draw_water(surface *[width][height]float64, water *[width][height]block, mo
 	gl.Begin(gl.QUADS)
 
 	for i := range water {
-		if float64(i) != width-1 {
+		if float64(i) != width-1 && i != 0 {
 			ifloat = float32(float64(i*2) / float64(width))
 			ifloatone = float32(float64(i+1) * 2 / float64(width))
 			for j := range water[i] {
-				if float64(j) != height-1 {
+				if float64(j) != height-1 && j != 0 {
 					jfloat = float32(float64(j*2) / float64(height))
 					jfloatone = float32(float32(j+1) * 2 / float32(height))
 					if mode == 3 || water[i][j].todraw == 1 {
 						if mode == 3 {
 							k := int16(0)
-							for k < water[i][j].height {
+							for k < water[i][j].block {
 								kfloat = float64(k)
+								gl.Color3ub(20, 0, 100-(uint8(water[i][j].block)+uint8(surface[i][j])*40))
 								draw_square_water(surface, water, kfloat, i, j, ifloat, jfloat, jfloatone, ifloatone)
 								k++
 							}

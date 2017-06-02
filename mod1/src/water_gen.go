@@ -46,9 +46,13 @@ func water_gen(mode int, water *[width][height]block, surface *[width][height]fl
 		//test_suface(surface)
 	}
 	if mode == 3 {
-		x := rand.Intn(int(width))
-		y := rand.Intn(int(height))
-		water[x][y].block += 1
+		if hauteur < 200 {
+			for g := 0; g < 20; g++ {
+				x := rand.Intn(int(width))
+				y := rand.Intn(int(height))
+				water[x][y].block += 1
+			}
+		}
 		mode_pluie(water, surface)
 	}
 }
