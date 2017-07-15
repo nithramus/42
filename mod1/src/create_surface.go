@@ -35,8 +35,6 @@ func projection_x(surface *[width][height]float64, list_point []point) {
 		last_point = point{list_point[i].x, 0, 0}
 		for j = 0; float64(j) < height; j++ {
 			if surface[int(list_point[i].x)][int(j)] != 0 {
-
-				//fmt.Println("##################### result\n", surface[int(list_point[i].x)][int(j)]*float64(7/8), "test")
 				b = bezier{
 					last_point,
 					point{list_point[i].x, j, surface[int(list_point[i].x)][int(j)]},

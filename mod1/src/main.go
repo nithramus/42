@@ -40,14 +40,16 @@ func main() {
 	var water [width][height]block
 
 	mode := flag.Int("mode", 1, "erreur dans le mode")
+	name_file := flag.String("file", "test", "No file")
 	flag.Parse()
-	file, err := ioutil.ReadFile("test")
+	file, err := ioutil.ReadFile(*name_file)
 	if err != nil {
 		panic("")
 	}
 	yolo := regexp.MustCompile("^(([[:space:]]*\\(([0-9]+,)([0-9]+,)([0-9]+)\\))+[[:space:]]*)$")
 	if yolo.MatchString(string(file)) == false {
 		fmt.Println("erreur d'input file")
+		os.Exit(1)
 	}
 	re := regexp.MustCompile(" *\\((?:([0-9]+),)(?:([0-9]+),)([0-9]+)\\)")
 	test := re.FindAllStringSubmatch(string(file), -1)

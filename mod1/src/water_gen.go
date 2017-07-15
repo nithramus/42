@@ -35,7 +35,7 @@ func water_gen(mode int, water *[width][height]block, surface *[width][height]fl
 		mode_normal(water, surface, hauteur)
 	}
 	if mode == 2 {
-		if int(hauteur)%15 == 0 {
+		if int(hauteur)%10 == 0 {
 			for x := range water[1] {
 				water[1][x].block += 1
 			}
