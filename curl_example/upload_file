@@ -1,0 +1,5 @@
+curl \   
+  -F "userid=1" \
+  -F "filecomment=This is an image file" \
+  -F "file=@/home/nithramir/js_cmagru/main.js" \
+  localhost:8080/main_page

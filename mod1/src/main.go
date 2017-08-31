@@ -53,7 +53,7 @@ func main() {
 	}
 	re := regexp.MustCompile(" *\\((?:([0-9]+),)(?:([0-9]+),)([0-9]+)\\)")
 	test := re.FindAllStringSubmatch(string(file), -1)
-	create_surface(&surface, test)
+	create_surface_bis(&surface, test)
 	for x := range water {
 		water[x][0].block = 20000
 		water[x][int(width-1)].block = 20000
