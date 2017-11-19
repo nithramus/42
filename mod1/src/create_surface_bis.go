@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 )
 
@@ -39,43 +40,82 @@ func string_to_point(list [][]string) []point {
 
 }
 
-func find_dist_most_proche(l_point []point) []point {
-	var proche []point
+func find_dist_most_proche(l_point []point) []int {
+	var proche []int
 	for i := range l_point {
-		for j := range l_point {
+		yolo := []point{point{0, 0, l_point[i].x}, point{0, 0, l_point[i].y}, point{0, 0, width - l_point[i].x}, point{0, 0, height - l_point[i].y}}
+		tri_à_bulle(yolo)
+		max_dist := yolo[3].z
+		if max_dist * 2 > l_point[i].z {
+			max_dist = l_point[i].z / 2
+		}
+		if max_dist < 10 {
+			max_dist = 10
+		}
+		proche = append(proche, int(max_dist))
+	}
+	return proche
+}
+
+func distance(a point, b point) float64 {
+
+	abx := a.x - b.x
+	aby := a.y - b.y
+	return math.Sqrt(abx*abx + aby*aby)
+}
+
+func put_point(pt point, distance_max int, surface *[width][height]float64) {
+	var dist float64 = float64(distance_max)
+	print(dist)
+	startx := int(pt.x - dist + 1)
+	starty := int(pt.y - dist + 1)
+	fmt.Println(starty, startx)
+	var t_point point
+	for i := startx; i <= int(pt.x+dist - 1); i++ {
+		fmt.Println(i)
+		for j := starty; j <= int(pt.y+dist - 1); j++ {
+			// fmt.Println(j)
+			t_point = point{float64(i), float64(j), 0.1}
+			//fmt.Println(float64(distance(pt, t_point)) / dist)
+			// print(i, j, "\n")
+			distance_actuelle := (float64(distance(pt, t_point)) / (dist))
+			if distance_actuelle <= 1 {
+				surface[i][j] = float64(int(pt.z * (1 - (distance_actuelle) * (distance_actuelle)) + distance_actuelle * distance_actuelle * surface[i][j]))
+			}
+
 		}
 	}
-}
-
-func find_distance(first point, second point) {
-
-}
-
-func put_point(pt point, dist int, surface *[width][height]float64) {
-
 }
 
 func generate_surface(surface *[width][height]float64, l_point []point) {
 	var x int
 	var y int
-	var z int
+	//var z int
+	// fmt.Printf("%v", l_point)
+	dist := find_dist_most_proche(l_point)
+	// fmt.Println(dist)
 	for i := range l_point {
 		x = int(l_point[i].x)
 		y = int(l_point[i].y)
-		z = int(l_point[i].z)
+		//z = int(l_point[i].z)
 		if l_point[i].z >= surface[x][y] {
-			put_point(l_point[i], z, surface)
+			put_point(l_point[i], dist[i], surface)
 		} else {
-			z = find_dist_most_proche()
-
-			put_point(l_point[i], z, surface)
+			put_point(l_point[i], dist[i], surface)
 		}
 	}
+	// for i := 0; i < int(height); i++ {
+	// 	surface[60][i] = 90
+	// }
+	test_suface(surface)
 }
 
 func create_surface_bis(surface *[width][height]float64, test [][]string) {
 	list_point := string_to_point(test)
 	tri_à_bulle(list_point)
-	fmt.Println(list_point)
-	exit("Fin du prog")
+	generate_surface(surface, list_point)
+
+
+	// exit("string")
+
 }

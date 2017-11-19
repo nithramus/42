@@ -14,9 +14,7 @@ const (
 )
 
 type block struct {
-	height int16
-	todraw int8
-	block  int16
+	block  float64
 }
 
 func exit(str string) {
@@ -44,6 +42,7 @@ func main() {
 	flag.Parse()
 	file, err := ioutil.ReadFile(*name_file)
 	if err != nil {
+		print("no such file\n")
 		panic("")
 	}
 	yolo := regexp.MustCompile("^(([[:space:]]*\\(([0-9]+,)([0-9]+,)([0-9]+)\\))+[[:space:]]*)$")
