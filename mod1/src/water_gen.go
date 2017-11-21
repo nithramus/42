@@ -34,9 +34,9 @@ func test_suface(surface *[width][height]float64) {
 func water_gen(mode int, water *[width][height]block, surface *[width][height]float64, hauteurfloat int) {
 	hauteur := int(hauteurfloat)
 	if mode == 2 {
-		if hauteur < 100000 && hauteur % 20 == 0 {
+		if hauteur < 1000 && hauteur % 5 == 0 {
 			for x := range water[1] {
-				water[1][x].block += 2
+				water[1][x].block += 10
 			}
 		}
 		// if hauteur > 2000 {
@@ -49,30 +49,29 @@ func water_gen(mode int, water *[width][height]block, surface *[width][height]fl
 		mode_pluie2(water, surface)
 		mode_pluie3(water, surface)
 		mode_pluie4(water, surface)
-		mode_pluie1(water, surface)
-		mode_pluie2(water, surface)
-		mode_pluie3(water, surface)
-		mode_pluie4(water, surface)
-		mode_pluie1(water, surface)
-		mode_pluie2(water, surface)
-		mode_pluie3(water, surface)
-		mode_pluie4(water, surface)
-
 		//test_water(water)
 		//test_suface(surface)
 	}
 	if mode == 3 {
 		if hauteur < 20000 {
-			for g := 0; g < 50; g++ {
+			for g := 0; g < 20; g++ {
 				x := rand.Intn(int(width))
 				y := rand.Intn(int(height))
 				water[x][y].block += 1
 			}
 		}
+		if hauteur % 4 == 0 {
 		mode_pluie1(water, surface)
+	}
+		if hauteur % 4 == 1 {
 		mode_pluie2(water, surface)
+		}
+		if hauteur % 4 == 2 {
 		mode_pluie3(water, surface)
+		}
+		if hauteur % 4 == 3 {
 		mode_pluie4(water, surface)
+		}
 		// mode_pluie(water, surface)
 	}
 }

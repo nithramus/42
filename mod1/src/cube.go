@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	// "fmt"
 	"log"
 	"runtime"
 
@@ -46,28 +46,37 @@ func draw(surface *[width][height]float64, water *[width][height]block, mode int
 	setupScene()
 	var hauteur int
 	drawScene(surface)
-	/*	for x := range water[0] {
-		water[2][x].block += 90
-	}*/
-	test_water(water)
-
-	for !window.ShouldClose() && hauteur < 150000 {
+	// test_water(water)
+	window.SetInputMode(glfw.StickyKeysMode, 1)
+	for !window.ShouldClose() {
+		water_gen(mode, water, surface, hauteur)
 		glfw.PollEvents()
-		// x := window.GetKey(glfw.KeyA)
-		// if x == glfw.Press	 {
-		// 	fmt.Printf(string(x))
-		// }
-		go water_gen(mode, water, surface, hauteur)
-		if hauteur % 20 == 0 {
-			rotationZ += 0.5
+		goLeft := window.GetKey(glfw.KeyLeft)
+		goRight := window.GetKey(glfw.KeyRight)
+		goUp := window.GetKey(glfw.KeyUp)
+		goDown := window.GetKey(glfw.KeyDown)
+		if (hauteur % 20 == 0 && mode == 2) || (hauteur % 1 == 0 && mode == 3) {
+
+			if goLeft == glfw.Release {
+				rotationZ += 3
+			}
+			if goRight == glfw.Release {
+				rotationZ -= 3
+			}
+			if goUp == glfw.Release {
+				rotationX -= 3
+			}
+			if goDown == glfw.Release {
+				rotationX += 3
+			}
 			drawScene(surface)
 			draw_water(surface, water, mode)
 			window.SwapBuffers()
 		}
 		hauteur += 1
-		fmt.Println(hauteur)
+		// fmt.Println(hauteur)
 	}
-	test_water(water)
+	// test_water(water)
 }
 
 func setupScene() {
@@ -91,7 +100,6 @@ func showme(tst string) {
 	i := 0
 	for i = 0; i < 40000; i++ {
 	}
-	fmt.Println(tst, i)
 }
 
 func draw_water(surface *[width][height]float64, water *[width][height]block, mode int) {
@@ -133,7 +141,6 @@ func draw_water(surface *[width][height]float64, water *[width][height]block, mo
 }
 
 func draw_square_water(surface *[width][height]float64, water *[width][height]block, kfloat float64, i int, j int, ifloat float32, jfloat float32, jfloatone float32, ifloatone float32) {
-	//			fmt.Println(water[i][j].block, surface[i][j])
 
 	gl.Vertex3f(ifloat, jfloat, float32(-(surface[i][j]+kfloat)/200))
 	gl.Vertex3f(ifloat, jfloatone, float32(-(surface[i][j]+kfloat)/200))
