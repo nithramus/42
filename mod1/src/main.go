@@ -37,10 +37,16 @@ func main() {
 	var surface [width][height]float64
 	var water [width][height]block
 
-	mode := flag.Int("mode", 1, "erreur dans le mode")
-	name_file := flag.String("file", "test", "No file")
+	mode := flag.Int("mode", 0, "Wrong mode value, must be between 1 and 3")
+	name_file := flag.String("file", "", "No file")
+	time := flag.Int("time", 500, "No input time")
 	flag.Parse()
 	file, err := ioutil.ReadFile(*name_file)
+	if (*mode == 0 || *name_file == "") {
+		fmt.Println("mod1: usage: ./mod1 -mode [value] -file [file]")
+		os.Exit(1)
+
+	}
 	if err != nil {
 		print("no such file\n")
 		panic("")
@@ -64,7 +70,8 @@ func main() {
 	if *mode < 1 || *mode > 3 {
 		fmt.Println("Seulement 3 mode, 1, 2 ou 3")
 	} else {
-		draw(&surface, &water, *mode)
+		fmt.Println("Lancement du programme")
+		draw(&surface, &water, *mode, *time)
 	}
 
 }

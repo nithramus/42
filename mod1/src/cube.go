@@ -1,6 +1,7 @@
 package main
 
-import (
+import
+(
 	// "fmt"
 	"log"
 	"runtime"
@@ -14,6 +15,7 @@ var (
 	rotationX float32
 	rotationY float32
 	rotationZ float32
+	zoom			float32
 )
 
 func init() {
@@ -21,7 +23,7 @@ func init() {
 	runtime.LockOSThread()
 }
 
-func draw(surface *[width][height]float64, water *[width][height]block, mode int) {
+func draw(surface *[width][height]float64, water *[width][height]block, mode int, time int) {
 	if err := glfw.Init(); err != nil {
 		log.Fatalln("failed to initialize glfw:", err)
 	}
@@ -42,41 +44,48 @@ func draw(surface *[width][height]float64, water *[width][height]block, mode int
 	rotationX = 110
 	rotationY = 370
 	rotationZ = 30
+	zoom = -2.5
 
 	setupScene()
 	var hauteur int
 	drawScene(surface)
 	// test_water(water)
-	window.SetInputMode(glfw.StickyKeysMode, 1)
+	// window.SetInputMode(glfw.StickyKeysMode, 1)
 	for !window.ShouldClose() {
-		water_gen(mode, water, surface, hauteur)
+		water_gen(mode, water, surface, hauteur, time)
 		glfw.PollEvents()
+		goZoom := window.GetKey(glfw.KeyA)
+		goDeZoom := window.GetKey(glfw.KeyZ)
 		goLeft := window.GetKey(glfw.KeyLeft)
 		goRight := window.GetKey(glfw.KeyRight)
 		goUp := window.GetKey(glfw.KeyUp)
 		goDown := window.GetKey(glfw.KeyDown)
-		if (hauteur % 20 == 0 && mode == 2) || (hauteur % 1 == 0 && mode == 3) {
 
-			if goLeft == glfw.Release {
+		if (hauteur % 20 == 0 && mode == 2) || (hauteur % 1 == 0 && mode == 3 || (mode == 1 && hauteur % 5 == 0)) {
+			if goLeft == 1 {
 				rotationZ += 3
 			}
-			if goRight == glfw.Release {
+			if goRight == 1 {
 				rotationZ -= 3
 			}
-			if goUp == glfw.Release {
+			if goUp == 1 {
 				rotationX -= 3
 			}
-			if goDown == glfw.Release {
+			if goDown == 1 {
 				rotationX += 3
+			}
+			if goZoom == 1 {
+				zoom += 0.1
+			}
+			if goDeZoom == 1 {
+				zoom -= 0.1
 			}
 			drawScene(surface)
 			draw_water(surface, water, mode)
 			window.SwapBuffers()
 		}
 		hauteur += 1
-		// fmt.Println(hauteur)
 	}
-	// test_water(water)
 }
 
 func setupScene() {
@@ -112,7 +121,7 @@ func draw_water(surface *[width][height]float64, water *[width][height]block, mo
 
 	gl.MatrixMode(gl.MODELVIEW)
 	gl.LoadIdentity()
-	gl.Translatef(0, -1, -2.5)
+	gl.Translatef(0, -1, zoom)
 	gl.Rotatef(rotationX, 1, 0, 0)
 	gl.Rotatef(rotationY, 0, 1, 0)
 	gl.Rotatef(rotationZ, 0, 0, 1)
@@ -128,8 +137,8 @@ func draw_water(surface *[width][height]float64, water *[width][height]block, mo
 				if float64(j) != height-1 && j != 0 {
 					jfloat = float32(float64(j*2) / float64(height)) - 1
 					jfloatone = float32(float32(j+1) * 2 / float32(height)) - 1
-					if int(water[i][j].block) != 0 {
-						gl.Color3ub(0, 0, 200-(uint8(water[i][j].block)+uint8(surface[i][j])))
+					if water[i][j].block > 0.1 {
+						gl.Color3ub(30, 100, 200-((uint8(water[i][j].block)) * 2))
 						kfloat = float64(water[i][j].block)
 						draw_square_water(surface, water, kfloat, i, j, ifloat, jfloat, jfloatone, ifloatone)
 					}
@@ -190,7 +199,7 @@ func drawScene(surface *[width][height]float64) {
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 	gl.MatrixMode(gl.MODELVIEW)
 	gl.LoadIdentity()
-	gl.Translatef(0, -1, -2.5)
+	gl.Translatef(0, -1, zoom)
 	gl.Rotatef(rotationX, 1, 0, 0)
 	gl.Rotatef(rotationY, 0, 1, 0)
 	gl.Rotatef(rotationZ, 0, 0, 1)

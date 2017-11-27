@@ -46,10 +46,11 @@ func find_dist_most_proche(l_point []point) []int {
 		tri_à_bulle(yolo)
 		max_dist := yolo[3].z / 2
 		if max_dist * 2 > l_point[i].z {
-			max_dist = l_point[i].z / 2
+			max_dist = l_point[i].z
 		}
-		if max_dist < 10 {
-			max_dist = 10
+		// TODO: find le point le plus proche
+		if max_dist < 11 {
+			max_dist = 20
 		}
 		proche = append(proche, int(max_dist))
 	}

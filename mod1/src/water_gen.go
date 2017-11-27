@@ -31,29 +31,43 @@ func test_suface(surface *[width][height]float64) {
 	print("\n")
 }
 
-func water_gen(mode int, water *[width][height]block, surface *[width][height]float64, hauteurfloat int) {
+func water_gen(mode int, water *[width][height]block, surface *[width][height]float64, hauteurfloat int, time int) {
 	hauteur := int(hauteurfloat)
-	if mode == 2 {
-		if hauteur < 1000 && hauteur % 5 == 0 {
+	if mode == 1 {
+		if hauteur < time && hauteur % 5 == 0 {
 			for x := range water[1] {
-				water[1][x].block += 10
+				water[1][x].block += 2
+				water[int(height-2)][x].block += 2
+				water[x][1].block += 2
+				water[x][int(width-2)].block += 2
 			}
 		}
-		// if hauteur > 2000 {
-		// 	for x := range water[1] {
-		// 		// water[1][x].block = 0
-		//
-		// 	}
-		// }
 		mode_pluie1(water, surface)
 		mode_pluie2(water, surface)
 		mode_pluie3(water, surface)
 		mode_pluie4(water, surface)
-		//test_water(water)
-		//test_suface(surface)
+		mode_pluie1(water, surface)
+		mode_pluie2(water, surface)
+		mode_pluie3(water, surface)
+		mode_pluie4(water, surface)
+		mode_pluie1(water, surface)
+		mode_pluie2(water, surface)
+		mode_pluie3(water, surface)
+		mode_pluie4(water, surface)
+	}
+	if mode == 2 {
+		if hauteur < time && hauteur % 5 == 0 {
+			for x := range water[1] {
+				water[1][x].block += 10
+			}
+		}
+		mode_pluie1(water, surface)
+		mode_pluie2(water, surface)
+		mode_pluie3(water, surface)
+		mode_pluie4(water, surface)
 	}
 	if mode == 3 {
-		if hauteur < 20000 {
+		if hauteur < time {
 			for g := 0; g < 20; g++ {
 				x := rand.Intn(int(width))
 				y := rand.Intn(int(height))
@@ -72,9 +86,9 @@ func water_gen(mode int, water *[width][height]block, surface *[width][height]fl
 		if hauteur % 4 == 3 {
 		mode_pluie4(water, surface)
 		}
-		// mode_pluie(water, surface)
 	}
 }
+
 func find_min(tab [4]float64) (int) {
 	var i int = 0
 	var min float64 = tab[0]
@@ -84,7 +98,6 @@ func find_min(tab [4]float64) (int) {
 			i = j
 		}
 	}
-	//print(tab[min])
 	return i
 }
 
@@ -92,7 +105,6 @@ func mode_pluie1(water *[width][height]block, surface *[width][height]float64) {
 	var i int
 	var j int
 	var tab [4]float64
-	// TODO: resetup un 1 sur deux, et un changement de sens ?
 	i = 1
 	for i < int(width-1) {
 		j = 1
@@ -113,15 +125,12 @@ func mode_pluie1(water *[width][height]block, surface *[width][height]float64) {
 					if min == 0 {
 						water[i][j].block -= diff / 2
 						water[i+1][j].block += diff / 2
-						//	WATER[i+1][j].todraw = 1
 					} else if min == 1 {
 						water[i][j].block -= diff / 2
 						water[i][j+1].block += diff / 2
-						//	water[i][j+1].todraw = 1
 					} else if min == 2 {
 						water[i][j].block -= diff / 2
 						water[i][j-1].block += diff / 2
-						//water[i][j-1].todraw = 1
 					} else if min == 3 {
 						water[i][j].block -= diff / 2
 						water[i-1][j].block += diff / 2
@@ -140,7 +149,6 @@ func mode_pluie2(water *[width][height]block, surface *[width][height]float64) {
 	var i int
 	var j int
 	var tab [4]float64
-	// TODO: resetup un 1 sur deux, et un changement de sens ?
 	i = 2
 	for i < int(width-1) {
 		j = 1
@@ -161,15 +169,12 @@ func mode_pluie2(water *[width][height]block, surface *[width][height]float64) {
 					if min == 0 {
 						water[i][j].block -= diff / 2
 						water[i+1][j].block += diff / 2
-						//	WATER[i+1][j].todraw = 1
 					} else if min == 1 {
 						water[i][j].block -= diff / 2
 						water[i][j+1].block += diff / 2
-						//	water[i][j+1].todraw = 1
 					} else if min == 2 {
 						water[i][j].block -= diff / 2
 						water[i][j-1].block += diff / 2
-						//water[i][j-1].todraw = 1
 					} else if min == 3 {
 						water[i][j].block -= diff / 2
 						water[i-1][j].block += diff / 2
@@ -187,7 +192,6 @@ func mode_pluie3(water *[width][height]block, surface *[width][height]float64) {
 	var i int
 	var j int
 	var tab [4]float64
-	// TODO: resetup un 1 sur deux, et un changement de sens ?
 	i = 1
 	for i < int(width-1) {
 		j = 2
@@ -208,15 +212,12 @@ func mode_pluie3(water *[width][height]block, surface *[width][height]float64) {
 					if min == 0 {
 						water[i][j].block -= diff / 2
 						water[i+1][j].block += diff / 2
-						//	WATER[i+1][j].todraw = 1
 					} else if min == 1 {
 						water[i][j].block -= diff / 2
 						water[i][j+1].block += diff / 2
-						//	water[i][j+1].todraw = 1
 					} else if min == 2 {
 						water[i][j].block -= diff / 2
 						water[i][j-1].block += diff / 2
-						//water[i][j-1].todraw = 1
 					} else if min == 3 {
 						water[i][j].block -= diff / 2
 						water[i-1][j].block += diff / 2
@@ -234,7 +235,6 @@ func mode_pluie4(water *[width][height]block, surface *[width][height]float64) {
 	var i int
 	var j int
 	var tab [4]float64
-	// TODO: resetup un 1 sur deux, et un changement de sens ?
 	i = 2
 	for i < int(width-1) {
 		j = 2
@@ -255,15 +255,12 @@ func mode_pluie4(water *[width][height]block, surface *[width][height]float64) {
 					if min == 0 {
 						water[i][j].block -= diff / 2
 						water[i+1][j].block += diff / 2
-						//	WATER[i+1][j].todraw = 1
 					} else if min == 1 {
 						water[i][j].block -= diff / 2
 						water[i][j+1].block += diff / 2
-						//	water[i][j+1].todraw = 1
 					} else if min == 2 {
 						water[i][j].block -= diff / 2
 						water[i][j-1].block += diff / 2
-						//water[i][j-1].todraw = 1
 					} else if min == 3 {
 						water[i][j].block -= diff / 2
 						water[i-1][j].block += diff / 2
