@@ -45,11 +45,11 @@ typedef struct	s_file
 void	quit_clean(int error);
 int			get_option(int argc, char **argv, t_option *option);
 void	printf_option(t_option option);
-int		path_mov(char stock[4097], t_option option, int ptr);
+int		path_mov(char stock[4097], t_option option, int ptr, int show);
 int		ft_sort(t_file **mem_ptr, t_option option);
 
 void	print_list(t_file *first);
-void		show_dir(t_file *first, char stock[4097], int ptr);
+void		show_dir(t_file *first, char stock[4097], int ptr, t_option option);
 t_file	*create_file(char stock[4097], t_option option, int ptr, char *name);
 
 #endif

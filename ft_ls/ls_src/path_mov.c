@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include "stdio.h"
 
 t_file	*create_file(char stock[4097], t_option option, int ptr, char *name)
 {
@@ -20,12 +21,11 @@ t_file	*create_file(char stock[4097], t_option option, int ptr, char *name)
 	size = ft_strlen(name);
 	if (name[0] == '.' && option.a == 0)
 		return (NULL);
-	if (!(new = malloc(sizeof(t_file) + size + 3)))
+	if (!(new = mem_stock(sizeof(t_file) + size + 3)))
 		return (NULL);
 	new->file = (char*)&new[1];
 	ft_strcpy(new->file, name);
-	new->file[size] = '\n';
-	new->file[size + 1] = '\0';
+	new->file[size] = '\0';
 	new->next = NULL;
 	ft_strcpy(&stock[ptr], name);
 	if (lstat(stock, &new->info) == -1)
@@ -51,7 +51,7 @@ static t_file	*stock_file(char stock[4097], t_option option, int ptr)
 	first = NULL;
 	if (!(dir = opendir(stock)))
 	{
-	perror("");
+		perror("");
 		return (NULL);
 	}
 	while ((list_elem = readdir(dir)))
@@ -74,36 +74,31 @@ static t_file	*stock_file(char stock[4097], t_option option, int ptr)
 	}
 	closedir(dir);
 	ft_sort(&first, option);
-	if (option.l)
-		show_dir(first, stock, ptr);
-	else
-	{
-		tmp = first;
-		while (tmp)
-		{
-			ft_putstr(tmp->file);
-			tmp = tmp->next;
-		}
-	}
+	show_dir(first, stock, ptr, option);
+
 	return (first);
 }
 
-int		path_mov(char stock[4097], t_option option, int ptr)
+int		path_mov(char stock[4097], t_option option, int ptr, int show)
 {
 	struct stat info;
 	t_file *file_stock;
 	t_file *next;
 
+	stock[ptr] = '\0';
+	if (show){
+		ft_putstr(stock);
+		ft_putendl(":");
+	}
 	stock[ptr] = '/';
 	ptr += 1;
 	stock[ptr] = '\0';
-	ft_putendl(stock);
+
 
 	if (!(file_stock = stock_file(stock, option, ptr)))
 		return (1);
 	if (option.rmaj)
 	{
-
 		next = file_stock;
 		while (next)
 		{
@@ -112,11 +107,9 @@ int		path_mov(char stock[4097], t_option option, int ptr)
 			else if (S_ISDIR(next->info.st_mode))
 			{
 				ft_putendl("");
-				stock[ptr] = '\n';
 				stock[ptr + 1] = '\0';
-				stock[ptr] = '\0';
 				ft_strcpy(&stock[ptr], next->file);
-				path_mov(stock, option, ft_strlen(stock) - 1);
+				path_mov(stock, option, ft_strlen(stock), 1);
 			}
 			next = next->next;
 		}

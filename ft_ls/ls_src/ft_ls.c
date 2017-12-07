@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include "stdio.h"
 
 int main(int argc, char **argv)
 {
@@ -18,10 +19,13 @@ int main(int argc, char **argv)
 	char		**files;
 	int			i;
 	char stock[4097];
+	int show;
 	t_file		*new;
 
+	show = 0;
 	i = get_option(argc, argv, &option);
-//	printf_option(option);
+	if (i + 2 <= argc)
+		show = 1;
 	if (i < argc)
 	{
 		while (i < argc)
@@ -30,19 +34,17 @@ int main(int argc, char **argv)
 			if (!(new = create_file(stock, option, 0, argv[i])))
 				i = i + 1 - 1;
 			else if (!(S_ISDIR(new->info.st_mode)))
-			{
-				show_dir(new, stock, 1);
-			}
+				show_dir(new, stock, 1, option);
 			else
-				path_mov(stock, option, ft_strlen(stock));
+				path_mov(stock, option, ft_strlen(stock), show);
 			i++;
 		}
 	}
 	else
 	{
 		ft_strcpy(stock, ".");
-		path_mov(stock, option, ft_strlen(stock));
+		path_mov(stock, option, ft_strlen(stock), 0);
 	}
-
+	quit_clean(0);
 	return (0);
 }

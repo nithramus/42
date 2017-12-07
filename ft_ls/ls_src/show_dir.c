@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include "stdio.h"
 
 static void print_droit(struct stat info)
 {
@@ -67,7 +68,6 @@ static void print_l(struct stat info, char *file, char stock[4097], int ptr)
 	ft_printf("%s ", gid->gr_name);
 	ft_printf("%d ", info.st_size);
 	print_hour(info);
-	//ft_printf("%ud\n", minor(info.st_rdev));
 	if (S_ISLNK(info.st_mode))
 	{
 		file[ft_strlen(file) - 1] = '\0';
@@ -81,15 +81,21 @@ static void print_l(struct stat info, char *file, char stock[4097], int ptr)
 		ft_printf("%s -> %s\n", file, buff);
 	}
 	else
-		ft_putstr(file);
+		ft_putendl(file);
 }
 
-void	show_dir(t_file *first, char stock[4097], int ptr)
+void	show_dir(t_file *first, char stock[4097], int ptr, t_option option)
 {
+	int yolo;
+
 	ptr--;
 	while (first)
 	{
-		print_l(first->info, first->file, stock, ptr);
+		if (option.l)
+			print_l(first->info, first->file, stock, ptr);
+		else
+			ft_putendl(first->file);
+		yolo = 1;
 		first = first->next;
 	}
 }

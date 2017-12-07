@@ -88,7 +88,7 @@ t_file	*sort_ascii(t_file *first)
 			i++;
 		}
 	}
-	ft_printf("%d\n", i);
+	// ft_printf("%d\n", i);
 	return (first);
 }
 

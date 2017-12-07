@@ -30,7 +30,6 @@ void	quit_clean(int error)
 	{
 		ft_putendl("Erreur des fonctions systemes");
 	}
-	ft_putendl("fin du prog");
 	mem_stock_free();
 	exit(0);
 }
