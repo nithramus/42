@@ -9,13 +9,9 @@ import (
 )
 
 const (
-	width  float64 = 100
 	height float64 = 100
+	width  float64 = 100
 )
-
-type block struct {
-	block  float64
-}
 
 func exit(str string) {
 	fmt.Println(str)
@@ -35,14 +31,14 @@ func puissance(value int, power int) int {
 
 func main() {
 	var surface [width][height]float64
-	var water [width][height]block
+	var water [width][height]float64
 
 	mode := flag.Int("mode", 0, "Wrong mode value, must be between 1 and 3")
 	name_file := flag.String("file", "", "No file")
 	time := flag.Int("time", 500, "No input time")
 	flag.Parse()
 	file, err := ioutil.ReadFile(*name_file)
-	if (*mode == 0 || *name_file == "") {
+	if *mode == 0 || *name_file == "" {
 		fmt.Println("mod1: usage: ./mod1 -mode [value] -file [file]")
 		os.Exit(1)
 
@@ -60,12 +56,12 @@ func main() {
 	test := re.FindAllStringSubmatch(string(file), -1)
 	create_surface_bis(&surface, test)
 	for x := range water {
-		water[x][0].block = 20000
-		water[x][int(width-1)].block = 20000
+		water[x][0] = 20000
+		water[x][int(width-1)] = 20000
 	}
 	for y := range water[0] {
-		water[0][y].block = 20000
-		water[int(height-1)][y].block = 20000
+		water[0][y] = 20000
+		water[int(height-1)][y] = 20000
 	}
 	if *mode < 1 || *mode > 3 {
 		fmt.Println("Seulement 3 mode, 1, 2 ou 3")
