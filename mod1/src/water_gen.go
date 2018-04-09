@@ -52,55 +52,65 @@ func test_suface(surface *[width][height]float64) {
 	print("\n")
 }
 
-func water_gen(mode int, water *[width][height]float64, surface *[width][height]float64, hauteurfloat int, time int) {
+func water_gen(mode int, water *[width][height]float64, surface *[width][height]float64, hauteurfloat int, addTime int, forceInt int) {
+	var force = float64(forceInt)
+
 	hauteur := int(hauteurfloat)
 	if hauteur > 3720 {
 		test_water(water)
 		exit("ended")
 	}
 	if mode == 1 {
-		if hauteur < time && hauteur%5 == 0 {
+		if hauteur < addTime && hauteur%2 == 0 {
 			for x := range water[1] {
 				water[1][x] += 2
-				water[int(height-2)][x] += 2
+				water[int(height-2)][x] += force
 				water[x][1] += 2
-				water[x][int(width-2)] += 2
+				water[x][int(width-2)] += force
 			}
 		}
 		mode_pluie1(water, surface)
 		mode_pluie2(water, surface)
 		mode_pluie3(water, surface)
 		mode_pluie4(water, surface)
-		// 	mode_pluie1(water, surface)
-		// 	mode_pluie2(water, surface)
-		// 	mode_pluie3(water, surface)
-		// 	mode_pluie4(water, surface)
-		// 	mode_pluie1(water, surface)
-		// 	mode_pluie2(water, surface)
-		// 	mode_pluie3(water, surface)
-		// 	mode_pluie4(water, surface)
+		mode_pluie1(water, surface)
+		mode_pluie2(water, surface)
+		mode_pluie3(water, surface)
+		mode_pluie4(water, surface)
+		mode_pluie1(water, surface)
+		mode_pluie2(water, surface)
+		mode_pluie3(water, surface)
+		mode_pluie4(water, surface)
 	}
 	if mode == 2 {
-		if hauteur < time && hauteur%5 == 0 {
+		if hauteur < addTime && hauteur%2 == 0 {
 			for x := range water[1] {
-				water[1][x] += 10
+				water[1][x] += force
 			}
 		}
-		// if hauteur > 300 {
-		// 	test_all(water, surface)
-		// 	exit("finished")
-		// }
+		mode_pluie1(water, surface)
+		mode_pluie2(water, surface)
+		mode_pluie3(water, surface)
+		mode_pluie4(water, surface)
+		mode_pluie1(water, surface)
+		mode_pluie2(water, surface)
+		mode_pluie3(water, surface)
+		mode_pluie4(water, surface)
+		mode_pluie1(water, surface)
+		mode_pluie2(water, surface)
+		mode_pluie3(water, surface)
+		mode_pluie4(water, surface)
 		mode_pluie1(water, surface)
 		mode_pluie2(water, surface)
 		mode_pluie3(water, surface)
 		mode_pluie4(water, surface)
 	}
 	if mode == 3 {
-		if hauteur < time {
+		if hauteur < addTime {
 			for g := 0; g < 20; g++ {
 				x := rand.Intn(int(width))
 				y := rand.Intn(int(height))
-				water[x][y] += 1
+				water[x][y] += force
 			}
 		}
 		if hauteur%4 == 0 {
@@ -127,7 +137,6 @@ func find_min(tab [4]float64) int {
 			i = j
 		}
 	}
-	// fmt.Println(tab, i)
 	return i
 }
 
@@ -147,13 +156,6 @@ func mode_pluie1(water *[width][height]float64, surface *[width][height]float64)
 				tab[3] = float64(water[i-1][j]) + float64(surface[i-1][j])
 				min := find_min(tab)
 				diff := taille - tab[min]
-				// if diff > 2*water[i][j] {
-				// 	diff = 2 * water[i][j]
-				// }
-				// if diff > water[i][j] {
-				// 	diff = water[i][j]
-				// 	exit("yolo")
-				// }
 				if diff > 0 {
 					if min == 0 {
 						water[i][j] -= diff / 2
@@ -195,9 +197,6 @@ func mode_pluie2(water *[width][height]float64, surface *[width][height]float64)
 				tab[3] = float64(water[i-1][j]) + float64(surface[i-1][j])
 				min := find_min(tab)
 				diff := taille - tab[min]
-				// if diff > 2*water[i][j] {
-				// 	diff = 2 * water[i][j]
-				// }
 				if diff > 0 {
 					if min == 0 {
 						water[i][j] -= diff / 2
@@ -238,9 +237,6 @@ func mode_pluie3(water *[width][height]float64, surface *[width][height]float64)
 				tab[3] = float64(water[i-1][j]) + float64(surface[i-1][j])
 				min := find_min(tab)
 				diff := taille - tab[min]
-				// if diff > 2*water[i][j] {
-				// 	diff = 2 * water[i][j]
-				// }
 				if diff > 0 {
 					if min == 0 {
 						water[i][j] -= diff / 2
@@ -281,9 +277,6 @@ func mode_pluie4(water *[width][height]float64, surface *[width][height]float64)
 				tab[3] = float64(water[i-1][j]) + float64(surface[i-1][j])
 				min := find_min(tab)
 				diff := taille - tab[min]
-				// if diff > 2*water[i][j] {
-				// 	diff = 2 * water[i][j]
-				// }
 				if diff > 0 {
 					if min == 0 {
 						water[i][j] -= diff / 2

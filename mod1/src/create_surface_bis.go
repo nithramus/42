@@ -1,7 +1,6 @@
 package main
 
 import (
-	// "fmt"
 	"math"
 	"strconv"
 )
@@ -51,10 +50,9 @@ func find_dist_most_proche(l_point []point) []int {
 		if max_dist*2 > l_point[i].z {
 			max_dist = l_point[i].z
 		}
-		// TODO: find le point le plus proche
-		// if max_dist < 11 {
-		// 	max_dist = 20
-		// }
+		if max_dist < 11 {
+			max_dist = 10
+		}
 		proche = append(proche, int(max_dist))
 	}
 	return proche

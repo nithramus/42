@@ -36,10 +36,11 @@ func main() {
 	mode := flag.Int("mode", 0, "Wrong mode value, must be between 1 and 3")
 	name_file := flag.String("file", "", "No file")
 	time := flag.Int("time", 500, "No input time")
+	force := flag.Int("force", 5, "No input force")
 	flag.Parse()
 	file, err := ioutil.ReadFile(*name_file)
 	if *mode == 0 || *name_file == "" {
-		fmt.Println("mod1: usage: ./mod1 -mode [value] -file [file]")
+		fmt.Println("mod1: usage: ./mod1 -mode [value] -file [file] -time [time] -force [force]")
 		os.Exit(1)
 
 	}
@@ -63,11 +64,13 @@ func main() {
 		water[0][y] = 20000
 		water[int(height-1)][y] = 20000
 	}
-	if *mode < 1 || *mode > 3 {
+	if *force < 1 || *force >= 30 {
+		fmt.Println("force must be between 1 and 30")
+	} else if *mode < 1 || *mode > 3 {
 		fmt.Println("Seulement 3 mode, 1, 2 ou 3")
 	} else {
 		fmt.Println("Lancement du programme")
-		draw(&surface, &water, *mode, *time)
+		draw(&surface, &water, *mode, *time, *force)
 	}
 
 }

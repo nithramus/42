@@ -10,7 +10,3 @@ func bezier_func_y(list bezier, tab *[width][height]float64) {
 		x++
 	}
 }
-
-/*	b := bezier{point{50, 50, 10}, point{50, 150, 1500}, point{50, 75, 10}, point{50, 125, 15000}}
-	bezier_func(b, &tab)
-*/

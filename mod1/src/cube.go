@@ -24,7 +24,7 @@ func init() {
 	runtime.LockOSThread()
 }
 
-func draw(surface *[width][height]float64, water *[width][height]float64, mode int, tours int) {
+func draw(surface *[width][height]float64, water *[width][height]float64, mode int, tours int, force int) {
 	if err := glfw.Init(); err != nil {
 		log.Fatalln("failed to initialize glfw:", err)
 	}
@@ -51,12 +51,11 @@ func draw(surface *[width][height]float64, water *[width][height]float64, mode i
 	var hauteur int
 	drawScene(surface)
 	lastTime := time.Now()
-	// test_water(water)
 	// window.SetInputMode(glfw.StickyKeysMode, 1)
 	for !window.ShouldClose() {
 		if time.Since(lastTime) > 5000000 {
 			lastTime = time.Now()
-			water_gen(mode, water, surface, hauteur, tours)
+			water_gen(mode, water, surface, hauteur, tours, force)
 			glfw.PollEvents()
 			goZoom := window.GetKey(glfw.KeyA)
 			goDeZoom := window.GetKey(glfw.KeyZ)
@@ -193,8 +192,8 @@ func draw_square_water(surface *[width][height]float64, water *[width][height]fl
 
 func drawScene(surface *[width][height]float64) {
 
-	var i float64 = 0
-	var j float64 = 0
+	var i float64
+	var j float64
 	var k int
 	var t int
 	var inorm float32
